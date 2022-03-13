@@ -6,7 +6,12 @@ module.exports = {
   ],
   mode: "jit",
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "main-bg": "#22232D",
+        "main-purple": "#7362D1",
+      },
+    },
   },
   plugins: [],
 };

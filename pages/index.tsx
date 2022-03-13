@@ -3,8 +3,8 @@ import type { NextPage } from "next";
 const Home: NextPage = () => {
   return (
     <>
-      <div className="bg-neutral-800 text-white min-h-screen min-w-full">
-        Hello
+      <div className="bg-main-bg  text-white min-h-screen min-w-full">
+        <h1 className="">Circle</h1>
       </div>
     </>
   );
