@@ -4,7 +4,7 @@ const People: NextPage = () => {
 	return (
 		<>
 			<div className="bg-main-bg  text-white min-h-screen min-w-full">
-				<h1 className="">People</h1>
+				<h1 className="">Profile</h1>
 			</div>
 		</>
 	);
