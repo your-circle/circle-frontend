@@ -59,7 +59,7 @@ const Navbar: React.FC<PropTypes> = () => {
           >
             <Link href="/projects">
               <a
-                className="block px-4 py-2 bg-slate-900 hover:bg-gray-800 text-sm opacity-70 hover:opacity-100"
+                className="block px-4 py-2 bg-slate-900 hover:bg-secondary-bg text-sm opacity-70 hover:opacity-100"
                 role="menuitem"
               >
                 My Projects
@@ -67,7 +67,7 @@ const Navbar: React.FC<PropTypes> = () => {
             </Link>
             <Link href="/profile">
               <a
-                className="block px-4 py-2 bg-gray-900 hover:bg-gray-800 text-sm opacity-70 hover:opacity-100"
+                className="block px-4 py-2 bg-gray-900 hover:bg-secondary-bg text-sm opacity-70 hover:opacity-100"
                 role="menuitem"
               >
                 Profile
@@ -75,7 +75,7 @@ const Navbar: React.FC<PropTypes> = () => {
             </Link>
             <Link href="/logout">
               <a
-                className="block px-4 py-2 bg-gray-900 hover:bg-gray-800 text-sm opacity-70 hover:opacity-100"
+                className="block px-4 py-2 bg-gray-900 hover:bg-secondary-bg text-sm opacity-70 hover:opacity-100"
                 role="menuitem"
               >
                 Logout
