@@ -6,7 +6,7 @@ import { UserContextProvider } from "../providers/userProvider";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <div className="bg-main-bg  text-white min-h-screen min-w-full">
+      <div className="bg-main-bg text-white min-h-screen min-w-full">
         <Navbar />
         <Component {...pageProps} />
       </div>

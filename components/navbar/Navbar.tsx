@@ -10,7 +10,7 @@ const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   return (
-    <nav className="border-b-[1px] border-main-purple">
+    <nav className="border-b-[1px] border-main-purple max-h-[60px]">
       <section className="flex justify-between items-center px-2 p-1">
         <Link href="/">Circle</Link>
         <section className="hidden md:flex  justify-around w-1/3 items-center">
@@ -28,7 +28,11 @@ const Navbar: React.FC<PropTypes> = () => {
           }}
         >
           <Image
-            src={isMobileNavOpen ? `/images/burger-close.svg` : `/images/burger.svg`}
+            src={
+              isMobileNavOpen
+                ? `/images/burger-close.svg`
+                : `/images/burger.svg`
+            }
             layout="fixed"
             width={20}
             height={20}

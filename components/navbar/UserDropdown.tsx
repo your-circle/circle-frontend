@@ -32,7 +32,11 @@ const UserDropdown: React.FC = () => {
             {user?.name || "username"}
           </span>
           <Image
-            src={showDropdown ? "/images/expand-up-icon.svg" : "/images/expand-down-icon.svg"}
+            src={
+              showDropdown
+                ? "/images/expand-up-icon.svg"
+                : "/images/expand-down-icon.svg"
+            }
             alt="expand"
             className=""
             width={25}
@@ -43,7 +47,9 @@ const UserDropdown: React.FC = () => {
           />
           <div
             role="menu"
-            className={`absolute top-[30px] right-0 mt-2 w-[200px] rounded-md  ${!showDropdown ? "hidden" : ""}`}
+            className={`absolute top-[30px] right-0 mt-2 w-[200px] rounded-md  ${
+              !showDropdown ? "hidden" : ""
+            }`}
           >
             <Link href="/projects">
               <a
@@ -79,10 +85,10 @@ const UserDropdown: React.FC = () => {
           />
         </>
       ) : (
-        <Link href="/signin">
+        <Link href="/login">
           <div className=" mx-2 p-[2px] rounded-md w-max h-max bg-gradient-to-br from-[#7362D1] to-[#618EB0]">
             <div className="flex flex-col justify-between h-full bg-secondary-bg rounded-md px-4 py-2">
-              <h1>Sign In</h1>
+              <h1>Log in</h1>
             </div>
           </div>
         </Link>
