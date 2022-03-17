@@ -38,15 +38,21 @@ const Login: NextPage = () => {
     }
 
     // login
-    try {
+    const signupApiCall = async () => {
       const res = await signup(input);
       console.log("signup", res.data);
       updateUser(res.data);
       changeLogInStatus();
-    } catch (err: any) {
-      console.error(err?.message || "something went wrong, try again!");
-      alert(err.message);
-    }
+    };
+    toast.promise(
+      signupApiCall,
+      {
+        pending: " Signing in ....",
+        error: "Oops! Couldn't Sign in",
+        success: "Signed In !",
+      },
+      toastConfig
+    );
   };
 
   const onInputChange = (key: string, value: string) => {
