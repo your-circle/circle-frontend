@@ -10,7 +10,7 @@ export type userContextType = {
 export const userContext = createContext<userContextType>({
   user: {},
   updateUser: () => {},
-  isLoggedIn: true,
+  isLoggedIn: false,
   changeLogInStatus: () => {},
 });
 
@@ -19,7 +19,7 @@ export const UserContextProvider = (props: { children: ReactElement }) => {
   const updateUser = (data: Object) => {
     setUser(data);
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const changeLogInStatus = () => {
     setIsLoggedIn(!isLoggedIn);

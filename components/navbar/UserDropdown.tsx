@@ -2,10 +2,11 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { userContext } from "../../providers/userProvider";
 import Image from "next/image";
+import Card from "../../shared/components/Card";
 
 const UserDropdown: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
-  const { user } = useContext(userContext);
+  const { user, isLoggedIn } = useContext(userContext);
   // handle dropdown outside click
   useEffect(() => {
     if (!showDropdown) return;
@@ -20,7 +21,7 @@ const UserDropdown: React.FC = () => {
   }, [showDropdown]);
   return (
     <div className="flex items-center cursor-pointer relative">
-      {user.isLoggedIn ? (
+      {isLoggedIn ? (
         <>
           <span
             className="select-none opacity-90 hover:opacity-100"
@@ -78,7 +79,13 @@ const UserDropdown: React.FC = () => {
           />
         </>
       ) : (
-        <h1>login</h1>
+        <Link href="/signin">
+          <div className=" mx-2 p-[2px] rounded-md w-max h-max bg-gradient-to-br from-[#7362D1] to-[#618EB0]">
+            <div className="flex flex-col justify-between h-full bg-secondary-bg rounded-md px-4 py-2">
+              <h1>Sign In</h1>
+            </div>
+          </div>
+        </Link>
       )}
     </div>
   );
