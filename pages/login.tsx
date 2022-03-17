@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { login } from "../api/auth";
 import { userContext } from "../providers/userProvider";
 import Input from "../shared/components/Input";
+import { toast } from "react-toastify";
+import { toastConfig } from "../shared/constants";
 
 const Login: NextPage = () => {
   type inputType = {
@@ -19,11 +21,11 @@ const Login: NextPage = () => {
   const handleSubmit = async () => {
     // validate the input
     if (!validateEmail(input.email)) {
-      alert("enter valid email");
+      toast("Enter valid email", toastConfig);
       return;
     }
     if (input.password.length < 3 || input.password.length > 25) {
-      alert("password must be between 3 and 25 characters");
+      toast("Password must be between 3 and 25 characters", toastConfig);
       return;
     }
 
@@ -34,8 +36,8 @@ const Login: NextPage = () => {
       updateUser(res.data);
       changeLogInStatus();
     } catch (err: any) {
+      toast.error("Oops! Something Went Wrong", toastConfig);
       console.error(err?.message || "something went wrong, try again!");
-      alert(err.message);
     }
   };
 
