@@ -31,10 +31,21 @@ const Login: NextPage = () => {
 
     // login
     try {
-      const res = await login(input);
-      console.log("login", res.data);
-      updateUser(res.data);
-      changeLogInStatus();
+      const loginApiCall = async () => {
+        const res = await login(input);
+        console.log("login", res.data);
+        updateUser(res.data);
+        changeLogInStatus();
+      };
+      toast.promise(
+        loginApiCall,
+        {
+          pending: "Logging in ....",
+          error: "Oops! Couldn't log in",
+          success: "Logged In !",
+        },
+        toastConfig
+      );
     } catch (err: any) {
       toast.error("Oops! Something Went Wrong", toastConfig);
       console.error(err?.message || "something went wrong, try again!");
