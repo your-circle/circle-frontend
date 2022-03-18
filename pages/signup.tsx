@@ -4,6 +4,9 @@ import { useState, useContext } from "react";
 import { signup } from "../api/auth";
 import Input from "../shared/components/Input";
 import { userContext } from "../providers/userProvider";
+import { toast } from "react-toastify";
+import { validateEmail } from "../shared/helpers";
+import { toastConfig } from "../shared/constants";
 
 const Login: NextPage = () => {
   type inputType = {
@@ -21,33 +24,35 @@ const Login: NextPage = () => {
   const handleSubmit = async () => {
     // validate the input
     if (input.name.length < 3 || input.name.length > 25) {
-      alert("name must be between 3 and 25 characters");
+      toast("Name must be between 3 and 25 characters", toastConfig);
       return;
     }
     if (!validateEmail(input.email)) {
-      alert("enter valid email");
+      toast("Enter valid email", toastConfig);
+
       return;
     }
     if (input.password.length < 3 || input.password.length > 25) {
-      alert("password must be between 3 and 25 characters");
+      toast("Password must be between 3 and 25 characters", toastConfig);
       return;
     }
 
     // login
-    try {
+    const signupApiCall = async () => {
       const res = await signup(input);
       console.log("signup", res.data);
       updateUser(res.data);
       changeLogInStatus();
-    } catch (err: any) {
-      console.error(err?.message || "something went wrong, try again!");
-      alert(err.message);
-    }
-  };
-
-  const validateEmail = (email: string) => {
-    const regex = /\S+@\S+\.\S+/;
-    return regex.test(email);
+    };
+    toast.promise(
+      signupApiCall,
+      {
+        pending: " Signing in ....",
+        error: "Oops! Couldn't Sign in",
+        success: "Signed In !",
+      },
+      toastConfig
+    );
   };
 
   const onInputChange = (key: string, value: string) => {
@@ -93,7 +98,7 @@ const Login: NextPage = () => {
             Sign up
           </button>
           <span>
-            Already have an account?{" "}
+            Already have an account?
             <Link href="/login">
               <a className="text-main-purple">Log in</a>
             </Link>

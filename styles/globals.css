@@ -10,6 +10,11 @@ body {
   font-family: "Questrial", sans-serif;
 }
 
+/* .Toastify__toast-container--top-right {
+  --toastify-color-dark: #7362d150;
+  opacity: 100;
+} */
+
 a {
   color: inherit;
   text-decoration: none;
