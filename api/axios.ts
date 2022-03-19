@@ -1,7 +1,7 @@
 import axios from "axios";
+import config from "../config";
 
-const baseURL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:3001/api/";
+const baseURL = config.BackendURL;
 
 export default axios.create({
   baseURL,
