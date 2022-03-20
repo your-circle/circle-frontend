@@ -6,8 +6,10 @@ import { userContext } from "../providers/userProvider";
 import Input from "../shared/components/Input";
 import { toast } from "react-toastify";
 import { toastConfig } from "../shared/constants";
+import { useRouter } from "next/router";
 
 const Login: NextPage = () => {
+  const router = useRouter();
   type inputType = {
     email: string;
     password: string;
@@ -36,6 +38,8 @@ const Login: NextPage = () => {
         console.log("login", res.data);
         updateUser(res.data);
         changeLogInStatus();
+        localStorage.setItem("jwtToken", res.data.token);
+        router.push("/profile");
       };
       toast.promise(
         loginApiCall,
