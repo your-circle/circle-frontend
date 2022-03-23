@@ -11,8 +11,8 @@ type Props = {
 
 const Input = (props: Props) => {
   return (
-    <div className="relative h-[40px]">
-      <div className="absolute left-1 z-10 h-[30px] my-[7.5px]">
+    <div className="relative h-[40px] ">
+      <div className="absolute left-1 z-10 h-[30px] my-[7.5px] pl-2">
         <Image src={props.icon} alt={props.name} height={25} width={25} />
       </div>
 
@@ -20,7 +20,7 @@ const Input = (props: Props) => {
         placeholder={props.name}
         type={props.type}
         onChange={(e) => props.onChange(props.name, e.target.value)}
-        className="text-black h-full relative pl-9 focus:border-main-purple rounded-sm min-w-[280px]"
+        className="text-black h-full relative pl-9 focus:border-main-purple rounded-full min-w-[280px] ml-1"
       />
     </div>
   );

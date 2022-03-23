@@ -10,7 +10,7 @@ const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   return (
-    <nav className="max-h-[60px]">
+    <nav className=" w-full sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
       <section className="flex justify-between items-center px-2 p-1">
         <Link href="/">
           <span className=" flex items-center gap-2 cursor-pointer">
@@ -54,8 +54,8 @@ const Navbar: React.FC<PropTypes> = () => {
         </div>
       </section>
       {isMobileNavOpen ? (
-        <section className="flex flex-col items-center md:hidden">
-          <div className="flex-col flex">
+        <section className="flex flex-col items-center md:hidden ">
+          <div className="flex-col flex z-10 ">
             <Navlinks />
           </div>
           <div className="flex m-2 mb-5">

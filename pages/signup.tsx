@@ -7,6 +7,7 @@ import { userContext } from "../providers/userProvider";
 import { toast } from "react-toastify";
 import { validateEmail } from "../shared/helpers";
 import { toastConfig } from "../shared/constants";
+import Card from "../shared/components/Card";
 
 const Login: NextPage = () => {
   type inputType = {
@@ -64,46 +65,48 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <div className="bg-main-bg text-white min-h-screen min-w-full flex flex-col items-center justify-center pt-[58px] mt-[-60px]">
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="flex flex-col items-center gap-4"
-        >
-          <span className="text-lg">Create a Circle account</span>
-          <Input
-            icon="/images/user-icon.svg"
-            name="name"
-            type="text"
-            key="name"
-            onChange={onInputChange}
-          />
-          <Input
-            icon="/images/email-icon.svg"
-            name="email"
-            type="text"
-            key="email"
-            onChange={onInputChange}
-          />
-          <Input
-            icon="/images/password-icon.svg"
-            name="password"
-            type="password"
-            key="password"
-            onChange={onInputChange}
-          />
-          <button
-            className="rounded-md bg-main-purple px-4 py-2"
-            onClick={handleSubmit}
+      <div className="bg-main-bg text-white mt-[20vh] min-w-full  flex flex-col items-center justify-center">
+        <Card>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex flex-col items-center gap-4 py-6 px-3"
           >
-            Sign up
-          </button>
-          <span>
-            Already have an account?
-            <Link href="/login">
-              <a className="text-main-purple">Log in</a>
-            </Link>
-          </span>
-        </form>
+            <span className="text-lg">Create a Circle account</span>
+            <Input
+              icon="/images/user-icon.svg"
+              name="name"
+              type="text"
+              key="name"
+              onChange={onInputChange}
+            />
+            <Input
+              icon="/images/email-icon.svg"
+              name="email"
+              type="text"
+              key="email"
+              onChange={onInputChange}
+            />
+            <Input
+              icon="/images/password-icon.svg"
+              name="password"
+              type="password"
+              key="password"
+              onChange={onInputChange}
+            />
+            <button
+              className="rounded-md bg-main-purple px-4 py-2"
+              onClick={handleSubmit}
+            >
+              Sign up
+            </button>
+            <span>
+              Already have an account?
+              <Link href="/login">
+                <a className="text-main-purple"> Log in</a>
+              </Link>
+            </span>
+          </form>
+        </Card>
       </div>
     </>
   );
