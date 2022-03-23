@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { login } from "../api/auth";
+import { login } from "../shared/services/auth.services";
 import { userContext } from "../providers/userProvider";
 import Input from "../shared/components/Input";
 import { toast } from "react-toastify";
-import { toastConfig } from "../shared/constants";
+import { toastConfig } from "../shared/config/constants";
 import Card from "../shared/components/Card";
 
 const Login: NextPage = () => {

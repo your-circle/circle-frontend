@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useState, useContext } from "react";
-import { signup } from "../api/auth";
+import { signup } from "../shared/services/auth.services";
 import Input from "../shared/components/Input";
 import { userContext } from "../providers/userProvider";
 import { toast } from "react-toastify";
 import { validateEmail } from "../shared/helpers";
-import { toastConfig } from "../shared/constants";
+import { toastConfig } from "../shared/config/constants";
 import Card from "../shared/components/Card";
 
 const Login: NextPage = () => {
