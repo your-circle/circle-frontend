@@ -10,9 +10,21 @@ const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   return (
-    <nav className="border-b-[1px] border-main-purple max-h-[60px]">
+    <nav className="max-h-[60px]">
       <section className="flex justify-between items-center px-2 p-1">
-        <Link href="/">Circle</Link>
+        <Link href="/">
+          <span className=" flex items-center gap-2 cursor-pointer">
+            <Image
+              src="/images/logo.svg"
+              layout="fixed"
+              width="30"
+              height="30"
+            />
+
+            <h1 className="text-white ">Circle</h1>
+          </span>
+        </Link>
+
         <section className="hidden md:flex  justify-around w-1/3 items-center">
           <div className=" flex justify-around w-3/4">
             <Navlinks />
