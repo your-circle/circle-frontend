@@ -3,7 +3,7 @@ const Loading: React.FC = () => {
   return (
     <>
       <Image
-        src="/images/logo.svg"
+        src="/images/loading.svg"
         layout="fixed"
         width="30"
         height="30"

@@ -15,6 +15,12 @@ body {
   opacity: 100;
 } */
 
+@layer components {
+  .text-main-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-br from-[#7362D1] to-[#618EB0];
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

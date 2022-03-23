@@ -89,15 +89,15 @@ const Login: NextPage = () => {
               onChange={onInputChange}
             />
             <button
-              className="rounded-md bg-main-purple px-4 py-2"
+              className="min-w-[280px] bg-main-purple px-4 py-2 rounded-full "
               onClick={handleSubmit}
             >
               Log in
             </button>
             <span>
-              New to Circle?{" "}
+              New to Circle?
               <Link href="/signup">
-                <a className="text-main-purple">Sign up</a>
+                <a className="text-main-purple"> Sign up</a>
               </Link>
             </span>
           </form>

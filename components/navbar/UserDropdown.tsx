@@ -88,7 +88,7 @@ const UserDropdown: React.FC = () => {
         <Link href="/login">
           <div className=" mx-2 p-[2px] rounded-md w-max h-max bg-gradient-to-br from-[#7362D1] to-[#618EB0]">
             <div className="flex flex-col justify-between h-full bg-secondary-bg rounded-md px-4 py-2">
-              <h1>Log in</h1>
+              <h1 className="text-main-gradient font-black">Log in</h1>
             </div>
           </div>
         </Link>

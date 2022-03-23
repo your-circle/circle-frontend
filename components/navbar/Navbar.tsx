@@ -13,16 +13,7 @@ const Navbar: React.FC<PropTypes> = () => {
     <nav className=" w-full sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
       <section className="flex justify-between items-center px-2 p-1">
         <Link href="/">
-          <span className=" flex items-center gap-2 cursor-pointer">
-            <Image
-              src="/images/logo.svg"
-              layout="fixed"
-              width="30"
-              height="30"
-            />
-
-            <h1 className="text-white ">Circle</h1>
-          </span>
+          <h1 className="text-2xl text-main-gradient cursor-pointer">Circle</h1>
         </Link>
 
         <section className="hidden md:flex  justify-around w-1/3 items-center">

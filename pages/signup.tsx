@@ -94,7 +94,7 @@ const Login: NextPage = () => {
               onChange={onInputChange}
             />
             <button
-              className="rounded-md bg-main-purple px-4 py-2"
+              className="min-w-[280px] bg-main-purple px-4 py-2 rounded-full "
               onClick={handleSubmit}
             >
               Sign up
