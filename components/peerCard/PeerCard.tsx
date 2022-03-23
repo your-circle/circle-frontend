@@ -1,6 +1,6 @@
 import Card from "../../shared/components/Card";
 
-const PeopleCard: React.FC = () => {
+const PeerCard: React.FC = () => {
   return (
     <Card>
       <div className="text-sm font-normal">
@@ -16,4 +16,4 @@ const PeopleCard: React.FC = () => {
   );
 };
 
-export default PeopleCard;
+export default PeerCard;
