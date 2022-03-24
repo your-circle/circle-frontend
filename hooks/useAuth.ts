@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-import { verifyToken } from "../api/auth";
+import { verifyToken } from "../shared/services/auth.services";
 
 const useAuth = () => {
   const router = useRouter();
