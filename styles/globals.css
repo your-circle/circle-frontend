@@ -19,6 +19,9 @@ body {
   .text-main-gradient {
     @apply text-transparent bg-clip-text bg-gradient-to-br from-[#7362D1] to-[#618EB0];
   }
+  .bg-gradient {
+    @apply bg-gradient-to-br from-[#7362D1] to-[#618EB0];
+  }
 }
 
 a {
