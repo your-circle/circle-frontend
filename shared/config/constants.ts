@@ -10,3 +10,5 @@ export const toastConfig: ToastOptions = {
   theme: "dark",
   progress: undefined,
 };
+
+export const BackendURL = process.env.NEXT_PUBLIC_BACKEND_URL

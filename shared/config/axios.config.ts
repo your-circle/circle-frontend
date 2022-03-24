@@ -1,7 +1,7 @@
 import axios from "axios";
-import config from "../config";
+import { BackendURL } from "./constants";
 
-const baseURL = config.BackendURL;
+export const baseURL = BackendURL;
 
 export default axios.create({
   baseURL,
