@@ -1,5 +1,21 @@
 import axios from "../config/axios.config";
 
+export const verifyToken = async (token: string) => {
+  try {
+    const res = await axios.get("auth/verifyToken", {
+      headers: {
+        authorization: token,
+      },
+    });
+    if (res.status != 200) {
+      return false;
+    }
+    return true;
+  } catch (err: any) {
+    return false;
+  }
+};
+
 interface signupPayload {
   name: string;
   email: string;
