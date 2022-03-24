@@ -21,4 +21,4 @@ export type projectTypeEnum =
   | "Cybersecurity";
 
 export type needsArray = Array<needsEnum>;
-export type needsEnum = "Developer" | "Mentor";
+export type needsEnum = "Developers" | "Mentors";
