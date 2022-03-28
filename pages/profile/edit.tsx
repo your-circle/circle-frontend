@@ -11,13 +11,13 @@ import { toast } from "react-toastify";
 const Profile: NextPage = () => {
   useAuth();
   const { user, updateUser } = useContext(userContext);
-  console.log(user);
 
   type inputType = {
     name: string;
     email: string;
+    avatarSeed: String;
     skills: string[];
-    bio: string;
+    about: string;
     github: string;
     linkedin: string;
     twitter: string;
@@ -27,18 +27,20 @@ const Profile: NextPage = () => {
     email: "",
     avatarSeed: "",
     skills: [],
-    bio: "",
+    about: "",
     github: "",
     linkedin: "",
     twitter: "",
   };
   const [input, setInput] = useState<inputType>(defaultInput);
-  const [seedText, setSeedText] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
     fetchUser();
     generateRandomSeed();
+    return () => {
+      setInput(defaultInput);
+    };
   }, []);
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const Profile: NextPage = () => {
   };
 
   const discardChanges = () => {
-    // discard new changes
+    resetInput();
     setIsEditing(false);
   };
 
@@ -111,13 +113,13 @@ const Profile: NextPage = () => {
 
   const generateRandomSeed = async () => {
     const randomText = Math.random().toString(36).substring(2, 7);
-    setSeedText(randomText);
+    onInputChange("avatarSeed", randomText);
   };
 
   return (
     <>
       <div className="bg-main-bg text-white min-h-screen min-w-full">
-        <div className="flex gap-10 items-center py-2 border-b-[2px] mb-4 mx-[45px]">
+        <div className="flex gap-20 items-center py-2 border-b-[2px] mb-4 mx-[45px]">
           <h1 className="h-[27px]">Profile</h1>
           <div
             className="cursor-pointer"
@@ -148,6 +150,7 @@ const Profile: NextPage = () => {
               name="name"
               type="text"
               key="name"
+              value={input.name}
               onChange={onInputChange}
             />
           </div>
@@ -159,22 +162,24 @@ const Profile: NextPage = () => {
               name="email"
               type="text"
               key="email"
+              value={input.email}
               onChange={onInputChange}
             />
           </div>
           <div className="flex items-center gap-4 mb-2">
             <span className="w-[100px]">Bio:</span>
             <Input
-              name="bio"
+              name="about"
               type="textarea"
-              key="bio"
+              key="about"
+              value={input.about}
               onChange={onInputChange}
             />
           </div>
           <div className="flex justify-start items-center gap-4 mb-2">
             <span className="w-[100px]">photo:</span>
             <Image
-              src={`https://avatars.dicebear.com/api/human/${seedText}.svg`}
+              src={`https://avatars.dicebear.com/api/human/${input.avatarSeed}.svg`}
               alt="profile"
               // onClick={focusInput}
               className="rounded-[50%] bg-white text-black cursor-pointer"
@@ -235,9 +240,10 @@ const Profile: NextPage = () => {
           <div className="flex items-center gap-4 mb-2">
             <span className="w-[100px]">github url:</span>
             <Input
-              name="username"
+              name="github"
               type="text"
               key="github"
+              value={input.github}
               onChange={onInputChange}
               pre="https://github.com/"
             />
@@ -245,9 +251,10 @@ const Profile: NextPage = () => {
           <div className="flex items-center gap-4 mb-2">
             <span className="w-[100px]">linkedin url:</span>
             <Input
-              name="username"
+              name="linkedin"
               type="text"
               key="linkedin"
+              value={input.linkedin}
               onChange={onInputChange}
               pre="https://www.linkedin.com/in/"
             />
@@ -255,9 +262,10 @@ const Profile: NextPage = () => {
           <div className="flex items-center gap-4 mb-2">
             <span className="w-[100px]">twitter url:</span>
             <Input
-              name="username"
+              name="twitter"
               type="text"
               key="twitter"
+              value={input.twitter}
               onChange={onInputChange}
               pre="https://twitter.com/"
             />

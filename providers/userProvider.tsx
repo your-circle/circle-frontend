@@ -29,10 +29,6 @@ export const UserContextProvider = (props: { children: ReactElement }) => {
     setIsLoggedIn(state);
   };
 
-  useEffect(() => {
-    console.log("user update", user);
-  }, [user]);
-
   return (
     <userContext.Provider
       value={{ user, updateUser, isLoggedIn, changeLogInStatus }}

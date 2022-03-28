@@ -7,6 +7,7 @@ type Props = {
   type: string;
   name: string;
   key: string;
+  value: string;
   onChange: (key: string, value: string) => void;
 };
 
@@ -24,6 +25,7 @@ const Input = (props: Props) => {
       {props.type === "textarea" && (
         <textarea
           placeholder={props.name}
+          value={props.value}
           onChange={(e) => props.onChange(props.name, e.target.value)}
           className="text-black h-full relative px-4 py-2 focus:border-main-purple rounded-sm min-w-[280px] resize-none"
           rows={4}
@@ -34,6 +36,7 @@ const Input = (props: Props) => {
         <input
           placeholder={props.name}
           type={props.type}
+          value={props.value}
           onChange={(e) => props.onChange(props.name, e.target.value)}
           className={`text-black h-full px-4 py-2 relative ${
             props.icon ? "pl-9" : "pl-4"
