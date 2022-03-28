@@ -2,11 +2,14 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { userContext } from "../../providers/userProvider";
 import Image from "next/image";
-import Card from "../../shared/components/Card";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const UserDropdown: React.FC = () => {
+  const router = useRouter();
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
-  const { user, isLoggedIn } = useContext(userContext);
+  const { user, isLoggedIn, updateUser, changeLogInStatus } =
+    useContext(userContext);
   // handle dropdown outside click
   useEffect(() => {
     if (!showDropdown) return;
@@ -19,6 +22,14 @@ const UserDropdown: React.FC = () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [showDropdown]);
+
+  const Logout = () => {
+    updateUser({});
+    changeLogInStatus(false);
+    router.push("/projects");
+    toast.info("user logged out!");
+  };
+
   return (
     <div className="flex items-center cursor-pointer relative">
       {isLoggedIn ? (
@@ -67,14 +78,13 @@ const UserDropdown: React.FC = () => {
                 Profile
               </a>
             </Link>
-            <Link href="/logout">
-              <a
-                className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
-                role="menuitem"
-              >
-                Logout
-              </a>
-            </Link>
+            <a
+              className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
+              role="menuitem"
+              onClick={Logout}
+            >
+              Logout
+            </a>
           </div>
           <Image
             src="/images/login-icon.svg"

@@ -1,10 +1,11 @@
-import { createContext, ReactElement, useState } from "react";
+import { createContext, ReactElement, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export type userContextType = {
   user: any;
   updateUser: (data: Object) => any;
   isLoggedIn: boolean;
-  changeLogInStatus: () => any;
+  changeLogInStatus: (state: boolean) => void;
 };
 
 export const userContext = createContext<userContextType>({
@@ -15,18 +16,27 @@ export const userContext = createContext<userContextType>({
 });
 
 export const UserContextProvider = (props: { children: ReactElement }) => {
-  const [user, setUser] = useState<Object>({});
+  const [user, setUser] = useLocalStorage<object>("user", {});
   const updateUser = (data: Object) => {
     setUser(data);
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorage<boolean>(
+    "isLoggedIn",
+    false
+  );
 
-  const changeLogInStatus = () => {
-    setIsLoggedIn(!isLoggedIn);
+  const changeLogInStatus = (state: boolean) => {
+    setIsLoggedIn(state);
   };
 
+  useEffect(() => {
+    console.log("user update", user);
+  }, [user]);
+
   return (
-    <userContext.Provider value={{ user, updateUser, isLoggedIn, changeLogInStatus }}>
+    <userContext.Provider
+      value={{ user, updateUser, isLoggedIn, changeLogInStatus }}
+    >
       {props.children}
     </userContext.Provider>
   );
