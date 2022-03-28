@@ -24,8 +24,8 @@ const Projects: NextPage = () => {
           Find Your Peers
         </h1>
         <div className="">
-          {ProjectData.map((Project) => {
-            return <ProjectCard data={Project} />;
+          {ProjectData.map((Project, index) => {
+            return <ProjectCard data={Project} key={index} />;
           })}
         </div>
       </div>

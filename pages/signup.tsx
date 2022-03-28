@@ -45,7 +45,7 @@ const Login: NextPage = () => {
       const res = await signup(input);
       console.log("signup", res.data);
       updateUser(res.data);
-      changeLogInStatus();
+      changeLogInStatus(true);
       localStorage.setItem("jwtToken", res.data.token);
       router.push("/profile");
     };

@@ -38,9 +38,9 @@ const Login: NextPage = () => {
         const res = await login(input);
         console.log("login", res.data);
         updateUser(res.data);
-        changeLogInStatus();
+        changeLogInStatus(true);
         localStorage.setItem("jwtToken", res.data.token);
-        router.push("/profile");
+        router.push("/projects");
       };
       toast.promise(
         loginApiCall,

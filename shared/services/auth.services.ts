@@ -2,9 +2,9 @@ import axios from "../config/axios.config";
 
 export const verifyToken = async (token: string) => {
   try {
-    const res = await axios.get("auth/verifyToken", {
+    const res = await axios.get("v1/auth/verifyToken", {
       headers: {
-        authorization: token,
+        authorization: `Bearer ${token}`,
       },
     });
     if (res.status != 200) {
@@ -24,7 +24,7 @@ interface signupPayload {
 
 export const signup = async (payload: signupPayload) => {
   try {
-    const res = await axios.post("auth/signup", payload);
+    const res = await axios.post("v1/auth/signup", payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
@@ -40,7 +40,7 @@ interface loginPayload {
 
 export const login = async (payload: loginPayload) => {
   try {
-    const res = await axios.post("auth/login", payload);
+    const res = await axios.post("v1/auth/login", payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }

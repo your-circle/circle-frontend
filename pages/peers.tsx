@@ -37,8 +37,8 @@ const Peer: NextPage = () => {
           Find Your Peers
         </h1>
         <div className="">
-          {PeerData.map((Peer) => {
-            return <PeerCard data={Peer} />;
+          {PeerData.map((Peer, index) => {
+            return <PeerCard data={Peer} key={index} />;
           })}
         </div>
       </div>

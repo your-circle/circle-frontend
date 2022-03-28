@@ -20,7 +20,7 @@ const Navbar: React.FC<PropTypes> = () => {
           <div className=" flex justify-around w-3/4">
             <Navlinks />
           </div>
-          <div className="flex  ">
+          <div className="flex">
             <UserDropdown />
           </div>
         </section>
@@ -49,7 +49,7 @@ const Navbar: React.FC<PropTypes> = () => {
           <div className="flex-col flex z-10 ">
             <Navlinks />
           </div>
-          <div className="flex m-2 mb-5">
+          <div className="flex gap-4 m-2 mb-5">
             <UserDropdown />
           </div>
         </section>
