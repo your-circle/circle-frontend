@@ -17,7 +17,7 @@ export const editUser = async (payload: any) => {
   try {
     const res = await axios.put("v1/user/update", payload, {
       headers: {
-        authorization: token,
+        authorization: `Bearer ${token}`,
       },
     });
     if (res.status != 200) {

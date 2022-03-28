@@ -4,7 +4,7 @@ export const verifyToken = async (token: string) => {
   try {
     const res = await axios.get("v1/auth/verifyToken", {
       headers: {
-        authorization: token,
+        authorization: `Bearer ${token}`,
       },
     });
     if (res.status != 200) {
