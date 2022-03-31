@@ -11,6 +11,7 @@ import EmptyList from "../../../shared/components/EmptyList";
 const Peer: NextPage = () => {
   const router = useRouter();
   const params = router.query;
+
   const [currentUser, setCurrentUser] = useState({});
   const testProp: ProjectDetailsType = {
     title: "Circle",
@@ -26,8 +27,9 @@ const Peer: NextPage = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    if (!router.isReady) return;
     fetchUser();
-  }, []);
+  }, [router.isReady]);
 
   const fetchUser = async () => {
     try {
@@ -43,15 +45,15 @@ const Peer: NextPage = () => {
     <>
       <div className="bg-main-bg  text-white min-h-screen min-w-full">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          {currentUser.name} Projects
+          {currentUser.name || params.id}'s Projects
         </h1>
         <div className="">
-          {projects.length > 0 &&
+          {projects.length === 0 ? (
+            <EmptyList message="No Projects created yet" />
+          ) : (
             projects.map((project, index) => {
               return <ProjectCard data={project} key={index} />;
-            })}
-          {projects.length === 0 && (
-            <EmptyList message="No Projects created yet" />
+            })
           )}
         </div>
       </div>
