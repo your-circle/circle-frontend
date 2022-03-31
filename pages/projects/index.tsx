@@ -21,7 +21,7 @@ const Projects: NextPage = () => {
     <>
       <div className="bg-main-bg  text-white min-h-screen min-w-full">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          Find Your Peers
+          Find Your Projects
         </h1>
         <div className="">
           {ProjectData.map((Project, index) => {
