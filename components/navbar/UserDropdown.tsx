@@ -10,6 +10,7 @@ const UserDropdown: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
   const { user, isLoggedIn, updateUser, changeLogInStatus } =
     useContext(userContext);
+
   // handle dropdown outside click
   useEffect(() => {
     if (!showDropdown) return;
@@ -26,7 +27,7 @@ const UserDropdown: React.FC = () => {
   const Logout = () => {
     updateUser({});
     changeLogInStatus(false);
-    router.push("/projects");
+    router.push("/login");
     toast.info("user logged out!");
   };
 
@@ -64,7 +65,7 @@ const UserDropdown: React.FC = () => {
               !showDropdown ? "hidden" : ""
             }`}
           >
-            <Link href="/projects">
+            <Link href={`/projects/${user._id}`}>
               <a
                 className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
                 role="menuitem"

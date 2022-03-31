@@ -40,6 +40,7 @@ const useAuth = () => {
     console.log("clearing storage");
     updateUser({});
     changeLogInStatus(false);
+    localStorage.removeItem("jwtToken");
   };
 
   return;
