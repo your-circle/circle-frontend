@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import ProjectCard from "../../../components/projectCard";
 import EmptyList from "../../../shared/components/EmptyList";
+import { getUserProjects } from "../../../shared/services/projects.services";
 
 const Peer: NextPage = () => {
   const router = useRouter();
@@ -29,12 +30,23 @@ const Peer: NextPage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     fetchUser();
+    fetchProjects();
   }, [router.isReady]);
 
   const fetchUser = async () => {
     try {
       const res = await getUser(params.id);
       setCurrentUser(res.data);
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message);
+    }
+  };
+
+  const fetchProjects = async () => {
+    try {
+      const res = await getUserProjects(params.id);
+      setProjects(res.data);
     } catch (err: any) {
       console.error(err);
       toast.error(err.message);
