@@ -10,14 +10,17 @@ const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   return (
-    <nav className="border-b-[1px] border-main-purple max-h-[60px]">
+    <nav className=" w-full sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
       <section className="flex justify-between items-center px-2 p-1">
-        <Link href="/">Circle</Link>
+        <Link href="/">
+          <h1 className="text-2xl text-main-gradient cursor-pointer">Circle</h1>
+        </Link>
+
         <section className="hidden md:flex  justify-around w-1/3 items-center">
           <div className=" flex justify-around w-3/4">
             <Navlinks />
           </div>
-          <div className="flex  ">
+          <div className="flex">
             <UserDropdown />
           </div>
         </section>
@@ -42,11 +45,11 @@ const Navbar: React.FC<PropTypes> = () => {
         </div>
       </section>
       {isMobileNavOpen ? (
-        <section className="flex flex-col items-center md:hidden">
-          <div className="flex-col flex">
+        <section className="flex flex-col items-center md:hidden ">
+          <div className="flex-col flex z-10 ">
             <Navlinks />
           </div>
-          <div className="flex m-2 mb-5">
+          <div className="flex gap-4 m-2 mb-5">
             <UserDropdown />
           </div>
         </section>

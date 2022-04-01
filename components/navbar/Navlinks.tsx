@@ -7,10 +7,14 @@ const Navlinks: React.FC = () => {
   return (
     <>
       <Link href="/projects">
-        <a className="opacity-80 hover:opacity-100 cursor-pointer m-1">Projects</a>
+        <a className="opacity-80 hover:opacity-100 cursor-pointer hover:text-main-gradient duration-200">
+          Projects
+        </a>
       </Link>
-      <Link href="/people">
-        <a className="opacity-80 hover:opacity-100 cursor-pointer m-1">People</a>
+      <Link href="/peers">
+        <a className="opacity-80 hover:opacity-100 cursor-pointer hover:text-main-gradient duration-200">
+          Peers
+        </a>
       </Link>
     </>
   );

@@ -1,7 +1,7 @@
 import axios from "axios";
+import { BackendURL } from "./constants";
 
-const baseURL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:3000/api/";
+export const baseURL = BackendURL;
 
 export default axios.create({
   baseURL,
