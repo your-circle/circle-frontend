@@ -1,8 +1,9 @@
 export type ProjectDetailsType = {
   title: string;
-  author: string;
-  about: string;
+  creator: string;
+  description: string;
   projectType: projectTypeArray;
+  tech: string[];
   needs: needsArray;
   targetTeamSize: number;
   currentTeamSize: number;

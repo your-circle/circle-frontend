@@ -10,7 +10,7 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
     <Card>
       <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-default">
         <div className="flex justify-between items-start w-full">
-          <h2 className="text-main-gradient">@{data.author}</h2>
+          <h2 className="text-main-gradient">@{data.creator}</h2>
           <span className="text-main-gradient flex ">
             <Image
               src="/images/people.svg"
@@ -28,19 +28,22 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
             {data.title}
           </h2>
           <h3 className="text-slate-300 w-full text-center text-md">
-            {data.about}
+            {data.description}
           </h3>
         </div>
         <div className="flex items-center justify-center w-full">
-          {data.projectType.map((item) => {
+          {data.tech.map((item, index) => {
             return (
-              <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
+              <span
+                key={index}
+                className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 "
+              >
                 {item}
               </span>
             );
           })}
         </div>
-        <div className="flex items-center justify-start w-full">
+        {/* <div className="flex items-center justify-start w-full">
           <h4 className="px-2">Looking for:</h4>
           {data.needs.map((item) => {
             return (
@@ -49,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               </span>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </Card>
   );

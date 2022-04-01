@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import PeerCard from "../../../components/peerCard";
 import { ProjectDetailsType } from "../../../shared/schemas/projectDetails.schema";
 import { getUser } from "../../../shared/services/user.services";
@@ -9,55 +9,31 @@ import ProjectCard from "../../../components/projectCard";
 import EmptyList from "../../../shared/components/EmptyList";
 import { getUserProjects } from "../../../shared/services/projects.services";
 
-const Peer: NextPage = () => {
-  const router = useRouter();
-  const params = router.query;
-
-  const [currentUser, setCurrentUser] = useState({});
-  const testProp: ProjectDetailsType = {
-    title: "Circle",
-    author: "lsd",
-    about: "Connecting peers, projects and mentors",
-    projectType: ["Fullstack"],
-    needs: ["Mentors", "Developers"],
-    currentTeamSize: 5,
-    targetTeamSize: 6,
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // api call
+  const { id } = context.params;
+  let userResponse = {},
+    projectsResponse = [];
+  try {
+    userResponse = await getUser(id);
+    projectsResponse = await getUserProjects(id);
+  } catch (err: any) {
+    console.error(err);
+    toast.error(err.message);
+  }
+  return {
+    props: { user: userResponse?.data, projects: projectsResponse?.data || [] },
   };
+};
 
-  const testArray = [testProp];
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    fetchUser();
-    fetchProjects();
-  }, [router.isReady]);
-
-  const fetchUser = async () => {
-    try {
-      const res = await getUser(params.id);
-      setCurrentUser(res.data);
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message);
-    }
-  };
-
-  const fetchProjects = async () => {
-    try {
-      const res = await getUserProjects(params.id);
-      setProjects(res.data);
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message);
-    }
-  };
+const Peer: NextPage = (props: any) => {
+  const { user, projects } = props;
 
   return (
     <>
-      <div className="bg-main-bg  text-white min-h-screen min-w-full">
+      <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          {currentUser.name || params.id}'s Projects
+          {user.name}'s Projects
         </h1>
         <div className="">
           {projects.length === 0 ? (

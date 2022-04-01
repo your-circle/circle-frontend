@@ -1,32 +1,39 @@
-import { useState } from "react";
-import type { NextPage } from "next";
+import { Key, useState } from "react";
+import type { GetServerSideProps, NextPage } from "next";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import ProjectCard from "../../components/projectCard";
+import EmptyList from "../../shared/components/EmptyList";
+import {
+  getAllProjects,
+  getUserProjects,
+} from "../../shared/services/projects.services";
 
-const Projects: NextPage = () => {
-  const testProp: ProjectDetailsType = {
-    title: "Circle",
-    author: "lsd",
-    about: "Connecting peers, projects and mentors",
-    projectType: ["Fullstack"],
-    needs: ["Mentors", "Developers"],
-    currentTeamSize: 5,
-    targetTeamSize: 6,
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // api call
+  const projects = await getAllProjects();
+  return {
+    props: { projects: projects?.data || [] },
   };
+};
 
-  const testArray = [testProp];
-  const [ProjectData, setProjectdata] = useState(testArray);
+const Projects: NextPage = (props: any) => {
+  const { projects } = props;
+  console.log("projects", projects);
 
   return (
     <>
-      <div className="bg-main-bg  text-white min-h-screen min-w-full">
+      <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Find Your Projects
         </h1>
-        <div className="">
-          {ProjectData.map((Project, index) => {
-            return <ProjectCard data={Project} key={index} />;
-          })}
+        <div className="flex gap-4 py-4 flex-wrap justify-center">
+          {projects.length === 0 ? (
+            <EmptyList message="No Projects available" />
+          ) : (
+            projects.map((project, index) => {
+              return <ProjectCard data={project} key={index} />;
+            })
+          )}
         </div>
       </div>
     </>

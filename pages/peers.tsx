@@ -32,11 +32,11 @@ const Peer: NextPage = () => {
 
   return (
     <>
-      <div className="bg-main-bg  text-white min-h-screen min-w-full">
+      <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Find Your Peers
         </h1>
-        <div className="">
+        <div className="flex gap-4 py-4 flex-wrap justify-center">
           {PeerData.map((Peer, index) => {
             return <PeerCard data={Peer} key={index} />;
           })}
