@@ -8,6 +8,7 @@ import { newProject } from "../../shared/services/projects.services";
 import Input from "../../shared/components/Input";
 
 const NewProject: NextPage = () => {
+  useAuth();
   const router = useRouter();
 
   type inputType = {
