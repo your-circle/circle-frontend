@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import useAuth from "../../hooks/useAuth";
 import { toastConfig } from "../../shared/config/constants";
 import { newProject } from "../../shared/services/projects.services";
+import Input from "../../shared/components/Input";
 
 const NewProject: NextPage = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const NewProject: NextPage = () => {
     try {
       const res = await newProject({ ...input });
       setPosting(false);
-      router.push("/");
+      router.push("/projects");
     } catch (err: any) {
       setPosting(false);
       toast.error(err.message, toastConfig);
@@ -78,30 +79,43 @@ const NewProject: NextPage = () => {
           className="flex flex-col items-center gap-4"
         >
           <span className="text-lg">New Project</span>
-          <input
-            name="title"
-            type="text"
-            key="title"
-            placeholder="title"
-            value={input.title}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            required
-          />
-          <input
-            name="description"
-            type="text"
-            key="description"
-            placeholder="description"
-            value={input.description}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            required
-          />
+          <div className="flex flex-col gap-4 items-start">
+            <Input
+              name="title"
+              type="text"
+              key="title"
+              value={input.title}
+              onChange={onInputChange}
+            />
+            <Input
+              name="description"
+              type="text"
+              key="description"
+              value={input.description}
+              onChange={onInputChange}
+            />
 
-          <div className="flex items-center gap-4 mb-2">
-            <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
-              <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
-                {input.tech.length !== 0 &&
-                  input.tech.map((tech, index) => (
+            <div className="flex items-center gap-4 mb-2">
+              <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
+                <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
+                  {input.tech.length !== 0 &&
+                    input.tech.map((tech, index) => (
+                      <Choice
+                        choice={tech}
+                        key={index}
+                        selectedChoice={input.tech}
+                        handleToggle={() => handleToggle(tech, "tech")}
+                      />
+                    ))}
+                  {/* placeholder(its like input field to fill the data) */}
+                  {input.tech.length === 0 && (
+                    <span className="text-black opacity-50 select-none">
+                      Technology
+                    </span>
+                  )}
+                </div>
+                <div className="flex gap-2 flex-wrap my-2">
+                  {allTech.map((tech, index) => (
                     <Choice
                       choice={tech}
                       key={index}
@@ -109,62 +123,47 @@ const NewProject: NextPage = () => {
                       handleToggle={() => handleToggle(tech, "tech")}
                     />
                   ))}
-                {/* placeholder(its like input field to fill the data) */}
-                {input.tech.length === 0 && (
-                  <span className="text-black opacity-50 select-none">
-                    Technology
-                  </span>
-                )}
-              </div>
-              <div className="flex gap-2 flex-wrap my-2">
-                {allTech.map((tech, index) => (
-                  <Choice
-                    choice={tech}
-                    key={index}
-                    selectedChoice={input.tech}
-                    handleToggle={() => handleToggle(tech, "tech")}
-                  />
-                ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* OPEN TO */}
-          <div className="flex items-center gap-4 mb-2">
-            {/*  multiple */}
-            <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
-              <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
-                {input.open_to.length !== 0 &&
-                  input.open_to.map((tech, index) => (
+            {/* OPEN TO */}
+            <div className="flex items-center gap-4 mb-2">
+              {/*  multiple */}
+              <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
+                <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
+                  {input.open_to.length !== 0 &&
+                    input.open_to.map((tech, index) => (
+                      <Choice
+                        choice={tech}
+                        key={index}
+                        selectedChoice={input.open_to}
+                        handleToggle={() => handleToggle(tech, "openTo")}
+                      />
+                    ))}
+                  {/* placeholder(its like input field to fill the data) */}
+                  {input.open_to.length === 0 && (
+                    <span className="text-black opacity-50 select-none">
+                      Open To
+                    </span>
+                  )}
+                </div>
+                <div className="flex gap-2 flex-wrap my-2">
+                  {allOpenTo.map((tech, index) => (
                     <Choice
                       choice={tech}
                       key={index}
                       selectedChoice={input.open_to}
-                      handleToggle={() => handleToggle(tech, "openTo")}
+                      handleToggle={() => handleToggle(tech, "open_to")}
                     />
                   ))}
-                {/* placeholder(its like input field to fill the data) */}
-                {input.open_to.length === 0 && (
-                  <span className="text-black opacity-50 select-none">
-                    Open To
-                  </span>
-                )}
-              </div>
-              <div className="flex gap-2 flex-wrap my-2">
-                {allOpenTo.map((tech, index) => (
-                  <Choice
-                    choice={tech}
-                    key={index}
-                    selectedChoice={input.open_to}
-                    handleToggle={() => handleToggle(tech, "open_to")}
-                  />
-                ))}
+                </div>
               </div>
             </div>
           </div>
 
           <button className="rounded-md bg-main-purple px-4 py-2">
-            {posting ? "Posting" : "Post"}
+            {posting ? "adding" : "Add"}
           </button>
         </form>
       </div>

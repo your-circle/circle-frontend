@@ -16,18 +16,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     projectsResponse = [];
   try {
     userResponse = await getUser(id);
-    projectsResponse = await getUserProjects(id);
   } catch (err: any) {
     console.error(err);
     toast.error(err.message);
   }
   return {
-    props: { user: userResponse?.data, projects: projectsResponse?.data || [] },
+    props: { user: userResponse?.data },
   };
 };
 
 const Peer: NextPage = (props: any) => {
-  const { user, projects } = props;
+  const { user } = props;
+  const router = useRouter();
+
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const res = await getUserProjects(router.query.id);
+      setProjects(res.data);
+    };
+
+    fetchProjects();
+  }, [router.isReady]);
 
   return (
     <>
@@ -35,7 +46,7 @@ const Peer: NextPage = (props: any) => {
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           {user.name}'s Projects
         </h1>
-        <div className="">
+        <div className="flex justify-center">
           {projects.length === 0 ? (
             <EmptyList message="No Projects created yet" />
           ) : (

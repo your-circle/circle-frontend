@@ -8,7 +8,7 @@ type PeerCardProp = {
 };
 const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
   return (
-    <Card>
+    <Card scale>
       <Link href={`user/${data._id}`} passHref>
         <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
           <div className="flex justify-between items-start w-full">

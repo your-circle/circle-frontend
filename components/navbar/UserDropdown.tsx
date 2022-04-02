@@ -65,7 +65,7 @@ const UserDropdown: React.FC = () => {
               !showDropdown ? "hidden" : ""
             }`}
           >
-            <Link href={`/projects/${user._id}`}>
+            <Link href={`/user/${user._id}`}>
               <a
                 className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
                 role="menuitem"

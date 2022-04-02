@@ -8,11 +8,11 @@ type ProjectCardProp = {
 };
 const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
   return (
-    <Card>
+    <Card scale>
       <Link href={`/projects/${data._id}`} passHref>
         <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
           <div className="flex justify-between items-start w-full">
-            <Link href={`/user/${data.creator_id}`}>
+            <Link href={`/user/${data.creator_id}`} passHref>
               <span className="text-main-gradient hover:underline">
                 @{data.creator_name}
               </span>
@@ -39,7 +39,7 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
             </h3>
           </div>
           <div className="flex items-center justify-center w-full">
-            {data.tech.map((item, index) => {
+            {data?.tech?.map((item, index) => {
               return (
                 <span
                   key={index}
@@ -50,16 +50,16 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               );
             })}
           </div>
-          {/* <div className="flex items-center justify-start w-full">
+          <div className="flex items-center justify-start w-full">
             <h4 className="px-2">Looking for:</h4>
-            {data.needs.map((item) => {
+            {data?.needs?.map((item) => {
               return (
                 <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
                   {item}
                 </span>
               );
             })}
-          </div> */}
+          </div>
         </div>
       </Link>
     </Card>
