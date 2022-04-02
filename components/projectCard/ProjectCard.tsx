@@ -1,6 +1,7 @@
 import Card from "../../shared/components/Card";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import Image from "next/image";
+import Link from "next/link";
 
 type ProjectCardProp = {
   data: ProjectDetailsType;
@@ -8,52 +9,59 @@ type ProjectCardProp = {
 const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
   return (
     <Card>
-      <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-default">
-        <div className="flex justify-between items-start w-full">
-          <h2 className="text-main-gradient">@{data.creator}</h2>
-          <span className="text-main-gradient flex ">
-            <Image
-              src="/images/people.svg"
-              layout="fixed"
-              height={20}
-              width={20}
-            />
-            <h4 className="px-1">
-              {data.currentTeamSize} / {data.targetTeamSize}
-            </h4>
-          </span>
-        </div>
-        <div className="flex flex-col items-center justify-center w-full">
-          <h2 className="text-main-gradient w-full text-center text-lg">
-            {data.title}
-          </h2>
-          <h3 className="text-slate-300 w-full text-center text-md">
-            {data.description}
-          </h3>
-        </div>
-        <div className="flex items-center justify-center w-full">
-          {data.tech.map((item, index) => {
-            return (
-              <span
-                key={index}
-                className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 "
-              >
-                {item}
+      <Link href={`/projects/${data._id}`} passHref>
+        <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
+          <div className="flex justify-between items-start w-full">
+            <Link href={`/user/${data.creator_id}`}>
+              <span className="text-main-gradient hover:underline">
+                @{data.creator_name}
               </span>
-            );
-          })}
+            </Link>
+            <span className="text-main-gradient flex ">
+              <Image
+                src="/images/people.svg"
+                alt="people icon"
+                layout="fixed"
+                height={20}
+                width={20}
+              />
+              <h4 className="px-1">
+                {data.currentTeamSize} / {data.targetTeamSize}
+              </h4>
+            </span>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full">
+            <h2 className="text-main-gradient w-full text-center text-lg">
+              {data.title}
+            </h2>
+            <h3 className="text-slate-300 w-full text-center text-md">
+              {data.description}
+            </h3>
+          </div>
+          <div className="flex items-center justify-center w-full">
+            {data.tech.map((item, index) => {
+              return (
+                <span
+                  key={index}
+                  className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 "
+                >
+                  {item}
+                </span>
+              );
+            })}
+          </div>
+          {/* <div className="flex items-center justify-start w-full">
+            <h4 className="px-2">Looking for:</h4>
+            {data.needs.map((item) => {
+              return (
+                <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
+                  {item}
+                </span>
+              );
+            })}
+          </div> */}
         </div>
-        {/* <div className="flex items-center justify-start w-full">
-          <h4 className="px-2">Looking for:</h4>
-          {data.needs.map((item) => {
-            return (
-              <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
-                {item}
-              </span>
-            );
-          })}
-        </div> */}
-      </div>
+      </Link>
     </Card>
   );
 };

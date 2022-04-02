@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { newPost } from "../../api/post";
 import { toast } from "react-toastify";
-import { toastConfig } from "../../shared/constants";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
 import useAuth from "../../hooks/useAuth";
+import { toastConfig } from "../../shared/config/constants";
+import { newProject } from "../../shared/services/projects.services";
 
 const NewProject: NextPage = () => {
   const router = useRouter();
@@ -48,7 +48,7 @@ const NewProject: NextPage = () => {
     setPosting(true);
     // data validation
     try {
-      const res = await newPost({ ...input });
+      const res = await newProject({ ...input });
       setPosting(false);
       router.push("/");
     } catch (err: any) {
