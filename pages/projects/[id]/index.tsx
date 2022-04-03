@@ -7,46 +7,35 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import ProjectCard from "../../../components/projectCard";
 import EmptyList from "../../../shared/components/EmptyList";
-import { getUserProjects } from "../../../shared/services/projects.services";
+import {
+  getProject,
+  getUserProjects,
+} from "../../../shared/services/projects.services";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
   const { id } = context.params;
-  let userResponse = {},
-    projectsResponse = [];
+  let projectData = {};
   try {
-    userResponse = await getUser(id);
-    projectsResponse = await getUserProjects(id);
+    projectData = await getProject(id);
   } catch (err: any) {
     console.error(err);
     toast.error(err.message);
   }
   return {
-    props: { user: userResponse?.data, projects: projectsResponse?.data || [] },
+    props: { data: projectData?.data || {} },
   };
 };
 
-const Peer: NextPage = (props: any) => {
-  const { user, projects } = props;
+const Project: NextPage = (props: any) => {
+  const { data } = props;
+  console.log("data", data);
 
   return (
-    <>
-      <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full">
-        <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          {user.name}'s Projects
-        </h1>
-        <div className="">
-          {projects.length === 0 ? (
-            <EmptyList message="No Projects created yet" />
-          ) : (
-            projects.map((project, index) => {
-              return <ProjectCard data={project} key={index} />;
-            })
-          )}
-        </div>
-      </div>
-    </>
+    <div className="w-max mx-auto">
+      <ProjectCard data={data} />
+    </div>
   );
 };
 
-export default Peer;
+export default Project;
