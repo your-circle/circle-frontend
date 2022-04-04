@@ -3,14 +3,12 @@ export type PeerDetailsType = {
   name: string;
   userName: string;
   about: string;
-  socials: {
-    discord?: string;
-    linkedin?: string;
-    twitter?: string;
-    github?: string;
-  };
+  discord?: string;
+  linkedin?: string;
+  twitter?: string;
+  github?: string;
   skills: skillEnum;
-  openTo: openToArray;
+  open_to: openToArray;
 };
 
 export type skillEnum = [

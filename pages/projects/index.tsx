@@ -30,7 +30,7 @@ const Projects: NextPage = (props: any) => {
           {projects.length === 0 ? (
             <EmptyList message="No Projects available" />
           ) : (
-            projects.map((project, index) => {
+            projects.map((project: ProjectDetailsType, index: any) => {
               return <ProjectCard data={project} key={index} />;
             })
           )}
