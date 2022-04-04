@@ -108,13 +108,11 @@ const UserDropdown: React.FC = () => {
           />
         </>
       ) : (
-        <Link href="/login" passHref>
-          <Button>
-            <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200">
-              Login
-            </h1>
-          </Button>
-        </Link>
+        <Button href="/login">
+          <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200 w-16 text-center">
+            Login
+          </h1>
+        </Button>
       )}
     </div>
   );
