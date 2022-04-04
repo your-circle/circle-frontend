@@ -10,10 +10,10 @@ const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   return (
-    <nav className=" w-full sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
+    <nav className=" w-full sticky top-0.5 z-10 backdrop-filter backdrop-blur-lg">
       <section className="flex justify-between items-center px-2 p-1">
         <Link href="/">
-          <h1 className="text-2xl text-main-gradient cursor-pointer">Circle</h1>
+          <h1 className="text-2xl text-main-gradient cursor-pointer">circle</h1>
         </Link>
 
         <section className="hidden md:flex  justify-around w-1/3 items-center">
