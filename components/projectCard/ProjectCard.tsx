@@ -17,18 +17,20 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
                 @{data.creator_name}
               </span>
             </Link>
-            <span className="text-main-gradient flex ">
-              <Image
-                src="/images/people.svg"
-                alt="people icon"
-                layout="fixed"
-                height={20}
-                width={20}
-              />
-              <h4 className="px-1">
-                {data.currentTeamSize} / {data.targetTeamSize}
-              </h4>
-            </span>
+            {data.currentTeamSize && data.targetTeamSize && (
+              <span className="text-main-gradient flex ">
+                <Image
+                  src="/images/people.svg"
+                  alt="people icon"
+                  layout="fixed"
+                  height={20}
+                  width={20}
+                />
+                <h4 className="px-1">
+                  {data.currentTeamSize} / {data.targetTeamSize}
+                </h4>
+              </span>
+            )}
           </div>
           <div className="flex flex-col items-center justify-center w-full">
             <h2 className="text-main-gradient w-full text-center text-lg">
@@ -43,20 +45,24 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               return (
                 <span
                   key={index}
-                  className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 "
+                  className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
                 >
                   {item}
                 </span>
               );
             })}
           </div>
-          <div className="flex items-center justify-start w-full">
-            <h4 className="px-2">Looking for:</h4>
-            {data?.needs?.map((item) => {
+          <div className="flex items-center justify-center w-full">
+            {data.need.length ? (
+              <h4 className="text-slate-200">Looking for </h4>
+            ) : (
+              ""
+            )}
+            {data?.need?.map((item) => {
               return (
-                <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
+                <h4 className="text-slate-200 px-1 text-gradient-main">
                   {item}
-                </span>
+                </h4>
               );
             })}
           </div>

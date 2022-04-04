@@ -1,12 +1,17 @@
 module.exports = {
-  content: [ "./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./shared/**/*.{js,ts,jsx,tsx}" ],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./shared/**/*.{js,ts,jsx,tsx}",
+  ],
   mode: "jit",
   theme: {
     extend: {
       colors: {
-        "main-bg": "#22232D",
+        "main-bg": "#0F1319",
         "main-purple": "#7362D1",
-        "secondary-bg": "#343347",
+        "gray-border": "#525866",
+        "main-gray": "#1d1f27",
       },
     },
   },

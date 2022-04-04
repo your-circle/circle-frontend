@@ -4,6 +4,7 @@ import { userContext } from "../../providers/userProvider";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import Button from "../../shared/components/Button";
 
 const UserDropdown: React.FC = () => {
   const router = useRouter();
@@ -67,7 +68,7 @@ const UserDropdown: React.FC = () => {
           >
             <Link href={`/user/${user._id}`}>
               <a
-                className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
+                className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
                 role="menuitem"
               >
                 My Projects
@@ -75,7 +76,7 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href={`/projects/new`}>
               <a
-                className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
+                className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
                 role="menuitem"
               >
                 Add Project
@@ -83,14 +84,14 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href="/profile/edit">
               <a
-                className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
+                className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
                 role="menuitem"
               >
                 Profile
               </a>
             </Link>
             <a
-              className="block px-4 py-2 bg-secondary-bg hover:bg-secondary-bg text-sm  hover:opacity-80"
+              className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
               role="menuitem"
               onClick={Logout}
             >
@@ -108,11 +109,11 @@ const UserDropdown: React.FC = () => {
         </>
       ) : (
         <Link href="/login" passHref>
-          <a className=" mx-2 p-[2px] rounded-md w-max h-max bg-gradient-to-br from-[#7362D1] to-[#618EB0]">
-            <div className="flex flex-col justify-between h-full bg-secondary-bg rounded-md px-4 py-2">
-              <h1 className="text-main-gradient font-black">Log in</h1>
-            </div>
-          </a>
+          <Button>
+            <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200">
+              Login
+            </h1>
+          </Button>
         </Link>
       )}
     </div>

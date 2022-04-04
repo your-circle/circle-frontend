@@ -7,11 +7,11 @@ export type PeerDetailsType = {
     twitter?: string;
     github?: string;
   };
-  skills: skillArray;
+  skills: skillEnum;
   openTo: openToArray;
 };
 
-export const skillEnum = [
+export type skillEnum = [
   "Frontend",
   "Backend",
   "Fullstack",
@@ -20,7 +20,7 @@ export const skillEnum = [
   "AppDev",
   "Blockchain",
   "Hardware",
-  "Cybersecurity",
+  "Cybersecurity"
 ];
 
 export type openToArray = Array<openToEnum>;
