@@ -10,7 +10,7 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
   return (
     <Card scale>
       <Link href={`user/${data._id}`} passHref>
-        <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
+        <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px]  cursor-pointer h-[100%]">
           <div className="flex justify-between items-start w-full">
             <h2 className="text-main-gradient">@{data.name}</h2>
             <div className="flex  justify-between space-x-2">

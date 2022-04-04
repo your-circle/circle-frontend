@@ -26,7 +26,7 @@ const Projects: NextPage = (props: any) => {
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Find Your Projects
         </h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
           {projects.length === 0 ? (
             <EmptyList message="No Projects available" />
           ) : (
