@@ -11,83 +11,10 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
     <Card scale>
       <Link href={`user/${data._id}`} passHref>
         <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer h-[100%]">
-          <div className="flex justify-between items-start w-full">
-            <h2 className="text-main-gradient">@{data.name}</h2>
-            <div className="flex  justify-between space-x-2">
-              {data?.discord ? (
-                <a
-                  rel="noreferrer"
-                  href={`https://discordapp.com/users/`}
-                  target="_blank"
-                >
-                  <Image
-                    className="cursor-pointer"
-                    src="/images/socials/discord.svg"
-                    alt="discord"
-                    layout="fixed"
-                    height="15"
-                    width="15"
-                  />
-                </a>
-              ) : (
-                ""
-              )}
-              {data?.github ? (
-                <a
-                  rel="noreferrer"
-                  href={`https://www.github.com/${data.github}`}
-                  target="_blank"
-                >
-                  <Image
-                    className="cursor-pointer"
-                    src="/images/socials/github.svg"
-                    alt="github"
-                    layout="fixed"
-                    height="15"
-                    width="15"
-                  />
-                </a>
-              ) : (
-                ""
-              )}
-              {data?.twitter ? (
-                <a
-                  rel="noreferrer"
-                  href={`https://www.twitter.com/${data.twitter}`}
-                  target="_blank"
-                >
-                  <Image
-                    className="cursor-pointer"
-                    src="/images/socials/twitter.svg"
-                    alt="twitter"
-                    layout="fixed"
-                    height="15"
-                    width="15"
-                  />
-                </a>
-              ) : (
-                ""
-              )}
-              {data?.linkedin ? (
-                <a
-                  rel="noreferrer"
-                  href={`https://www.linkedin.com/${data.linkedin}`}
-                  target="_blank"
-                >
-                  <Image
-                    className="cursor-pointer"
-                    src="/images/socials/linkedin.svg"
-                    alt="linkedin"
-                    layout="fixed"
-                    height="15"
-                    width="15"
-                  />
-                </a>
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
+          <h2 className=" mx-auto text-lg w-full text-main-gradient">
+            <h2 className="text-center"> @{data.name}</h2>
+          </h2>
+
           <h3 className="mx-auto text-slate-300">{data.about}</h3>
           <div className="flex items-center w-full justify-center">
             <div className="flex flex-wrap items-center justify-center">

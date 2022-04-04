@@ -54,13 +54,13 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
           </div>
           <div className="flex items-center justify-center w-full">
             {data.need.length ? (
-              <h4 className="text-slate-200">Looking for </h4>
+              <h4 className=" text-main-gradient">Looking for</h4>
             ) : (
               ""
             )}
             {data?.need?.map((item) => {
               return (
-                <h4 className="text-slate-200 px-1 text-gradient-main">
+                <h4 className="px-1 text-main-gradient border mx-1 rounded border-slate-400">
                   {item}
                 </h4>
               );
