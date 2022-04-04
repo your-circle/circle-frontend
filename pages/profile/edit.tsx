@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
-import { skillEnum } from "../../shared/schemas/peerDetails.schema";
 import useAuth from "../../hooks/useAuth";
 import Input from "../../shared/components/Input";
 import { getUser, editUser } from "../../shared/services/user.services";
 import { userContext } from "../../providers/userProvider";
 import { toast } from "react-toastify";
+import { skillEnum } from "../../shared/config/constants";
 
 const Profile: NextPage = () => {
   useAuth();
