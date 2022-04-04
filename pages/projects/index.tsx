@@ -24,7 +24,7 @@ const Projects: NextPage = (props: any) => {
     <>
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          Find Your Projects
+          Projects
         </h1>
         <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
           {projects.length === 0 ? (
