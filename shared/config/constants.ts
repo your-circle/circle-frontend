@@ -11,4 +11,16 @@ export const toastConfig: ToastOptions = {
   progress: undefined,
 };
 
-export const BackendURL = process.env.NEXT_PUBLIC_BACKEND_URL
+export const BackendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+export const skillEnum = [
+  "Frontend",
+  "Backend",
+  "Fullstack",
+  "UI/UX",
+  "ML",
+  "AppDev",
+  "Blockchain",
+  "Hardware",
+  "Cybersecurity",
+];
