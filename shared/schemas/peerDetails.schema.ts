@@ -1,4 +1,6 @@
 export type PeerDetailsType = {
+  _id: string;
+  name: string;
   userName: string;
   about: string;
   socials: {
