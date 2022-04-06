@@ -74,18 +74,18 @@ const NewProject: NextPage = () => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center ">
+    <div className="flex w-full items-center justify-center text-sm sm:text-md">
       <div className="text-white min-h-screen min-w-full flex flex-col items-center justify-center pt-[58px] mt-[-60px]">
         <Card>
           <form
             onSubmit={(e) => handleSubmit(e)}
-            className="flex flex-col items-center gap-4 justify-center"
+            className="flex flex-col items-center gap-4 justify-center w-[300px] sm:w-full"
           >
             <span className="text-lg m-4 text-main-gradient">
               Add a new Project
             </span>
             <div className="flex flex-col gap-3 items-center">
-              <div className="w-full">
+              <div className="w-[260px] sm:w-full">
                 <Input
                   name="title"
                   type="text"
@@ -96,7 +96,7 @@ const NewProject: NextPage = () => {
                   fullWidth={true}
                 />
               </div>
-              <div className="w-full">
+              <div className="w-[260px] sm:w-full">
                 <Input
                   name="description"
                   type="text"
@@ -108,7 +108,7 @@ const NewProject: NextPage = () => {
                 />
               </div>
               <div className="flex items-center gap-4 mb-2">
-                <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
+                <div className="h-full focus:border-gray-800 rounded-sm w-[260px] sm:w-[400px]">
                   <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
                     {input.tech.length !== 0 &&
                       input.tech.map((tech, index) => (
@@ -141,7 +141,7 @@ const NewProject: NextPage = () => {
               {/* OPEN TO */}
               <div className="flex items-center gap-4 mb-2">
                 {/*  multiple */}
-                <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
+                <div className="h-full focus:border-gray-800 rounded-sm w-[260px] sm:w-[400px]">
                   <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
                     {input.open_to.length !== 0 &&
                       input.open_to.map((tech, index) => (
@@ -153,13 +153,14 @@ const NewProject: NextPage = () => {
                         />
                       ))}
                     {/* placeholder(its like input field to fill the data) */}
+
                     {input.open_to.length === 0 && (
-                      <span className="text-slate-300 py-3 select-none mx-auto">
+                      <span className="text-slate-300 py-3 select-none mx-auto ">
                         Project is looking for
                       </span>
                     )}
                   </div>
-                  <div className="flex gap-2 flex-wrap my-2">
+                  <div className="flex items-center justify-center w-full">
                     {allOpenTo.map((tech, index) => (
                       <Choice
                         choice={tech}
@@ -173,8 +174,8 @@ const NewProject: NextPage = () => {
               </div>
             </div>
 
-            <button className="rounded-md bg-main-purple px-4 py-2 w-full">
-              {posting ? "adding" : "Add"}
+            <button className="rounded-md bg-main-purple px-4 py-3 w-full">
+              {posting ? "Adding project to Circle" : "Add Project"}
             </button>
           </form>
         </Card>
