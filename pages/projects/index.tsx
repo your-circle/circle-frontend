@@ -28,7 +28,10 @@ const Projects: NextPage = (props: any) => {
         </h1>
         <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
           {projects.length === 0 ? (
-            <EmptyList message="No Projects available" />
+            <>
+              <span></span>
+              <EmptyList message="No Projects available" />
+            </>
           ) : (
             projects.map((project: any, index: number) => {
               return <ProjectCard data={project} key={index} />;
