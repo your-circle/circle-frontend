@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { toastConfig } from "../../shared/config/constants";
 import { newProject } from "../../shared/services/projects.services";
 import Input from "../../shared/components/Input";
+import Card from "../../shared/components/Card";
 
 const NewProject: NextPage = () => {
   useAuth();
@@ -73,34 +74,60 @@ const NewProject: NextPage = () => {
   };
 
   return (
-    <>
-      <div className="bg-main-bg text-white min-h-screen min-w-full flex flex-col items-center justify-center pt-[58px] mt-[-60px]">
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-          className="flex flex-col items-center gap-4"
-        >
-          <span className="text-lg">New Project</span>
-          <div className="flex flex-col gap-4 items-start">
-            <Input
-              name="title"
-              type="text"
-              key="title"
-              value={input.title}
-              onChange={onInputChange}
-            />
-            <Input
-              name="description"
-              type="text"
-              key="description"
-              value={input.description}
-              onChange={onInputChange}
-            />
-
-            <div className="flex items-center gap-4 mb-2">
-              <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
-                <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
-                  {input.tech.length !== 0 &&
-                    input.tech.map((tech, index) => (
+    <div className="flex w-full items-center justify-center ">
+      <div className="text-white min-h-screen min-w-full flex flex-col items-center justify-center pt-[58px] mt-[-60px]">
+        <Card>
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            className="flex flex-col items-center gap-4 justify-center"
+          >
+            <span className="text-lg m-4 text-main-gradient">
+              Add a new Project
+            </span>
+            <div className="flex flex-col gap-3 items-center">
+              <div className="w-full">
+                <Input
+                  name="title"
+                  type="text"
+                  key="title"
+                  value={input.title}
+                  onChange={onInputChange}
+                  transparent={true}
+                  fullWidth={true}
+                />
+              </div>
+              <div className="w-full">
+                <Input
+                  name="description"
+                  type="text"
+                  key="description"
+                  value={input.description}
+                  onChange={onInputChange}
+                  transparent={true}
+                  fullWidth={true}
+                />
+              </div>
+              <div className="flex items-center gap-4 mb-2">
+                <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
+                  <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
+                    {input.tech.length !== 0 &&
+                      input.tech.map((tech, index) => (
+                        <Choice
+                          choice={tech}
+                          key={index}
+                          selectedChoice={input.tech}
+                          handleToggle={() => handleToggle(tech, "tech")}
+                        />
+                      ))}
+                    {/* placeholder(its like input field to fill the data) */}
+                    {input.tech.length === 0 && (
+                      <span className="text-slate-300 py-3 select-none mx-auto">
+                        Add Project Type
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2 flex-wrap my-2">
+                    {allTech.map((tech, index) => (
                       <Choice
                         choice={tech}
                         key={index}
@@ -108,67 +135,51 @@ const NewProject: NextPage = () => {
                         handleToggle={() => handleToggle(tech, "tech")}
                       />
                     ))}
-                  {/* placeholder(its like input field to fill the data) */}
-                  {input.tech.length === 0 && (
-                    <span className="text-black opacity-50 select-none">
-                      Technology
-                    </span>
-                  )}
-                </div>
-                <div className="flex gap-2 flex-wrap my-2">
-                  {allTech.map((tech, index) => (
-                    <Choice
-                      choice={tech}
-                      key={index}
-                      selectedChoice={input.tech}
-                      handleToggle={() => handleToggle(tech, "tech")}
-                    />
-                  ))}
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* OPEN TO */}
-            <div className="flex items-center gap-4 mb-2">
-              {/*  multiple */}
-              <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
-                <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
-                  {input.open_to.length !== 0 &&
-                    input.open_to.map((tech, index) => (
+              {/* OPEN TO */}
+              <div className="flex items-center gap-4 mb-2">
+                {/*  multiple */}
+                <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
+                  <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
+                    {input.open_to.length !== 0 &&
+                      input.open_to.map((tech, index) => (
+                        <Choice
+                          choice={tech}
+                          key={index}
+                          selectedChoice={input.open_to}
+                          handleToggle={() => handleToggle(tech, "openTo")}
+                        />
+                      ))}
+                    {/* placeholder(its like input field to fill the data) */}
+                    {input.open_to.length === 0 && (
+                      <span className="text-slate-300 py-3 select-none mx-auto">
+                        Project is looking for
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2 flex-wrap my-2">
+                    {allOpenTo.map((tech, index) => (
                       <Choice
                         choice={tech}
                         key={index}
                         selectedChoice={input.open_to}
-                        handleToggle={() => handleToggle(tech, "openTo")}
+                        handleToggle={() => handleToggle(tech, "open_to")}
                       />
                     ))}
-                  {/* placeholder(its like input field to fill the data) */}
-                  {input.open_to.length === 0 && (
-                    <span className="text-black opacity-50 select-none">
-                      Open To
-                    </span>
-                  )}
-                </div>
-                <div className="flex gap-2 flex-wrap my-2">
-                  {allOpenTo.map((tech, index) => (
-                    <Choice
-                      choice={tech}
-                      key={index}
-                      selectedChoice={input.open_to}
-                      handleToggle={() => handleToggle(tech, "open_to")}
-                    />
-                  ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <button className="rounded-md bg-main-purple px-4 py-2">
-            {posting ? "adding" : "Add"}
-          </button>
-        </form>
+            <button className="rounded-md bg-main-purple px-4 py-2 w-full">
+              {posting ? "adding" : "Add"}
+            </button>
+          </form>
+        </Card>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -186,17 +197,17 @@ const Choice = ({
   const selected = selectedChoice.includes(choice);
   if (isSelected && !selected) return null;
   return (
-    <div
-      className={`flex items-center cursor-pointer hover:scale-105 text-black px-1 text-s ${
-        selected ? "bg-[#8080FF]" : "bg-[#d4d4d4]"
-      }`}
-      onClick={() => handleToggle(choice)}
-    >
-      <span>{choice}</span>
-      <span className="ml-1 pl-1 border-l-2 border-gray-500">
-        {selected ? "x" : "+"}
-      </span>
-    </div>
+    <Card scale={false} hoverBorder={true}>
+      <div
+        className={`flex items-center justify-center w-full h-full cursor-pointer text-slate-300 px-1 text-sm ${
+          selected ? "text-[#8080FF]" : ""
+        }`}
+        onClick={() => handleToggle(choice)}
+      >
+        <span>{choice}</span>
+        <span className="ml-1 pl-1 ">{selected ? "x" : "+"}</span>
+      </div>
+    </Card>
   );
 };
 

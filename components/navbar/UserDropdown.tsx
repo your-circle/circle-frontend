@@ -36,7 +36,7 @@ const UserDropdown: React.FC = () => {
     <div className="flex items-center cursor-pointer relative">
       {isLoggedIn ? (
         <>
-          <div className="flex items-center mr-4">
+          <div className="flex items-center mr-5">
             <span
               className="select-none opacity-90 hover:opacity-100"
               onClick={() => {
@@ -68,7 +68,7 @@ const UserDropdown: React.FC = () => {
           >
             <Link href={`/user/${user._id}`}>
               <a
-                className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
+                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 My Projects
@@ -76,7 +76,7 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href={`/projects/new`}>
               <a
-                className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
+                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 Add Project
@@ -84,14 +84,14 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href="/profile/edit">
               <a
-                className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
+                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 Profile
               </a>
             </Link>
             <a
-              className="block px-4 py-2 bg-gray-border hover:bg-gray-border text-sm  hover:opacity-80"
+              className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
               role="menuitem"
               onClick={Logout}
             >

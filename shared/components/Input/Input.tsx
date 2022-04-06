@@ -8,6 +8,8 @@ type Props = {
   name: string;
   key: string;
   value?: string;
+  transparent?: boolean;
+  fullWidth?: boolean;
   onChange: (key: string, value: string) => void;
 };
 
@@ -40,7 +42,9 @@ const Input = (props: Props) => {
           onChange={(e) => props.onChange(props.name, e.target.value)}
           className={`text-white h-full px-4 py-3 relative ${
             props.icon ? "pl-9" : "pl-4"
-          } min-w-[280px] focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm bg-secondary-bg `}
+          } ${props.transparent ? "bg-transparent" : "bg-secondary-bg"} ${
+            props.fullWidth ? "w-full" : "min-w-[280px]"
+          }  focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm  `}
         />
       )}
     </div>
