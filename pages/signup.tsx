@@ -47,7 +47,7 @@ const Login: NextPage = () => {
       updateUser(res.data);
       changeLogInStatus(true);
       localStorage.setItem("jwtToken", res.data.token);
-      router.push("/profile");
+      router.push("/profile/edit");
     };
     toast.promise(
       signupApiCall,
