@@ -42,11 +42,6 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
             </div>
           </div>
           <div className="flex items-center justify-center w-full h-[25px] overflow-hidden">
-            {data?.tech?.length === 0 && (
-              <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
-                no tech stack provided
-              </span>
-            )}
             {data?.tech?.map((item, index) => {
               return (
                 <span
@@ -58,18 +53,13 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               );
             })}
           </div>
-          <div className="flex items-center justify-start w-full h-[25px] overflow-hidden">
-            <h4 className="px-2">Looking for:</h4>
-            {data?.need?.length === 0 && (
-              <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
-                none
-              </span>
-            )}
+          <div className="flex items-center justify-center w-full h-[25px] overflow-hidden font-light text-main-purple">
+            {data?.need?.length !== 0 && <h4 className="px-1">Looking for</h4>}
             {data?.need?.map((item, index) => {
               return (
                 <span
                   key={index}
-                  className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 "
+                  className="font-light  border p-0.5 rounded-sm"
                 >
                   {item}
                 </span>

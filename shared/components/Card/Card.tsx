@@ -8,7 +8,7 @@ type Props = {
 const Card = (props: Props) => {
   return (
     <div
-      className={`m-2 p-[3px] rounded-md w-max h-full  backdrop-filter backdrop-blur-lg bg-main-gray border border-gray-border hover:border-slate-300 ${
+      className={`m-2 p-[3px] rounded-md w-max h-fit  backdrop-filter backdrop-blur-lg bg-main-gray border border-gray-border hover:border-slate-300 ${
         props.scale ? "hover:scale-105" : ""
       } transition-all`}
     >
