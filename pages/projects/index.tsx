@@ -1,24 +1,24 @@
-import { Key, useState } from "react";
-import type { GetServerSideProps, NextPage } from "next";
-import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
+import type { GetStaticProps, NextPage } from "next";
 import ProjectCard from "../../components/projectCard";
 import EmptyList from "../../shared/components/EmptyList";
-import {
-  getAllProjects,
-  getUserProjects,
-} from "../../shared/services/projects.services";
+import { getAllProjects } from "../../shared/services/projects.services";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   // api call
-  const projects = await getAllProjects();
+  let projectsResponse;
+  try {
+    projectsResponse = await getAllProjects();
+  } catch (err) {
+    console.error(err);
+  }
   return {
-    props: { projects: projects?.data || [] },
+    props: { projects: projectsResponse?.data || [] },
+    revalidate: 5,
   };
 };
 
 const Projects: NextPage = (props: any) => {
   const { projects } = props;
-  console.log("projects", projects);
 
   return (
     <>
@@ -30,7 +30,7 @@ const Projects: NextPage = (props: any) => {
           {projects.length === 0 ? (
             <EmptyList message="No Projects available" />
           ) : (
-            projects.map((project: ProjectDetailsType, index: any) => {
+            projects.map((project: any, index: number) => {
               return <ProjectCard data={project} key={index} />;
             })
           )}
