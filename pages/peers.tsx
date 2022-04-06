@@ -4,6 +4,7 @@ import PeerCard from "../components/peerCard";
 import { getAllUsers } from "../shared/services/user.services";
 import { toast } from "react-toastify";
 import EmptyList from "../shared/components/EmptyList";
+import { PeerDetailsType } from "../shared/schemas/peerDetails.schema";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
@@ -20,6 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Peer: NextPage = (props: any) => {
+  console.log(props.peers);
   return (
     <>
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
@@ -27,10 +29,10 @@ const Peer: NextPage = (props: any) => {
           Peers
         </h1>
         <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
-          {props?.peers?.data?.length === 0 ? (
+          {props?.peers?.length === 0 ? (
             <EmptyList message="No users available" />
           ) : (
-            props?.peers?.data?.map((peer: PeerDetailsType, index: any) => {
+            props?.peers?.map((peer: PeerDetailsType, index: any) => {
               return <PeerCard data={peer} key={index} />;
             })
           )}
