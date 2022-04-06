@@ -15,12 +15,12 @@ const Input = (props: Props) => {
   return (
     <div className="relative h-max">
       {props.icon && (
-        <div className="absolute left-1 z-10 h-[30px] my-[7.5px]">
+        <div className="absolute left-1 z-10 py-2 ">
           <Image src={props.icon} alt={props.name} height={25} width={25} />
         </div>
       )}
       {props.pre && (
-        <span className="h-full px-2 py-2 bg-gray-700">{props.pre}</span>
+        <span className="h-full px-4 py-2 bg-gray-700">{props.pre}</span>
       )}
       {props.type === "textarea" && (
         <textarea
@@ -38,11 +38,9 @@ const Input = (props: Props) => {
           type={props.type}
           value={props.value}
           onChange={(e) => props.onChange(props.name, e.target.value)}
-          className={`text-black h-full px-4 py-2 relative ${
+          className={`text-black h-full px-4 py-3 relative ${
             props.icon ? "pl-9" : "pl-4"
-          } w-[${
-            props.pre ? "150" : "280"
-          }px] focus:border-gray-800 rounded-sm`}
+          } min-w-[280px] focus:border-gray-800 rounded-sm`}
         />
       )}
     </div>
