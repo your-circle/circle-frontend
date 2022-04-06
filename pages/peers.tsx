@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Peer: NextPage = (props: any) => {
-  const peers = props.peers.data;
+  const peers = props.peers;
   return (
     <>
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
@@ -40,3 +40,5 @@ const Peer: NextPage = (props: any) => {
     </>
   );
 };
+
+export default Peer;
