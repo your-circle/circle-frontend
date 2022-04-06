@@ -1,14 +1,17 @@
 export type ProjectDetailsType = {
   _id: string;
   title: string;
-  creator_name: string;
   creator_id: string;
+  creator_name: string;
   description: string;
   projectType: projectTypeArray;
   tech: string[];
   need: needsArray;
+  request_list: string[];
+  team: object[];
   targetTeamSize: number;
   currentTeamSize: number;
+  is_team_full: boolean;
 };
 
 export type projectTypeArray = Array<projectTypeEnum>;

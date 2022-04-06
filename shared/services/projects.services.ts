@@ -17,7 +17,7 @@ export const getUserProjects = async (id: any) => {
   } catch (err: any) {
     console.log("error", err.message);
 
-    throw Error(err?.response?.data?.message || "something went wrong");
+    // throw Error(err?.response?.data?.message || "something went wrong");
   }
 };
 
@@ -38,6 +38,27 @@ export const getAllProjects = async () => {
 export const getProject = async (id: string) => {
   try {
     const res = await axios.get(`v1/project/${id}`);
+    if (res.status != 200) {
+      throw Error(res?.data?.message || "something went wrong");
+    }
+    return res.data;
+  } catch (err: any) {
+    console.error(err);
+  }
+};
+
+export const joinProject = async (id: string) => {
+  const token = localStorage.getItem("jwtToken") || "";
+  try {
+    const res = await axios.post(
+      `v1/project/join-request/${id}`,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
