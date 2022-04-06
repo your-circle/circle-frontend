@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Peer: NextPage = (props: any) => {
-  const peers = props.peers;
   return (
     <>
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
@@ -28,10 +27,10 @@ const Peer: NextPage = (props: any) => {
           Peers
         </h1>
         <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
-          {peers.length === 0 ? (
+          {props?.peers?.data?.length === 0 ? (
             <EmptyList message="No users available" />
           ) : (
-            peers.map((peer: any, index: number) => {
+            props?.peers?.data?.map((peer: PeerDetailsType, index: any) => {
               return <PeerCard data={peer} key={index} />;
             })
           )}

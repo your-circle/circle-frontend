@@ -72,28 +72,31 @@ const Login: NextPage = () => {
   return (
     <>
       <div className="bg-main-bg text-white mt-[20vh] min-w-full  flex flex-col items-center justify-center">
-        <Card>
+        <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col items-center gap-4 py-6 px-3"
+            className="flex flex-col items-center justify-around gap-4 py-6 px-3 h-[25rem]"
           >
             <span className="text-lg">Log in to your Circle account</span>
-            <Input
-              icon="/images/email-icon.svg"
-              name="email"
-              type="text"
-              key="email"
-              onChange={onInputChange}
-            />
-            <Input
-              icon="/images/password-icon.svg"
-              name="password"
-              type="password"
-              key="password"
-              onChange={onInputChange}
-            />
+            <div className="flex flex-col justify-between h-[6rem]">
+              <Input
+                icon="/images/email-icon.svg"
+                name="Email"
+                type="text"
+                key="email"
+                onChange={onInputChange}
+              />
+              <Input
+                icon="/images/password-icon.svg"
+                name="Password"
+                type="password"
+                key="password"
+                onChange={onInputChange}
+              />
+            </div>
+
             <button
-              className="min-w-[280px] bg-main-purple px-4 py-2 rounded-full "
+              className="min-w-[280px] bg-main-purple px-4 py-2.5 rounded-sm "
               onClick={handleSubmit}
             >
               Log in
