@@ -79,7 +79,6 @@ const Login: NextPage = () => {
           >
             <span className="text-lg">Log in to your Circle account</span>
             <div className="flex flex-col justify-between h-[6rem]">
-              {" "}
               <Input
                 icon="/images/email-icon.svg"
                 name="Email"
