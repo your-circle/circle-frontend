@@ -30,7 +30,10 @@ const Peer: NextPage = (props: any) => {
         </h1>
         <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
           {props?.peers?.length === 0 ? (
-            <EmptyList message="No users available" />
+            <>
+              <span></span>
+              <EmptyList message="No users available" />
+            </>
           ) : (
             props?.peers?.map((peer: PeerDetailsType, index: any) => {
               return <PeerCard data={peer} key={index} />;
