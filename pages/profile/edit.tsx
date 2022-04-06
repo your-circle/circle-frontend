@@ -7,6 +7,7 @@ import { getUser, editUser } from "../../shared/services/user.services";
 import { userContext } from "../../providers/userProvider";
 import { toast } from "react-toastify";
 import { skillEnum } from "../../shared/config/constants";
+import Card from "../../shared/components/Card";
 
 const Profile: NextPage = () => {
   useAuth();
@@ -32,7 +33,7 @@ const Profile: NextPage = () => {
     linkedin: "",
     twitter: "",
   };
-  const [input, setInput] = useState<inputType>(defaultInput);
+  const [input, setInput] = useState<Type>(defaultInput);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
@@ -117,99 +118,88 @@ const Profile: NextPage = () => {
   };
 
   return (
-    <>
-      <div className="bg-main-bg text-white min-h-screen min-w-full">
-        <div className="flex gap-20 items-center py-2 border-b-[2px] mb-4 mx-[45px]">
-          <h1 className="h-[27px]">Profile</h1>
-          <div
-            className="cursor-pointer"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            title="edit"
+    <div className="flex items-center justify-center">
+      <Card>
+        <div className="text-white min-h-full w-[360px] sm:w-fit">
+          <div className="flex gap-20 items-center py-2   mx-[45px] ">
+            <h1 className="mx-auto text-lg text-main-gradient">Your Profile</h1>
+          </div>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
+              !isEditing ? "pointer-events-none" : ""
+            }`}
           >
-            <Image
-              src="/images/edit-purple.svg"
-              alt="edit"
-              height={25}
-              width={25}
-              onClick={() => setIsEditing(!isEditing)}
-            />
-          </div>
-        </div>
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
-            !isEditing ? "pointer-events-none" : ""
-          }`}
-        >
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">
-              username:<span className="text-red-400">*</span>
-            </span>
-            <Input
-              name="name"
-              type="text"
-              key="name"
-              value={input.name}
-              onChange={onInputChange}
-            />
-          </div>
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">
-              email:<span className="text-red-400">*</span>
-            </span>
-            <Input
-              name="email"
-              type="text"
-              key="email"
-              value={input.email}
-              onChange={onInputChange}
-            />
-          </div>
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">Bio:</span>
-            <Input
-              name="about"
-              type="textarea"
-              key="about"
-              value={input.about}
-              onChange={onInputChange}
-            />
-          </div>
-          <div className="flex justify-start items-center gap-4 mb-2">
-            <span className="w-[100px]">photo:</span>
-            <Image
-              src={`https://avatars.dicebear.com/api/human/${input.avatarSeed}.svg`}
-              alt="profile"
-              // onClick={focusInput}
-              className="rounded-[50%] bg-white text-black cursor-pointer"
-              width={55}
-              height={55}
-            />
-            {/* For Custom Photo - Future Use*/}
-            {/* <input
+            <div className="flex items-center gap-4 mb-2">
+              <span className="w-[100px]">
+                Username<span className="text-red-400">*</span>
+              </span>
+              <Input
+                name="name"
+                type="text"
+                key="name"
+                value={input.name}
+                onChange={onInputChange}
+                transparent={true}
+              />
+            </div>
+
+            <div className="flex items-center gap-4 mb-2">
+              <span className="hidden sm:block w-[100px]">
+                Email<span className="text-red-400">*</span>
+              </span>
+              <Input
+                name="email"
+                type="text"
+                key="email"
+                value={input.email}
+                onChange={onInputChange}
+                transparent={true}
+              />
+            </div>
+            <div className="flex items-center gap-4 mb-2">
+              <span className="w-[100px]">Bio</span>
+              <Input
+                transparent={true}
+                name="about"
+                type="textarea"
+                key="about"
+                value={input.about}
+                onChange={onInputChange}
+              />
+            </div>
+            <div className="flex justify-start items-center gap-4 mb-2">
+              <span className="w-[100px]">Avatar</span>
+              <Image
+                src={`https://avatars.dicebear.com/api/open-peeps/${input.avatarSeed}.svg`}
+                alt="profile"
+                // onClick={focusInput}
+                className="rounded-[50%] bg-white text-black cursor-pointer"
+                width={55}
+                height={55}
+              />
+              {/* For Custom Photo - Future Use*/}
+              {/* <input transparent={true}
               type="file"
               className="hidden"
               id="profile-img"
               onChange={handleImageChange}
             /> */}
-            <Image
-              src="/images/loop.svg"
-              alt="regenerate"
-              width={30}
-              height={30}
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="change avatar"
-              className="cursor-pointer"
-              onClick={generateRandomSeed}
-            />
-          </div>
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">skills:</span>
+              <Image
+                src="/images/loop.svg"
+                alt="regenerate"
+                width={30}
+                height={30}
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="change avatar"
+                className="cursor-pointer"
+                onClick={generateRandomSeed}
+              />
+            </div>
             {/*  multiple */}
-            <div className="h-full focus:border-gray-800 rounded-sm w-[400px]">
-              <div className="flex gap-2 flex-wrap my-2 bg-white px-3 py-2">
+            <div className="h-full focus:border-gray-800 rounded-sm w-full flex flex-col  justify-center items-center">
+              <div className="flex gap-2 flex-wrap my-2 border-gray-border border w-full px-3 py-2">
                 {input.skills.length !== 0 &&
                   input.skills.map((skill, index) => (
                     <Skill
@@ -220,7 +210,7 @@ const Profile: NextPage = () => {
                     />
                   ))}
                 {input.skills.length === 0 && (
-                  <span className="text-black opacity-50 select-none">
+                  <span className="text-slate-200 py2 select-none mx-auto">
                     Add your skills here
                   </span>
                 )}
@@ -236,59 +226,75 @@ const Profile: NextPage = () => {
                 ))}
               </div>
             </div>
-          </div>
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">github url:</span>
-            <Input
-              name="github"
-              type="text"
-              key="github"
-              value={input.github}
-              onChange={onInputChange}
-              pre="https://github.com/"
+            <div className="flex items-center gap-4 mb-2">
+              <Input
+                transparent={true}
+                name="github"
+                type="text"
+                key="github"
+                value={input.github}
+                onChange={onInputChange}
+                pre="https://github.com/"
+              />
+            </div>
+            <div className="flex items-center gap-4 mb-2">
+              <Input
+                transparent={true}
+                name="linkedin"
+                type="text"
+                key="linkedin"
+                value={input.linkedin}
+                onChange={onInputChange}
+                pre="https://www.linkedin.com/in/"
+              />
+            </div>
+            <div className="flex items-center gap-4 mb-2">
+              <Input
+                transparent={true}
+                name="twitter"
+                type="text"
+                key="twitter"
+                value={input.twitter}
+                onChange={onInputChange}
+                pre="https://twitter.com/"
+              />
+            </div>
+
+            <div className="flex justify-center items-center w-full gap-[10px] pl-[100px] ">
+              <button
+                className="rounded-md bg-main-purple py-2 disabled:bg-slate-500 w-1/2"
+                onClick={discardChanges}
+                disabled={!isEditing}
+              >
+                Discard Changes
+              </button>
+              <button
+                className="rounded-md bg-main-purple  py-2 disabled:bg-slate-500 w-1/2"
+                onClick={saveChanges}
+                disabled={!isEditing}
+              >
+                Save
+              </button>
+            </div>
+          </form>
+          <div
+            className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="edit"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            <Image
+              src="/images/edit-purple.svg"
+              alt="edit"
+              height={25}
+              width={25}
             />
+            <h2 className="p-3 px-2"> Edit Profile</h2>
           </div>
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">linkedin url:</span>
-            <Input
-              name="linkedin"
-              type="text"
-              key="linkedin"
-              value={input.linkedin}
-              onChange={onInputChange}
-              pre="https://www.linkedin.com/in/"
-            />
-          </div>
-          <div className="flex items-center gap-4 mb-2">
-            <span className="w-[100px]">twitter url:</span>
-            <Input
-              name="twitter"
-              type="text"
-              key="twitter"
-              value={input.twitter}
-              onChange={onInputChange}
-              pre="https://twitter.com/"
-            />
-          </div>
-          <div className="flex justify-start gap-[10px] pl-[100px] w-max">
-            <button
-              className="rounded-md bg-main-purple px-4 py-2 disabled:bg-slate-500 min-w-min"
-              onClick={discardChanges}
-              disabled={!isEditing}
-            >
-              Discard Changes
-            </button>
-            <button
-              className="rounded-md bg-main-purple px-4 py-2 disabled:bg-slate-500 min-w-min"
-              onClick={saveChanges}
-              disabled={!isEditing}
-            >
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+        </div>
+      </Card>
+    </div>
   );
 };
 
@@ -306,17 +312,19 @@ const Skill = ({
   const selected = skills.includes(skill);
   if (isSelected && !selected) return null;
   return (
-    <div
-      className={`flex items-center cursor-pointer hover:scale-105 text-black px-1 text-s ${
-        selected ? "bg-[#8080FF]" : "bg-[#d4d4d4]"
-      }`}
-      onClick={() => handleToggle(skill)}
-    >
-      <span>{skill}</span>
-      <span className="ml-1 pl-1 border-l-2 border-gray-500">
-        {selected ? "x" : "+"}
-      </span>
-    </div>
+    <Card scale={false} hoverBorder={true}>
+      <div
+        className={`flex items-center cursor-pointer px-1 text-s  ${
+          selected ? "text-[#8080FF]" : "text-slate-200"
+        }`}
+        onClick={() => handleToggle(skill)}
+      >
+        <span>{skill}</span>
+        <span className="ml-1 pl-1  border-gray-500">
+          {selected ? "x" : "+"}
+        </span>
+      </div>
+    </Card>
   );
 };
 

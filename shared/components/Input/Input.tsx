@@ -22,14 +22,24 @@ const Input = (props: Props) => {
         </div>
       )}
       {props.pre && (
-        <span className="h-full px-4 py-2 bg-gray-700">{props.pre}</span>
+        <span
+          className={`h-full pl-3 pr-2 py-2  ${
+            props.transparent ? "" : "bg-gray-700"
+          }`}
+        >
+          {props.pre}
+        </span>
       )}
       {props.type === "textarea" && (
         <textarea
           placeholder={props.name.charAt(0).toUpperCase() + props.name.slice(1)}
           value={props.value}
           onChange={(e) => props.onChange(props.name, e.target.value)}
-          className="text-black h-full relative px-4 py-2 focus:border-main-purple rounded-sm min-w-[280px] resize-none"
+          className={`${
+            props.transparent
+              ? "bg-transparent border-gray-border border"
+              : "bg-secondary-bg"
+          } text-black h-full relative px-4 py-2 focus:border-main-purple rounded-sm min-w-[280px] resize-none`}
           rows={4}
           cols={40}
         />
