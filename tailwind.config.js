@@ -12,6 +12,8 @@ module.exports = {
         "main-purple": "#7362D1",
         "gray-border": "#525866",
         "main-gray": "#1d1f27",
+        "disabled-purple": "#a198d1",
+        "secondary-bg": "#343347",
       },
     },
   },

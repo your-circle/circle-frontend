@@ -8,35 +8,41 @@ import { toast } from "react-toastify";
 import ProjectCard from "../../components/projectCard";
 import EmptyList from "../../shared/components/EmptyList";
 import { getUserProjects } from "../../shared/services/projects.services";
+import useAuth from "../../hooks/useAuth";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
   const { id } = context.params;
-  let userResponse = {},
-    projectsResponse = [];
+  let user = {};
   try {
-    userResponse = await getUser(id);
+    const userResponse = await getUser(id);
+    user = userResponse.data || {};
   } catch (err: any) {
     console.error(err);
     toast.error(err.message);
   }
   return {
-    props: { user: userResponse?.data },
+    props: { user },
   };
 };
 
 const Peer: NextPage = (props: any) => {
+  useAuth();
   const { user } = props;
+
   const router = useRouter();
 
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const res = await getUserProjects(router.query.id);
-      setProjects(res.data);
+      try {
+        const res = await getUserProjects(router.query.id);
+        setProjects(res.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
-
     fetchProjects();
   }, [router.isReady]);
 

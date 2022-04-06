@@ -17,30 +17,36 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
                 @{data.creator_name}
               </span>
             </Link>
-            {data.currentTeamSize && data.targetTeamSize && (
-              <span className="text-main-gradient flex ">
-                <Image
-                  src="/images/people.svg"
-                  alt="people icon"
-                  layout="fixed"
-                  height={20}
-                  width={20}
-                />
-                <h4 className="px-1">
-                  {data.currentTeamSize} / {data.targetTeamSize}
-                </h4>
-              </span>
-            )}
+            {/* comment for future use */}
+            {/* <span className="text-main-gradient flex ">
+              <Image
+                src="/images/people.svg"
+                alt="people icon"
+                layout="fixed"
+                height={20}
+                width={20}
+              />
+              <h4 className="px-1">
+                {data.currentTeamSize} / {data.targetTeamSize}
+              </h4>
+            </span> */}
           </div>
           <div className="flex flex-col items-center justify-center w-full">
             <h2 className="text-main-gradient w-full text-center text-lg">
               {data.title}
             </h2>
-            <h3 className="text-slate-300 w-full text-center text-md">
-              {data.description}
-            </h3>
+            <div className="h-[60px] overflow-hidden">
+              <h3 className="table-cell text-slate-300 w-full text-center text-md h-[60px] align-middle">
+                {data.description}
+              </h3>
+            </div>
           </div>
-          <div className="flex items-center justify-center w-full">
+          <div className="flex items-center justify-center w-full h-[25px] overflow-hidden">
+            {data?.tech?.length === 0 && (
+              <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
+                no tech stack provided
+              </span>
+            )}
             {data?.tech?.map((item, index) => {
               return (
                 <span
@@ -52,17 +58,21 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               );
             })}
           </div>
-          <div className="flex items-center justify-center w-full">
-            {data.need.length ? (
-              <h4 className=" text-main-gradient">Looking for</h4>
-            ) : (
-              ""
+          <div className="flex items-center justify-start w-full h-[25px] overflow-hidden">
+            <h4 className="px-2">Looking for:</h4>
+            {data?.need?.length === 0 && (
+              <span className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 ">
+                none
+              </span>
             )}
-            {data?.need?.map((item) => {
+            {data?.need?.map((item, index) => {
               return (
-                <h4 className="px-1 text-main-gradient border mx-1 rounded border-slate-400">
+                <span
+                  key={index}
+                  className="px-2 m-0.5 rounded-full font-extralight bg-gradient text-neutral-800 "
+                >
                   {item}
-                </h4>
+                </span>
               );
             })}
           </div>
