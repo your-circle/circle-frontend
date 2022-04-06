@@ -70,7 +70,7 @@ const Login: NextPage = () => {
   return (
     <>
       <div className="bg-main-bg text-white mt-[20vh] min-w-full  flex flex-col items-center justify-center">
-        <Card>
+        <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
             className="flex flex-col items-center justify-around gap-4 py-6 px-3 h-[25rem]"
