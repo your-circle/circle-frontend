@@ -20,8 +20,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const Peer: NextPage = (props: any) => {
-  console.log(props.peers);
+type PropTypes = {
+  peers: PeerDetailsType[];
+};
+
+const Peer: NextPage<PropTypes> = (props: PropTypes) => {
   return (
     <>
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">

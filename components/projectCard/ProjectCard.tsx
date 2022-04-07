@@ -1,6 +1,5 @@
 import Card from "../../shared/components/Card";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
-import Image from "next/image";
 import Link from "next/link";
 
 type ProjectCardProp = {

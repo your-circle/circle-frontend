@@ -81,16 +81,18 @@ const Login: NextPage = () => {
             <div className="flex flex-col justify-between h-[6rem]">
               <Input
                 icon="/images/email-icon.svg"
-                name="Email"
+                name="email"
                 type="text"
                 key="email"
+                value={input.email}
                 onChange={onInputChange}
               />
               <Input
                 icon="/images/password-icon.svg"
-                name="Password"
+                name="password"
                 type="password"
                 key="password"
+                value={input.password}
                 onChange={onInputChange}
               />
             </div>
