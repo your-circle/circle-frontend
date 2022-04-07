@@ -25,9 +25,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-type PropTypes = { data: ProjectDetailsType };
+type Props = { data: ProjectDetailsType };
 
-const Project: NextPage<PropTypes> = (props: PropTypes) => {
+const Project: NextPage<Props> = (props: Props) => {
   const router = useRouter();
   const { user } = useContext(userContext);
   const [data, setData] = useState(props.data);
@@ -74,7 +74,7 @@ const Project: NextPage<PropTypes> = (props: PropTypes) => {
         <div className="flex flex-col gap-2 items-start">
           <div className="w-[90%] text-center">{data.description}</div>
           <div className="flex items-center">
-            <h2 className="mr-2 w-[120px]">Tech Stack:</h2>
+            <h2 className="mr-2 w-[120px] opacity-80">Tech Stack:</h2>
             <div>
               {data?.tech?.length === 0 && (
                 <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
@@ -94,7 +94,7 @@ const Project: NextPage<PropTypes> = (props: PropTypes) => {
             </div>
           </div>
           <div className="flex items-center">
-            <h2 className="mr-2 w-[120px]">Looking For:</h2>
+            <h2 className="mr-2 w-[120px] opacity-80">Looking For:</h2>
             <div>
               {data?.need?.length === 0 && (
                 <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
@@ -114,7 +114,7 @@ const Project: NextPage<PropTypes> = (props: PropTypes) => {
             </div>
           </div>
           <div className="flex items-center">
-            <h2 className="mr-2 w-[120px]">Current Team:</h2>
+            <h2 className="mr-2 w-[120px] opacity-80">Current Team:</h2>
             <div>
               {data?.team?.length === 0 && (
                 <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
@@ -133,7 +133,7 @@ const Project: NextPage<PropTypes> = (props: PropTypes) => {
             </div>
           </div>
           <div className="flex items-center">
-            <h2 className="mr-2 w-[120px]">Status:</h2>
+            <h2 className="mr-2 w-[120px] opacity-80">Status:</h2>
             <span
               className={data.is_team_full ? "text-red-500" : "text-green-500"}
             >
