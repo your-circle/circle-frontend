@@ -68,15 +68,35 @@ export const joinProject = async (id: string) => {
   }
 };
 
+export const addProjectMember = async (id: string, userId: string) => {
+  const token = localStorage.getItem("jwtToken") || "";
+  try {
+    const res = await axios.post(
+      `v1/project/add-member/${id}`,
+      { user_id: userId },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (res.status != 200) {
+      throw Error(res?.data?.message || "something went wrong");
+    }
+    return res.data;
+  } catch (err: any) {
+    console.error(err);
+  }
+};
+
 interface newProjectPayload {
   title: string;
   description: string;
   tech: string[];
-  open_to: string[];
+  need: string[];
 }
 export const newProject = async (payload: newProjectPayload) => {
   const token = localStorage.getItem("jwtToken") || "";
-  console.log("user", token);
   try {
     const res = await axios.post("/v1/project/add-project", payload, {
       headers: {

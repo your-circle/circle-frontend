@@ -39,7 +39,7 @@ const Input = (props: Props) => {
             props.transparent
               ? "bg-transparent border-gray-border border"
               : "bg-secondary-bg"
-          } text-black h-full relative px-4 py-2 focus:border-main-purple rounded-sm min-w-[280px] resize-none`}
+          } h-full relative px-4 py-2 focus:border-main-purple rounded-sm min-w-[280px] resize-none text-white`}
           rows={4}
           cols={40}
         />
