@@ -82,6 +82,7 @@ const Login: NextPage = () => {
                 name="name"
                 type="text"
                 key="name"
+                value={input.name}
                 onChange={onInputChange}
               />
               <Input
@@ -89,6 +90,7 @@ const Login: NextPage = () => {
                 name="email"
                 type="text"
                 key="email"
+                value={input.email}
                 onChange={onInputChange}
               />
               <Input
@@ -96,6 +98,7 @@ const Login: NextPage = () => {
                 name="password"
                 type="password"
                 key="password"
+                value={input.password}
                 onChange={onInputChange}
               />
             </div>

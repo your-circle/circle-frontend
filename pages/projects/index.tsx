@@ -1,6 +1,7 @@
 import type { GetStaticProps, NextPage } from "next";
 import ProjectCard from "../../components/projectCard";
 import EmptyList from "../../shared/components/EmptyList";
+import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import { getAllProjects } from "../../shared/services/projects.services";
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -17,7 +18,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const Projects: NextPage = (props: any) => {
+type PropTypes = {
+  projects: ProjectDetailsType[];
+};
+
+const Projects: NextPage<PropTypes> = (props: PropTypes) => {
   const { projects } = props;
 
   return (
@@ -33,7 +38,7 @@ const Projects: NextPage = (props: any) => {
               <EmptyList message="No Projects available" />
             </>
           ) : (
-            projects.map((project: any, index: number) => {
+            projects.map((project: ProjectDetailsType, index: number) => {
               return <ProjectCard data={project} key={index} />;
             })
           )}

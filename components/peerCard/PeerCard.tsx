@@ -14,7 +14,7 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
           <div className="flex justify-between items-start w-full">
             <h2 className="text-main-gradient">@{data.name}</h2>
             <div className="flex  justify-between space-x-2">
-              {data?.socials?.discord ? (
+              {data?.discord ? (
                 <a
                   rel="noreferrer"
                   href={`https://discordapp.com/users/`}
@@ -32,10 +32,10 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
               ) : (
                 ""
               )}
-              {data?.socials?.github ? (
+              {data?.github ? (
                 <a
                   rel="noreferrer"
-                  href={`https://www.github.com/${data.socials.github}`}
+                  href={`https://www.github.com/${data.github}`}
                   target="_blank"
                 >
                   <Image
@@ -50,10 +50,10 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
               ) : (
                 ""
               )}
-              {data?.socials?.twitter ? (
+              {data?.twitter ? (
                 <a
                   rel="noreferrer"
-                  href={`https://www.twitter.com/${data.socials.twitter}`}
+                  href={`https://www.twitter.com/${data.twitter}`}
                   target="_blank"
                 >
                   <Image
@@ -68,10 +68,10 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
               ) : (
                 ""
               )}
-              {data?.socials?.linkedin ? (
+              {data?.linkedin ? (
                 <a
                   rel="noreferrer"
-                  href={`https://www.linkedin.com/${data.socials.linkedin}`}
+                  href={`https://www.linkedin.com/${data.linkedin}`}
                   target="_blank"
                 >
                   <Image
@@ -106,16 +106,17 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
                   </span>
                 );
               })}
+              {data?.skills?.length === 0 && (
+                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                  Not mentioned
+                </span>
+              )}
             </div>
           </div>
-          <div className="flex  flex-col  justify-center w-full items-center">
-            {data.open_to?.length ? (
-              <h4 className="w-[65px] text-center font-light text-slate-300">
-                Open to
-              </h4>
-            ) : (
-              ""
-            )}
+          <div className="flex w-full items-center">
+            <h4 className="w-[65px] text-center font-light text-slate-300">
+              Open to:
+            </h4>
             <div className="flex flex-wrap items-center justify-center">
               {data?.open_to?.map((item, index) => {
                 return (
@@ -127,6 +128,11 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
                   </span>
                 );
               })}
+              {data?.open_to?.length === 0 && (
+                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                  Not mentioned
+                </span>
+              )}
             </div>
           </div>
         </div>

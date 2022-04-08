@@ -9,6 +9,9 @@ import ProjectCard from "../../components/projectCard";
 import EmptyList from "../../shared/components/EmptyList";
 import { getUserProjects } from "../../shared/services/projects.services";
 import useAuth from "../../hooks/useAuth";
+import { PeerDetailsType } from "../../shared/schemas/peerDetails.schema";
+import Link from "next/link";
+import Image from "next/image";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
@@ -26,7 +29,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const Peer: NextPage = (props: any) => {
+type Props = { user: PeerDetailsType };
+
+const Peer: NextPage<Props> = (props: Props) => {
   useAuth();
   const { user } = props;
 
@@ -48,13 +53,127 @@ const Peer: NextPage = (props: any) => {
 
   return (
     <>
-      <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full">
-        <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          {user.name}'s Projects
+      <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-2 items-center">
+        <h1 className="text-center text-2xl text-main-gradient my-2 border-b-2 border-[#6A78C1] uppercase">
+          {user.name}'s Profile
         </h1>
-        <div className="flex justify-center">
+        <div className="flex flex-col gap-2 items-start">
+          <div className="w-[90%] text-center">{user.about}</div>
+          <div className="flex items-center">
+            <h2 className="mr-2 w-[80px] opacity-80">Skills:</h2>
+            <div>
+              {user.skills?.length === 0 && (
+                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                  not available
+                </span>
+              )}
+              {user.skills?.map((item, index) => {
+                return (
+                  <span
+                    key={index}
+                    className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                  >
+                    {item}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex items-center">
+            <h2 className="mr-2 w-[80px] opacity-80">open to:</h2>
+            <div>
+              {user.open_to?.length === 0 && (
+                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                  none
+                </span>
+              )}
+              {user.open_to?.map((item, index) => {
+                return (
+                  <span
+                    key={index}
+                    className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                  >
+                    {item}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+          {user.email && (
+            <div className="flex items-center">
+              <h2 className="mr-2 w-[80px] opacity-80">Email:</h2>
+              <span>{user.email}</span>
+            </div>
+          )}
+          {user.github && (
+            <div className="flex items-center">
+              <h2 className="mr-2 w-[80px] opacity-80">github:</h2>
+              <Link href={`https://www.github.com/${user.github}`} passHref>
+                <a target="_blank" className="flex items-center">
+                  {user.github}
+                  <div className="ml-2 mt-1">
+                    <Image
+                      src="/images/link.svg"
+                      alt="link"
+                      height={16}
+                      width={16}
+                    />
+                  </div>
+                </a>
+              </Link>
+            </div>
+          )}
+          {user.linkedin && (
+            <div className="flex items-center">
+              <h2 className="mr-2 w-[80px] opacity-80 hover:scale-110">
+                linkedin:{" "}
+              </h2>
+              <Link href={`https://www.linkedin.com/${user.linkedin}`} passHref>
+                <a target="_blank" className="flex items-center">
+                  {user.linkedin}
+                  <div className="ml-2 mt-1">
+                    <Image
+                      src="/images/link.svg"
+                      alt="link"
+                      height={16}
+                      width={16}
+                    />
+                  </div>
+                </a>
+              </Link>
+            </div>
+          )}
+          {user.twitter && (
+            <div className="flex items-center">
+              <h2 className="mr-2 w-[80px] opacity-80 hover:scale-110">
+                twitter:{" "}
+              </h2>
+              <Link href={`https://www.twitter.com/${user.twitter}`} passHref>
+                <a target="_blank" className="flex items-center">
+                  {user.twitter}
+                  <div className="ml-2 mt-1">
+                    <Image
+                      src="/images/link.svg"
+                      alt="link"
+                      height={16}
+                      width={16}
+                    />
+                  </div>
+                </a>
+              </Link>
+            </div>
+          )}
+        </div>
+        {/* user projects */}
+        <h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple">
+          Projects
+        </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-5 mb-8">
           {projects.length === 0 ? (
-            <EmptyList message="No Projects created yet" />
+            <>
+              <span></span>
+              <EmptyList message="No Projects created yet" />
+            </>
           ) : (
             projects.map((project, index) => {
               return <ProjectCard data={project} key={index} />;
