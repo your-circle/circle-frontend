@@ -16,7 +16,7 @@ const NewProject: NextPage = () => {
     title: string;
     description: string;
     tech: Array<string>;
-    open_to: Array<string>;
+    need: Array<string>;
   };
 
   const allTech: Array<string> = [
@@ -33,7 +33,7 @@ const NewProject: NextPage = () => {
     title: "",
     description: "",
     tech: [],
-    open_to: [],
+    need: [],
   });
 
   const [posting, setPosting] = useState<boolean>(false);
@@ -143,18 +143,18 @@ const NewProject: NextPage = () => {
                 {/*  multiple */}
                 <div className="h-full focus:border-gray-800 rounded-sm w-[260px] sm:w-[400px]">
                   <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
-                    {input.open_to.length !== 0 &&
-                      input.open_to.map((tech, index) => (
+                    {input.need.length !== 0 &&
+                      input.need.map((tech, index) => (
                         <Choice
                           choice={tech}
                           key={index}
-                          selectedChoice={input.open_to}
-                          handleToggle={() => handleToggle(tech, "openTo")}
+                          selectedChoice={input.need}
+                          handleToggle={() => handleToggle(tech, "need")}
                         />
                       ))}
                     {/* placeholder(its like input field to fill the data) */}
 
-                    {input.open_to.length === 0 && (
+                    {input.need.length === 0 && (
                       <span className="text-slate-300 py-3 select-none mx-auto ">
                         Project is looking for
                       </span>
@@ -165,8 +165,8 @@ const NewProject: NextPage = () => {
                       <Choice
                         choice={tech}
                         key={index}
-                        selectedChoice={input.open_to}
-                        handleToggle={() => handleToggle(tech, "open_to")}
+                        selectedChoice={input.need}
+                        handleToggle={() => handleToggle(tech, "need")}
                       />
                     ))}
                   </div>

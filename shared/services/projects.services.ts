@@ -72,11 +72,12 @@ interface newProjectPayload {
   title: string;
   description: string;
   tech: string[];
-  open_to: string[];
+  need: string[];
 }
 export const newProject = async (payload: newProjectPayload) => {
+  console.log("payload", payload);
+
   const token = localStorage.getItem("jwtToken") || "";
-  console.log("user", token);
   try {
     const res = await axios.post("/v1/project/add-project", payload, {
       headers: {
