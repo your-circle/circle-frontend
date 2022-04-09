@@ -5,6 +5,7 @@ import { getAllUsers } from "../shared/services/user.services";
 import { toast } from "react-toastify";
 import EmptyList from "../shared/components/EmptyList";
 import { PeerDetailsType } from "../shared/schemas/peerDetails.schema";
+import Sidebar from "../components/sidebar";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
@@ -27,6 +28,7 @@ type PropTypes = {
 const Peer: NextPage<PropTypes> = (props: PropTypes) => {
   return (
     <>
+      <Sidebar />
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Peers

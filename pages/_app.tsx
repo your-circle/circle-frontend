@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="static bg-main-bg text-white min-h-screen min-w-full">
         <ToastContainer />
         <Navbar />
-        <Sidebar />
         <Component {...pageProps} />
       </div>
     </UserContextProvider>

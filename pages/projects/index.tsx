@@ -28,8 +28,8 @@ const Projects: NextPage<PropTypes> = (props: PropTypes) => {
 
   return (
     <>
+      <Sidebar />
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-  
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Projects
         </h1>
