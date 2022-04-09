@@ -33,7 +33,7 @@ const Peer: NextPage<PropTypes> = (props: PropTypes) => {
         <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Peers
         </h1>
-        <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
           {props?.peers?.length === 0 ? (
             <>
               <span></span>
