@@ -33,7 +33,7 @@ const UserDropdown: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center cursor-pointer relative">
+    <div className="flex items-center justify-between w-32 cursor-pointer relative">
       {isLoggedIn ? (
         <>
           <div className="flex items-center mr-5">
@@ -97,6 +97,16 @@ const UserDropdown: React.FC = () => {
             >
               Logout
             </a>
+          </div>
+          <div className="flex items-center justify-center mx-3">
+            <Link href="/notification">
+              <Image
+                src="/images/notification-icon.svg"
+                layout="fixed"
+                width="20"
+                height="20"
+              />
+            </Link>
           </div>
           <Image
             src="/images/login-icon.svg"
