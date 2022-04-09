@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { userContext } from "../../providers/userProvider";
 const Sidebar: React.FC = () => {
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
+  const { user, isLoggedIn } = useContext(userContext);
   return (
     <>
       <div className="fixed left-0 h-full z-20">
@@ -36,14 +39,16 @@ const Sidebar: React.FC = () => {
               />
             </button>
             <div className="flex flex-col">
-              <div className="space-y-2 flex flex-col">
-                <button className="px-6 text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
-                  Add a Project
-                </button>
-                <button className="px-6 text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
-                  My Projects
-                </button>
-              </div>
+              {isLoggedIn && (
+                <div className="space-y-2 flex flex-col">
+                  <button className="px-6 text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
+                    <Link href={`/projects/new`}> Add a Project</Link>
+                  </button>
+                  <button className="px-6 text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
+                    <Link href={`/user/${user._id}`}> My Projects</Link>
+                  </button>
+                </div>
+              )}
 
               <div className="">
                 <div className="flex items-center justify-around px-6 pt-5 cursor-pointer">
