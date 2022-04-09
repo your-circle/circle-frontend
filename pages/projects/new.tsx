@@ -21,12 +21,15 @@ const NewProject: NextPage = () => {
   };
 
   const allTech: Array<string> = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "React",
-    "Redux",
-    "Node",
+    "Frontend",
+    "Backend",
+    "Fullstack",
+    "UI/UX",
+    "ML",
+    "AppDev",
+    "Blockchain",
+    "Hardware",
+    "Cybersecurity",
   ];
   const allOpenTo: Array<string> = ["Mentor", "Developers"];
   // new post state
