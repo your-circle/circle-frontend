@@ -58,7 +58,7 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               return (
                 <span
                   key={index}
-                  className="font-light  border border-slate-500 px-0.5 py-[1] rounded-sm"
+                  className="font-light  border border-slate-500 px-0.5 mx-0.5 py-[1] rounded-sm"
                 >
                   {item}
                 </span>
