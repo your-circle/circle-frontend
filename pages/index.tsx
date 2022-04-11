@@ -1,8 +1,18 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { userContext } from "../providers/userProvider";
 import Loading from "../shared/components/Loading/Loading";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const { isLoggedIn } = useContext(userContext);
+
+  if (isLoggedIn) {
+    router.push("projects");
+  }
+
   return (
     <div className="flex items-center h-[calc(100vh-60px)]">
       <div className="home-text text-5xl basis-3/6 px-6 py-2 text-center text-transparent bg-clip-text bg-gradient-to-tr from-[#B679D2] via-[#8FD89A] to-[#E8735C]">
