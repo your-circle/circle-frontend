@@ -39,8 +39,8 @@ const Notification: NextPage = () => {
         <EmptyList message="No Notification" />
       ) : (
         <>
-          {notifications?.map((notification) => (
-            <NotificationCard {...notification} />
+          {notifications?.map((notification, index) => (
+            <NotificationCard {...notification} key={index} />
           ))}
         </>
       )}

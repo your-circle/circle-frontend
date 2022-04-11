@@ -16,8 +16,8 @@ const Navbar: React.FC<PropTypes> = () => {
           <h1 className="text-2xl text-main-gradient cursor-pointer">circle</h1>
         </Link>
 
-        <section className="hidden md:flex justify-around w-1/3 items-center">
-          <div className=" flex justify-around w-3/4 mx-1">
+        <section className="hidden md:flex gap-10 items-center">
+          <div className=" flex justify-around gap-10 mx-1">
             <Navlinks />
           </div>
           <div className="flex">
