@@ -74,8 +74,8 @@ const Login: NextPage = () => {
   };
 
   return (
-    <>
-      <div className="bg-main-bg text-white mt-[20vh] min-w-full  flex flex-col items-center justify-center">
+    <div className="h-[calc(100vh-60px)] flex flex-col items-center justify-center">
+      <div className="bg-main-bg text-white h-fit">
         <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -116,7 +116,7 @@ const Login: NextPage = () => {
           </form>
         </Card>
       </div>
-    </>
+    </div>
   );
 };
 
