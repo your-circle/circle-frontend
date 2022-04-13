@@ -1,30 +1,27 @@
 import type { GetStaticProps, NextPage } from "next";
+import { useEffect, useState } from "react";
 import ProjectCard from "../../components/projectCard";
 import Sidebar from "../../components/sidebar";
 import EmptyList from "../../shared/components/EmptyList";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import { getAllProjects } from "../../shared/services/projects.services";
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  // api call
-  let projectsResponse;
-  try {
-    projectsResponse = await getAllProjects();
-  } catch (err) {
-    console.error(err);
-  }
-  return {
-    props: { projects: projectsResponse?.data || [] },
-    revalidate: 5,
+const Projects: NextPage = () => {
+  const [range, setRange] = useState({ from: 1, to: 6 });
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetchProjects();
+  }, [range]);
+
+  const fetchProjects = async () => {
+    try {
+      const res = await getAllProjects(range);
+      setProjects(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
-};
-
-type PropTypes = {
-  projects: ProjectDetailsType[];
-};
-
-const Projects: NextPage<PropTypes> = (props: PropTypes) => {
-  const { projects } = props;
 
   return (
     <>

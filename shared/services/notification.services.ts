@@ -1,10 +1,10 @@
 import axios from "../config/axios.config";
 
-export const getNotification = async () => {
+export const getNotification = async (payload: any) => {
   const token = localStorage.getItem("jwtToken") || "";
 
   try {
-    const res = await axios.get("/v1/notification/all", {
+    const res = await axios.post("/v1/notification/all", payload, {
       headers: {
         authorization: `Bearer ${token}`,
       },

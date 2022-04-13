@@ -21,9 +21,9 @@ export const getUserProjects = async (id: any) => {
   }
 };
 
-export const getAllProjects = async () => {
+export const getAllProjects = async (payload: any) => {
   try {
-    const res = await axios.get(`v1/project/all`);
+    const res = await axios.post(`v1/project/all`, payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
