@@ -74,7 +74,7 @@ const UserDropdown: React.FC = () => {
           >
             <Link href={`/user/${user._id}`}>
               <a
-                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+                className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 My Projects
@@ -82,7 +82,7 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href={`/projects/new`}>
               <a
-                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+                className="block px-4 py-2 bg-main-gray text-sm opacity-80 hover:bg-secondary-bg"
                 role="menuitem"
               >
                 Add Project
@@ -90,14 +90,14 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href="/profile/edit">
               <a
-                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+                className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 Profile
               </a>
             </Link>
             <a
-              className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+              className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
               role="menuitem"
               onClick={Logout}
             >

@@ -31,7 +31,7 @@ const Notification: NextPage = () => {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-        Notification
+        Notifications
       </h1>
       {isLoading ? (
         <Loading />
