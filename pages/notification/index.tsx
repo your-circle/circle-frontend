@@ -14,20 +14,25 @@ const Notification: NextPage = () => {
   const [notifications, setNotifications] = useState<NotificationCardType[]>(
     []
   );
+  const [range, setRange] = useState({ from: 1, to: 10 });
+  const [peers, setPeers] = useState([]);
 
-  const fetchNotification = async () => {
+  useEffect(() => {
+    fetchNotifications();
+  }, [range]);
+
+  const fetchNotifications = async () => {
     try {
-      const res = await getNotification();
+      const res = await getNotification(range);
       setNotifications(res?.data?.notifications || []);
       setIsLoading(false);
     } catch (err: any) {
+      setIsLoading(false);
       console.error(err);
       toast.error(err.message);
     }
   };
-  useEffect(() => {
-    fetchNotification();
-  }, []);
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
@@ -36,7 +41,7 @@ const Notification: NextPage = () => {
       {isLoading ? (
         <Loading />
       ) : notifications?.length === 0 ? (
-        <EmptyList message="No Notification" />
+        <EmptyList message="No Notifications available" />
       ) : (
         <>
           {notifications?.map((notification, index) => (
