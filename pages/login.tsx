@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { login } from "../shared/services/auth.services";
 import { userContext } from "../providers/userProvider";
 import Input from "../shared/components/Input";
@@ -19,7 +19,11 @@ const Login: NextPage = () => {
     email: "",
     password: "",
   });
-  const { updateUser, changeLogInStatus } = useContext(userContext);
+  const { isLoggedIn, updateUser, changeLogInStatus } = useContext(userContext);
+
+  if (isLoggedIn) {
+    router.push("projects");
+  }
 
   const handleSubmit = async () => {
     // validate the input
@@ -70,8 +74,8 @@ const Login: NextPage = () => {
   };
 
   return (
-    <>
-      <div className="bg-main-bg text-white mt-[20vh] min-w-full  flex flex-col items-center justify-center">
+    <div className="h-[calc(100vh-60px)] flex flex-col items-center justify-center">
+      <div className="bg-main-bg text-white h-fit">
         <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -112,7 +116,7 @@ const Login: NextPage = () => {
           </form>
         </Card>
       </div>
-    </>
+    </div>
   );
 };
 

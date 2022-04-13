@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { signup } from "../shared/services/auth.services";
 import Input from "../shared/components/Input";
 import { userContext } from "../providers/userProvider";
@@ -22,7 +22,11 @@ const Login: NextPage = () => {
     email: "",
     password: "",
   });
-  const { updateUser, changeLogInStatus } = useContext(userContext);
+  const { isLoggedIn, updateUser, changeLogInStatus } = useContext(userContext);
+
+  if (isLoggedIn) {
+    router.push("projects");
+  }
 
   const handleSubmit = async () => {
     // validate the input

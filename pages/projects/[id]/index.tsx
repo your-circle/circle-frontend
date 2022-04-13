@@ -257,43 +257,48 @@ const Project: NextPage<Props> = (props: Props) => {
         </Card>
         <div className="flex flex-col">
           <Card>
-            <div className="min-h-full w-[400px] sm:w-fit">
-              <div className="text-xl my-2 opacity-80 text-main-gradient">
+            <div className="min-h-full sm:w-fit">
+              <div className="text-xl w-[350px] my-2 text-main-gradient">
                 Requests List:
               </div>
               <div className="flex flex-col gap-2 my-2 border-gray-border border w-full min-w-fit px-3 py-2">
                 {input.request_list.length !== 0 &&
                   input.request_list.map(
                     (user: { _id: string; name: string }, index: number) => (
-                      <div key={index} className="flex items-center w-[220px]">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
                         <Link href={`/user/${user._id}`}>
-                          <a className="hover:opacity-80 mr-[100px]">
+                          <a className="hover:opacity-80 w-[300px]">
                             {user.name}
                           </a>
                         </Link>
-                        <div className="mr-2 h-[20px] cursor-pointer">
-                          <Image
-                            src="/images/add-icon.svg"
-                            alt="add"
-                            height={20}
-                            width={20}
-                            onClick={() => addMember(index)}
-                          />
-                        </div>
-                        <div className="h-[22px] cursor-pointer">
-                          <Image
-                            src="/images/delete-icon.svg"
-                            alt="add"
-                            height={22}
-                            width={22}
-                            onClick={() => deleteRequest(index)}
-                          />
+                        <div className="flex items-center">
+                          <div className="mr-2 h-[20px] cursor-pointer">
+                            <Image
+                              src="/images/add-icon.svg"
+                              alt="add"
+                              height={20}
+                              width={20}
+                              onClick={() => addMember(index)}
+                            />
+                          </div>
+                          <div className="h-[22px] cursor-pointer">
+                            <Image
+                              src="/images/delete-icon.svg"
+                              alt="add"
+                              height={22}
+                              width={22}
+                              onClick={() => deleteRequest(index)}
+                            />
+                          </div>
                         </div>
                       </div>
                     )
                   )}
                 {input.request_list.length === 0 && (
-                  <span className="text-slate-200 py2 select-none mx-auto">
+                  <span className="text-slate-200 py2 select-none">
                     join requests will be displayed here!
                   </span>
                 )}
@@ -301,17 +306,20 @@ const Project: NextPage<Props> = (props: Props) => {
             </div>
           </Card>
           <Card>
-            <div className="min-h-full w-[400px] sm:w-fit">
-              <div className="text-xl my-2 opacity-80 text-main-gradient">
+            <div className="min-h-full sm:w-fit">
+              <div className="text-xl w-[350px] my-2 text-main-gradient">
                 Team Members:
               </div>
               <div className="flex flex-col gap-2 my-2 border-gray-border border w-full min-w-fit px-3 py-2">
                 {input.team.length !== 0 &&
                   input.team.map(
                     (user: { _id: string; name: string }, index: number) => (
-                      <div key={index} className="flex items-center">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
                         <Link href={`/user/${user._id}`}>
-                          <a className="hover:opacity-80 w-[220px] mr-2">
+                          <a className="hover:opacity-80 w-[320px] mr-2">
                             {user.name}
                           </a>
                         </Link>
@@ -328,7 +336,7 @@ const Project: NextPage<Props> = (props: Props) => {
                     )
                   )}
                 {input.team.length === 0 && (
-                  <span className="text-slate-200 py2 select-none mx-auto">
+                  <span className="text-slate-200 py2 select-none">
                     All team members will be displayed here!
                   </span>
                 )}

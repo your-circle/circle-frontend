@@ -5,8 +5,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Button from "../../shared/components/Button";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const UserDropdown: React.FC = () => {
+  const isMobileView = useMediaQuery("(max-width:768px)");
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
   const { user, isLoggedIn, updateUser, changeLogInStatus } =
@@ -33,12 +35,16 @@ const UserDropdown: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-between w-32 cursor-pointer relative">
+    <div
+      className={`flex items-center justify-between w-32 cursor-pointer relative ${
+        isMobileView ? "flex-col space-y-4" : ""
+      } `}
+    >
       {isLoggedIn ? (
         <>
-          <div className="flex items-center mr-5">
+          <div className={`flex items-center ${isMobileView ? "" : "mr-3"}`}>
             <span
-              className="select-none opacity-90 hover:opacity-100"
+              className={`select-none opacity-80 hover:opacity-100`}
               onClick={() => {
                 setShowDropdown(!showDropdown);
               }}
@@ -52,7 +58,7 @@ const UserDropdown: React.FC = () => {
                   : "/images/expand-down-icon.svg"
               }
               alt="expand"
-              className=""
+              className="opacity-80 hover:opacity-100"
               width={25}
               height={25}
               onClick={() => {
@@ -62,13 +68,13 @@ const UserDropdown: React.FC = () => {
           </div>
           <div
             role="menu"
-            className={`absolute top-[30px] right-0 mt-2 w-[200px] rounded-md  ${
+            className={`absolute top-[30px] right-0 mt-2 w-[200px] rounded-md z-10 ${
               !showDropdown ? "hidden" : ""
             }`}
           >
             <Link href={`/user/${user._id}`}>
               <a
-                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+                className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 My Projects
@@ -76,7 +82,7 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href={`/projects/new`}>
               <a
-                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+                className="block px-4 py-2 bg-main-gray text-sm opacity-80 hover:bg-secondary-bg"
                 role="menuitem"
               >
                 Add Project
@@ -84,45 +90,64 @@ const UserDropdown: React.FC = () => {
             </Link>
             <Link href="/profile/edit">
               <a
-                className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+                className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 Profile
               </a>
             </Link>
             <a
-              className="block px-4 py-2 bg-main-gray text-sm  hover:bg-secondary-bg"
+              className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
               role="menuitem"
               onClick={Logout}
             >
               Logout
             </a>
           </div>
-          <div className="flex items-center justify-center mx-3">
+          <div className="flex items-center justify-center mr-2">
             <Link href="/notification">
-              <Image
-                src="/images/notification-icon.svg"
-                layout="fixed"
-                width="20"
-                height="20"
-              />
+              {isMobileView ? (
+                <span
+                  className={isMobileView ? "opacity-80 hover:opacity-100" : ""}
+                >
+                  Notifications
+                </span>
+              ) : (
+                <Image
+                  src="/images/notification-icon.svg"
+                  alt="notifications"
+                  layout="fixed"
+                  width="20"
+                  height="20"
+                />
+              )}
             </Link>
           </div>
-          <Image
-            src="/images/login-icon.svg"
-            alt="logout"
-            width={25}
-            height={25}
-            className="opacity-100 hover:opacity-90 hover:scale-105 cursor-pointer"
-            onClick={Logout}
-          />
+          {isMobileView ? (
+            <span
+              className={isMobileView ? "opacity-80 hover:opacity-100" : ""}
+            >
+              Logout
+            </span>
+          ) : (
+            <Image
+              src="/images/login-icon.svg"
+              alt="logout"
+              width={20}
+              height={20}
+              className="opacity-100 hover:opacity-90 hover:scale-105 cursor-pointer"
+              onClick={Logout}
+            />
+          )}
         </>
       ) : (
-        <Button href="/login">
-          <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200 w-16 p-1 text-center">
-            Login
-          </h1>
-        </Button>
+        <div className="flex items-center">
+          <Button href="/login">
+            <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200 w-16 p-1 text-center">
+              Login
+            </h1>
+          </Button>
+        </div>
       )}
     </div>
   );
