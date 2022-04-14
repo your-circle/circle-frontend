@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import ProjectCard from "../../components/projectCard";
 import Sidebar from "../../components/sidebar";
@@ -6,6 +6,8 @@ import EmptyList from "../../shared/components/EmptyList";
 import Loading from "../../shared/components/Loading";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import { getAllProjects } from "../../shared/services/projects.services";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from "../../shared/components/Loading";
 
 const Projects: NextPage = () => {
   const [filters, setFilters] = useState({
