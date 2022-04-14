@@ -8,6 +8,7 @@ import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import { getAllProjects } from "../../shared/services/projects.services";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../../shared/components/Loading";
+import { toast } from "react-toastify";
 
 const Projects: NextPage = () => {
   const [filters, setFilters] = useState({
@@ -32,7 +33,28 @@ const Projects: NextPage = () => {
       setLoading(false);
     } catch (err) {
       setLoading(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [range, setRange] = useState({ from: 1, to: 9 });
+  const [projects, setProjects] = useState<Array<ProjectDetailsType>>([]);
+  const [hasMoreProject, setHasMoreProject] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetchProjects();
+    setLoading(false);
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const res = await getAllProjects(range);
+      if (res.data.length === 0) {
+        setHasMoreProject(false);
+      } else {
+        setProjects([...projects, ...res.data]);
+        setRange((range) => ({ from: range.from + 9, to: range.to + 9 }));
+      }
+    } catch (err: any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -47,7 +69,7 @@ const Projects: NextPage = () => {
           <Loading />
         ) : (
           <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
-            {projects.length === 0 ? (
+            {projects.length === 0 && loading ? (
               <>
                 <span></span>
                 <EmptyList message="No Projects available" />
