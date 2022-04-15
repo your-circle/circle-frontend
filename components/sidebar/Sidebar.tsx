@@ -1,15 +1,46 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { userContext } from "../../providers/userProvider";
-const Sidebar: React.FC = () => {
+import { openToArray } from "../../shared/schemas/peerDetails.schema";
+import {
+  needsArray,
+  projectTypeArray,
+} from "../../shared/schemas/projectDetails.schema";
+
+type Props = {
+  type: string;
+  filters: object;
+  setFilters: any;
+};
+
+const Sidebar: React.FC<Props> = (props: Props) => {
+  const { filters, setFilters } = props;
+  const [localFilters, setLocalFilters] = useState(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
   const { user, isLoggedIn } = useContext(userContext);
+
+  const updateLocalFilters = (type: string, key: string, value: any) => {
+    const updatedLocalFilters = { ...localFilters };
+    const isPresent = updatedLocalFilters[type].includes(key);
+    if (value && !isPresent) {
+      updatedLocalFilters[type].push(key);
+    } else if (!value && isPresent) {
+      const index = updatedLocalFilters[type].indexOf(key);
+      updatedLocalFilters[type].splice(index, 1);
+    }
+    setLocalFilters(updatedLocalFilters);
+  };
+
+  const applyFilters = async () => {
+    setFilters(localFilters);
+  };
+
   return (
     <>
-      <div className="fixed left-0 h-full z-20">
+      <div className="fixed left-0 h-full z-20 scrollbar overflow-y-auto">
         <>
           <button
             className={`${sidebarStatus ? "hidden" : "flex"} m-1`}
@@ -17,6 +48,7 @@ const Sidebar: React.FC = () => {
           >
             <Image
               src="/images/sidebar-open-icon.svg"
+              alt="open"
               layout="fixed"
               height={30}
               width={30}
@@ -33,206 +65,355 @@ const Sidebar: React.FC = () => {
             >
               <Image
                 src="/images/sidebar-close-icon.svg"
+                alt="close"
                 layout="fixed"
                 height={30}
                 width={30}
               />
             </button>
-            <div className="flex flex-col">
+            <div className="flex w-full flex-col items-center">
               {isLoggedIn && (
-                <div className="space-y-2 flex flex-col">
-                  <button className="px-6 text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
+                <div className="space-y-2 flex flex-col items-center">
+                  <button className="px-6 w-[170px] text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
                     <Link href={`/projects/new`}> Add a Project</Link>
                   </button>
-                  <button className="px-6 text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
+                  <button className="px-6 w-[170px] text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
                     <Link href={`/user/${user._id}`}> My Projects</Link>
                   </button>
                 </div>
               )}
 
-              <div className="">
+              <div className="filters pb-16 w-full px-[50px] bg-main-bg">
                 <div className="flex items-center justify-around px-6 pt-5 cursor-pointer">
                   <h2>Filters</h2>
                 </div>
-                <div className="border-b border-gray-200 py-6">
-                  <h3 className="-my-3 flow-root">
-                    <button
-                      type="button"
-                      className="text-white w-full flex items-center justify-between text-sm hover:text-main-purple"
-                      onClick={() => setDropdownSkills(!dropdownSkills)}
-                    >
-                      <span className="font-medium"> Skills </span>
-                      <span className="ml-6 flex items-center ">
+                {/* projects: tech, need */}
+                {/* peers: skills, open_to */}
+                {props.type === "PROJECTS" && (
+                  <>
+                    <div className="border-b border-gray-200 py-6">
+                      <h3 className="-my-3 flow-root">
+                        <button
+                          type="button"
+                          className="text-white w-full flex items-center justify-between text-sm hover:text-main-purple"
+                          onClick={() => setDropdownSkills(!dropdownSkills)}
+                        >
+                          <span className="font-medium"> Skills </span>
+                          <span className="ml-6 flex items-center ">
+                            {dropdownSkills ? (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            )}
+                          </span>
+                        </button>
+                      </h3>
+                      <div className="">
                         {dropdownSkills ? (
-                          <svg
-                            className="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                          <div className="pt-6" id="filter-section-0">
+                            <div className="space-y-4">
+                              {projectTypeArray.map((item, index) => (
+                                <div key={index} className="flex items-center">
+                                  <input
+                                    id={item}
+                                    name="skills"
+                                    value="white"
+                                    checked={localFilters.tech.includes(item)}
+                                    onChange={(e) =>
+                                      updateLocalFilters(
+                                        "tech",
+                                        item,
+                                        e.target.checked
+                                      )
+                                    }
+                                    type="checkbox"
+                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                                  />
+                                  <label
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
+                                  >
+                                    {item}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         ) : (
-                          <svg
-                            className="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                          ""
                         )}
-                      </span>
-                    </button>
-                  </h3>
-                  <div className="">
-                    {dropdownSkills ? (
-                      <div className="pt-6" id="filter-section-0">
-                        <div className="space-y-4">
-                          <div className="flex items-center">
-                            <input
-                              id="filter-color-0"
-                              name="skills"
-                              value="white"
-                              type="checkbox"
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor="filter-color-0"
-                              className="ml-3 text-sm"
-                            >
-                              Frontend
-                            </label>
-                          </div>
-                          <div className="flex items-center">
-                            <input
-                              id="filter-color-0"
-                              name="skills"
-                              value="white"
-                              type="checkbox"
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor="filter-color-0"
-                              className="ml-3 text-sm"
-                            >
-                              Backend
-                            </label>
-                          </div>
-                          <div className="flex items-center">
-                            <input
-                              id="filter-color-0"
-                              name="skills"
-                              value="white"
-                              type="checkbox"
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor="filter-color-0"
-                              className="ml-3 text-sm"
-                            >
-                              Blockchain
-                            </label>
-                          </div>
-                        </div>
                       </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div className="border-b border-gray-200 py-6">
-                  <h3 className="-my-3 flow-root">
-                    <button
-                      type="button"
-                      className="text-white w-full flex items-center justify-between text-sm hover:text-main-purple"
-                      onClick={() => setDropdownNeeds(!dropdownNeeds)}
-                    >
-                      <span className="font-medium"> Looking For </span>
-                      <span className="ml-6 flex items-center ">
+                    </div>
+                    <div className="border-b border-gray-200 py-6">
+                      <h3 className="-my-3 flow-root">
+                        <button
+                          type="button"
+                          className="text-white w-full flex items-center justify-between text-sm hover:text-main-purple"
+                          onClick={() => setDropdownNeeds(!dropdownNeeds)}
+                        >
+                          <span className="font-medium"> Looking For </span>
+                          <span className="ml-6 flex items-center ">
+                            {dropdownNeeds ? (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            )}
+                          </span>
+                        </button>
+                      </h3>
+                      <div className="">
                         {dropdownNeeds ? (
-                          <svg
-                            className="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                          <div className="pt-6" id="filter-section-0">
+                            <div className="space-y-4">
+                              {needsArray.map((item, index) => (
+                                <div key={index} className="flex items-center">
+                                  <input
+                                    id={item}
+                                    name="skills"
+                                    value="white"
+                                    type="checkbox"
+                                    checked={localFilters.need.includes(item)}
+                                    onChange={(e) =>
+                                      updateLocalFilters(
+                                        "need",
+                                        item,
+                                        e.target.checked
+                                      )
+                                    }
+                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
+                                  >
+                                    {item}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         ) : (
-                          <svg
-                            className="h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                          ""
                         )}
-                      </span>
-                    </button>
-                  </h3>
-                  <div className="">
-                    {dropdownNeeds ? (
-                      <div className="pt-6" id="filter-section-0">
-                        <div className="space-y-4">
-                          <div className="flex items-center">
-                            <input
-                              id="filter-color-0"
-                              name="skills"
-                              value="white"
-                              type="checkbox"
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor="filter-color-0"
-                              className="ml-3 text-sm"
-                            >
-                              Developers
-                            </label>
-                          </div>
-                          <div className="flex items-center">
-                            <input
-                              id="filter-color-0"
-                              name="skills"
-                              value="white"
-                              type="checkbox"
-                              className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor="filter-color-0"
-                              className="ml-3 text-sm"
-                            >
-                              Mentors
-                            </label>
-                          </div>
-                        </div>
                       </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
+                    </div>
+                  </>
+                )}
+                {props.type === "PEERS" && (
+                  <>
+                    <div className="border-b border-gray-200 py-6">
+                      <h3 className="-my-3 flow-root">
+                        <button
+                          type="button"
+                          className="text-white w-full flex items-center justify-between text-sm hover:text-main-purple"
+                          onClick={() => setDropdownSkills(!dropdownSkills)}
+                        >
+                          <span className="font-medium"> Skills </span>
+                          <span className="ml-6 flex items-center ">
+                            {dropdownSkills ? (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            )}
+                          </span>
+                        </button>
+                      </h3>
+                      <div className="">
+                        {dropdownSkills ? (
+                          <div className="pt-6" id="filter-section-0">
+                            <div className="space-y-4">
+                              {projectTypeArray.map((item, index) => (
+                                <div key={index} className="flex items-center">
+                                  <input
+                                    id={item}
+                                    name="skills"
+                                    value="white"
+                                    type="checkbox"
+                                    checked={localFilters.skills.includes(item)}
+                                    onChange={(e) =>
+                                      updateLocalFilters(
+                                        "skills",
+                                        item,
+                                        e.target.checked
+                                      )
+                                    }
+                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
+                                  >
+                                    {item}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                    <div className="border-b border-gray-200 py-6">
+                      <h3 className="-my-3 flow-root">
+                        <button
+                          type="button"
+                          className="text-white w-full flex items-center justify-between text-sm hover:text-main-purple"
+                          onClick={() => setDropdownNeeds(!dropdownNeeds)}
+                        >
+                          <span className="font-medium"> open to </span>
+                          <span className="ml-6 flex items-center ">
+                            {dropdownNeeds ? (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                className="h-5 w-5"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            )}
+                          </span>
+                        </button>
+                      </h3>
+                      <div className="">
+                        {dropdownNeeds ? (
+                          <div className="pt-6" id="filter-section-0">
+                            <div className="space-y-4">
+                              {openToArray.map((item, index) => (
+                                <div key={index} className="flex items-center">
+                                  <input
+                                    id={item}
+                                    name="skills"
+                                    value="white"
+                                    type="checkbox"
+                                    checked={localFilters.open_to.includes(
+                                      item
+                                    )}
+                                    onChange={(e) =>
+                                      updateLocalFilters(
+                                        "open_to",
+                                        item,
+                                        e.target.checked
+                                      )
+                                    }
+                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
+                                  >
+                                    {item}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <button
+                  onClick={applyFilters}
+                  className="px-6 my-4 text-center border border-gray-border rounded-md p-2 cursor-pointer bg-main-purple"
+                >
+                  Apply Filters
+                </button>
               </div>
             </div>
           </div>

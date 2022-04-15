@@ -25,6 +25,34 @@ body {
   }
 }
 
+@layer base {
+  /* Scroll thumb styles */
+  .scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #bcb8b8;
+    border-radius: 1rem;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:active {
+    background-color: #b2b2b2;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b2b2b2;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Scroll track styles (Background) */
+  .scrollbar::-webkit-scrollbar-track {
+    background: #131314;
+    border-radius: 4px;
+  }
+  .scrollbar::-webkit-scrollbar-track:hover,
+  .scrollbar::-webkit-scrollbar-track:active {
+    background: #131314;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

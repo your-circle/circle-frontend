@@ -18,3 +18,4 @@ export type skillEnumType = typeof skillEnum;
 
 export type openToArray = Array<openToEnum>;
 export type openToEnum = "Projects" | "Hackathons" | "Mentoring";
+export const openToArray = ["Projects", "Hackathons", "Mentoring"];
