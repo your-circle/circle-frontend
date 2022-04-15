@@ -13,6 +13,13 @@ body {
   background-color: #0f1319;
 }
 
+input:checked + div {
+  @apply border-blue-500;
+}
+input:checked + div svg {
+  @apply block;
+}
+
 /* width */
 *::-webkit-scrollbar {
   width: 10px;
@@ -44,6 +51,34 @@ body {
   }
   .bg-gradient {
     @apply bg-gradient-to-br from-[#7362D1] to-[#618EB0];
+  }
+}
+
+@layer base {
+  /* Scroll thumb styles */
+  .scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #bcb8b8;
+    border-radius: 1rem;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:active {
+    background-color: #b2b2b2;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b2b2b2;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Scroll track styles (Background) */
+  .scrollbar::-webkit-scrollbar-track {
+    background: #131314;
+    border-radius: 4px;
+  }
+  .scrollbar::-webkit-scrollbar-track:hover,
+  .scrollbar::-webkit-scrollbar-track:active {
+    background: #131314;
   }
 }
 

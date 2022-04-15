@@ -6,6 +6,10 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Button from "../../shared/components/Button";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { AiOutlineUser } from 'react-icons/ai'
+import { BsBookmarkPlus } from 'react-icons/bs'
+import { IoMdNotificationsOutline } from 'react-icons/io'
+import { FiLogOut } from 'react-icons/fi'
 
 const UserDropdown: React.FC = () => {
   const isMobileView = useMediaQuery("(max-width:768px)");
@@ -36,9 +40,8 @@ const UserDropdown: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between w-32 cursor-pointer relative ${
-        isMobileView ? "flex-col space-y-4" : ""
-      } `}
+      className={`flex items-center justify-between w-32 cursor-pointer relative ${isMobileView ? "flex-col space-y-4" : ""
+        } `}
     >
       {isLoggedIn ? (
         <>
@@ -68,44 +71,51 @@ const UserDropdown: React.FC = () => {
           </div>
           <div
             role="menu"
-            className={`absolute top-[30px] right-0 mt-2 w-[200px] rounded-md z-10 ${
-              !showDropdown ? "hidden" : ""
-            }`}
+            className={`absolute top-[30px] right-0 mt-2 w-[200px] rounded-md z-10 ${!showDropdown ? "hidden" : ""
+              }`}
           >
-            <Link href={`/user/${user._id}`}>
+            {/* <Link href={`/user/${user._id}`}>
               <a
                 className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
                 role="menuitem"
               >
                 My Projects
               </a>
+            </Link> */}
+            <Link href={`/user/${user._id}`}>
+              <a
+                className="flex items-center gap-2 px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
+                role="menuitem"
+              >
+                <AiOutlineUser /> <span>Profile</span>
+              </a>
             </Link>
             <Link href={`/projects/new`}>
               <a
-                className="block px-4 py-2 bg-main-gray text-sm opacity-80 hover:bg-secondary-bg"
+                className="flex items-center gap-2 px-4 py-2 bg-main-gray text-sm opacity-80 hover:bg-secondary-bg"
                 role="menuitem"
               >
-                Add Project
+                <BsBookmarkPlus></BsBookmarkPlus> <span> Add Project</span>
               </a>
             </Link>
-            <Link href="/profile/edit">
+            <Link href={`/notification`}>
               <a
-                className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
+                className="flex items-center gap-2 px-4 py-2 bg-main-gray text-sm opacity-80 hover:bg-secondary-bg"
                 role="menuitem"
               >
-                Profile
+                <IoMdNotificationsOutline></IoMdNotificationsOutline> <span> Notifications</span>
               </a>
             </Link>
             <a
-              className="block px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
+              className="flex items-center gap-2 px-4 py-2 bg-main-gray text-sm opacity-80  hover:bg-secondary-bg"
               role="menuitem"
               onClick={Logout}
             >
-              Logout
+              <FiLogOut></FiLogOut> <span>Logout</span>
             </a>
           </div>
           <div className="flex items-center justify-center mr-2">
-            <Link href="/notification">
+            {/* <Link href="/notification">
               {isMobileView ? (
                 <span
                   className={isMobileView ? "opacity-80 hover:opacity-100" : ""}
@@ -121,7 +131,7 @@ const UserDropdown: React.FC = () => {
                   height="20"
                 />
               )}
-            </Link>
+            </Link> */}
           </div>
           {isMobileView ? (
             <span
@@ -130,14 +140,7 @@ const UserDropdown: React.FC = () => {
               Logout
             </span>
           ) : (
-            <Image
-              src="/images/login-icon.svg"
-              alt="logout"
-              width={20}
-              height={20}
-              className="opacity-100 hover:opacity-90 hover:scale-105 cursor-pointer"
-              onClick={Logout}
-            />
+            <FiLogOut size={20}></FiLogOut>
           )}
         </>
       ) : (

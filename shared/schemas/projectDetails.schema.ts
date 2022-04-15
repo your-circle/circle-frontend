@@ -26,5 +26,18 @@ export type projectTypeEnum =
   | "Hardware"
   | "Cybersecurity";
 
+export const projectTypeArray = [
+  "Frontend",
+  "Backend",
+  "Fullstack",
+  "UI/UX",
+  "ML",
+  "AppDev",
+  "Blockchain",
+  "Hardware",
+  "Cybersecurity",
+];
+
 export type needsArray = Array<needsEnum>;
 export type needsEnum = "Developers" | "Mentors";
+export const needsArray = ["Developers", "Mentors"];

@@ -12,6 +12,7 @@ import useAuth from "../../hooks/useAuth";
 import { PeerDetailsType } from "../../shared/schemas/peerDetails.schema";
 import Link from "next/link";
 import Image from "next/image";
+import Button from "../../shared/components/Button";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
@@ -25,15 +26,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     toast.error(err.message);
   }
   return {
-    props: { user },
+    props: { user, id },
   };
 };
 
-type Props = { user: PeerDetailsType };
+type Props = { user: PeerDetailsType, id: string };
 
 const Peer: NextPage<Props> = (props: Props) => {
   useAuth();
-  const { user } = props;
+  const { user, id } = props;
 
   const router = useRouter();
 
@@ -42,7 +43,7 @@ const Peer: NextPage<Props> = (props: Props) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await getUserProjects(router.query.id);
+        const res = await getUserProjects(router.query.id, { from: 1, to: 6 });
         setProjects(res.data);
       } catch (err) {
         console.error(err);
@@ -57,6 +58,15 @@ const Peer: NextPage<Props> = (props: Props) => {
         <h1 className="text-center text-2xl text-main-gradient my-2 border-b-2 border-[#6A78C1] uppercase">
           {user.name}'s Profile
         </h1>
+        {
+          user._id == id
+          &&
+          < Button href="/profile/edit">
+            <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200 w-16 p-1 text-center">
+              Edit
+            </h1>
+          </Button>
+        }
         <div className="flex flex-col gap-2 items-start">
           <div className="w-[90%] text-center">{user.about}</div>
           <div className="flex items-center">

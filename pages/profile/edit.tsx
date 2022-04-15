@@ -7,6 +7,7 @@ import { getUser, editUser } from "../../shared/services/user.services";
 import { userContext } from "../../providers/userProvider";
 import { toast } from "react-toastify";
 import { skillEnum } from "../../shared/config/constants";
+import { openToArray } from '../../shared/schemas/peerDetails.schema'
 import Card from "../../shared/components/Card";
 
 const Profile: NextPage = () => {
@@ -18,6 +19,7 @@ const Profile: NextPage = () => {
     email: string;
     avatarSeed: String;
     skills: string[];
+    open_to: string[];
     about: string;
     github: string;
     linkedin: string;
@@ -28,12 +30,13 @@ const Profile: NextPage = () => {
     email: "",
     avatarSeed: "",
     skills: [],
+    open_to: [],
     about: "",
     github: "",
     linkedin: "",
     twitter: "",
   };
-  const [input, setInput] = useState<Type>(defaultInput);
+  const [input, setInput] = useState<inputType>(defaultInput);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
@@ -107,9 +110,21 @@ const Profile: NextPage = () => {
     setInput({ ...input, skills: current });
   };
 
+  const handleToggleOpen_to = (skill: string) => {
+    const current = [...input.open_to];
+    const isSelected = current.includes(skill);
+    if (!isSelected) {
+      setInput({ ...input, open_to: [...current, skill] });
+      return;
+    }
+    const index = current.indexOf(skill);
+    current.splice(index, 1);
+    setInput({ ...input, open_to: current });
+  };
+
   const focusInput = () => {
-    const input = document.querySelector("#profile-img");
-    input && input.click();
+    const input: any = document.querySelector("#profile-img");
+    input && input?.click();
   };
 
   const generateRandomSeed = async () => {
@@ -118,57 +133,60 @@ const Profile: NextPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <Card>
-        <div className="text-white min-h-full w-[360px] sm:w-fit">
-          <div className="flex gap-20 items-center py-2   mx-[45px] ">
-            <h1 className="mx-auto text-lg text-main-gradient">Your Profile</h1>
-          </div>
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
-              !isEditing ? "pointer-events-none" : ""
+    <div className="flex items-center justify-center mt-2 w-3/4 m-auto">
+      {/* <Card> */}
+      <div className="text-white w-[360px] sm:w-fit mx-auto">
+        <div className="flex gap-20 items-center py-2   mx-[45px] ">
+          <h1 className="mx-auto text-lg text-main-gradient">Your Profile</h1>
+        </div>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${!isEditing ? "pointer-events-none" : ""
             }`}
-          >
-            <div className="flex items-center gap-4 mb-2">
-              <span className="w-[100px]">
-                Username<span className="text-red-400">*</span>
-              </span>
-              <Input
-                name="name"
-                type="text"
-                key="name"
-                value={input.name}
-                onChange={onInputChange}
-                transparent={true}
-              />
-            </div>
+        >
+          <h2>Basic Informations</h2>
+          <div className="flex items-center gap-4 mb-2 justify-between">
+            <span className="w-[100px]">
+              Username
+            </span>
+            <Input
+              name="name"
+              type="text"
+              key="name"
+              value={input.name}
+              onChange={onInputChange}
+              fullWidth={true}
+              transparent={true}
+            />
+          </div>
 
-            <div className="flex items-center gap-4 mb-2">
-              <span className="hidden sm:block w-[100px]">
-                Email<span className="text-red-400">*</span>
-              </span>
-              <Input
-                name="email"
-                type="text"
-                key="email"
-                value={input.email}
-                onChange={onInputChange}
-                transparent={true}
-              />
-            </div>
-            <div className="flex items-center gap-4 mb-2">
-              <span className="w-[100px]">Bio</span>
-              <Input
-                transparent={true}
-                name="about"
-                type="textarea"
-                key="about"
-                value={input.about}
-                onChange={onInputChange}
-              />
-            </div>
-            <div className="flex justify-start items-center gap-4 mb-2">
+          <div className="flex items-center gap-4 mb-2 justify-between">
+            <span className="hidden sm:block w-[100px]">
+              Email
+            </span>
+            <Input
+              name="email"
+              type="text"
+              key="email"
+              value={input.email}
+              onChange={onInputChange}
+              fullWidth={true}
+              transparent={true}
+            />
+          </div>
+          <div className="flex items-center gap-4 mb-2 justify-between">
+            <span className="w-[100px]">Bio</span>
+            <Input
+              transparent={true}
+              name="about"
+              type="textarea"
+              key="about"
+              value={input.about}
+              fullWidth={true}
+              onChange={onInputChange}
+            />
+          </div>
+          {/* <div className="flex justify-start items-center gap-4 mb-2">
               <span className="w-[100px]">Avatar</span>
               <Image
                 src={`https://avatars.dicebear.com/api/open-peeps/${input.avatarSeed}.svg`}
@@ -179,44 +197,30 @@ const Profile: NextPage = () => {
                 height={55}
               />
               {/* For Custom Photo - Future Use*/}
-              {/* <input transparent={true}
+          {/* <input transparent={true}
               type="file"
               className="hidden"
               id="profile-img"
               onChange={handleImageChange}
             /> */}
-              <Image
-                src="/images/loop.svg"
-                alt="regenerate"
-                width={30}
-                height={30}
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="change avatar"
-                className="cursor-pointer"
-                onClick={generateRandomSeed}
-              />
-            </div>
-            {/*  multiple */}
-            <div className="h-full focus:border-gray-800 rounded-sm w-full flex flex-col  justify-center items-center">
-              <div className="flex gap-2 flex-wrap my-2 border-gray-border border w-full px-3 py-2">
-                {input.skills.length !== 0 &&
-                  input.skills.map((skill, index) => (
-                    <Skill
-                      skill={skill}
-                      key={index}
-                      skills={input.skills}
-                      handleToggle={handleToggle}
-                    />
-                  ))}
-                {input.skills.length === 0 && (
-                  <span className="text-slate-200 py2 select-none mx-auto">
-                    Add your skills here
-                  </span>
-                )}
-              </div>
-              <div className="flex gap-2 flex-wrap my-2">
-                {skillEnum.map((skill, index) => (
+          {/* <Image
+              src="/images/loop.svg"
+              alt="regenerate"
+              width={30}
+              height={30}
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              title="change avatar"
+              className="cursor-pointer"
+              onClick={generateRandomSeed}
+            />
+        </div> */}
+          {/*  multiple */}
+          <h2>Skills</h2>
+          <div className="h-full focus:border-gray-800 rounded-sm w-full flex flex-col  justify-center items-center">
+            <div className="flex gap-2 flex-wrap my-2 border-gray-border border w-full px-3 py-2">
+              {input.skills.length !== 0 &&
+                input.skills.map((skill: any, index: any) => (
                   <Skill
                     skill={skill}
                     key={index}
@@ -224,43 +228,100 @@ const Profile: NextPage = () => {
                     handleToggle={handleToggle}
                   />
                 ))}
-              </div>
+              {input.skills.length === 0 && (
+                <span className="text-slate-200 py2 select-none mx-auto">
+                  Add your skills here
+                </span>
+              )}
             </div>
-            <div className="flex items-center gap-4 mb-2">
-              <Input
-                transparent={true}
-                name="github"
-                type="text"
-                key="github"
-                value={input.github}
-                onChange={onInputChange}
-                pre="https://github.com/"
-              />
+            <div className="flex gap-2 flex-wrap my-2">
+              {skillEnum.map((skill, index) => (
+                <Skill
+                  skill={skill}
+                  key={index}
+                  skills={input.skills}
+                  handleToggle={handleToggle}
+                />
+              ))}
             </div>
-            <div className="flex items-center gap-4 mb-2">
-              <Input
-                transparent={true}
-                name="linkedin"
-                type="text"
-                key="linkedin"
-                value={input.linkedin}
-                onChange={onInputChange}
-                pre="https://www.linkedin.com/in/"
-              />
-            </div>
-            <div className="flex items-center gap-4 mb-2">
-              <Input
-                transparent={true}
-                name="twitter"
-                type="text"
-                key="twitter"
-                value={input.twitter}
-                onChange={onInputChange}
-                pre="https://twitter.com/"
-              />
-            </div>
+          </div>
 
-            <div className="flex justify-center items-center w-full gap-[10px] pl-[100px] ">
+          <h2>Open to</h2>
+          <div className="h-full focus:border-gray-800 rounded-sm w-full flex flex-col  justify-center items-center">
+            <div className="flex gap-2 flex-wrap my-2 border-gray-border border w-full px-3 py-2">
+              {input.open_to.length !== 0 &&
+                input.open_to.map((skill: any, index: any) => (
+                  <Skill
+                    skill={skill}
+                    key={index}
+                    skills={input.open_to}
+                    handleToggle={handleToggleOpen_to}
+                  />
+                ))}
+              {input.open_to.length === 0 && (
+                <span className="text-slate-200 py2 select-none mx-auto">
+                  Add your open_to here
+                </span>
+              )}
+            </div>
+            <div className="flex gap-2 flex-wrap my-2">
+              {openToArray.map((skill, index) => (
+                <Skill
+                  skill={skill}
+                  key={index}
+                  skills={input.open_to}
+                  handleToggle={handleToggleOpen_to}
+                />
+              ))}
+            </div>
+          </div>
+          <h2>Links</h2>
+          <div className="flex items-center gap-4 mb-2">
+            <span>https://github.com/</span>
+            <Input
+              transparent={true}
+              name="github"
+              type="text"
+              key="github"
+              value={input.github}
+              onChange={onInputChange}
+              fullWidth={true}
+
+            />
+          </div>
+          <div className="flex items-center gap-4 mb-2">
+            <span>https://www.linkedin.com/in/</span>
+            <Input
+              transparent={true}
+              name="linkedin"
+              type="text"
+              key="linkedin"
+              value={input.linkedin}
+              onChange={onInputChange}
+              fullWidth={true}
+
+            />
+          </div>
+          <div className="flex items-center gap-4 mb-2">
+            <span>https://twitter.com/</span>
+            <Input
+              transparent={true}
+              name="twitter"
+              type="text"
+              key="twitter"
+              value={input.twitter}
+              onChange={onInputChange}
+              fullWidth={true}
+
+            />
+          </div>
+
+          {
+
+            isEditing
+
+            &&
+            <div className="flex justify-center items-center w-full gap-[10px]">
               <button
                 className="rounded-md bg-main-purple py-2 disabled:bg-slate-500 w-1/2"
                 onClick={discardChanges}
@@ -276,13 +337,18 @@ const Profile: NextPage = () => {
                 Save
               </button>
             </div>
-          </form>
+
+
+          }
+        </form>
+
+        {
+          !isEditing
+
+          &&
           <div
-            className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            title="edit"
-            onClick={() => setIsEditing(!isEditing)}
+            className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple mb-6 w-11/12 m-auto"
+            onClick={() => setIsEditing(true)}
           >
             <Image
               src="/images/edit-purple.svg"
@@ -292,9 +358,11 @@ const Profile: NextPage = () => {
             />
             <h2 className="p-3 px-2"> Edit Profile</h2>
           </div>
-        </div>
-      </Card>
-    </div>
+        }
+
+      </div>
+      {/* </Card > */}
+    </div >
   );
 };
 
@@ -314,9 +382,8 @@ const Skill = ({
   return (
     <Card scale={false} hoverBorder={true}>
       <div
-        className={`flex items-center cursor-pointer px-1 text-s  ${
-          selected ? "text-[#8080FF]" : "text-slate-200"
-        }`}
+        className={`flex items-center cursor-pointer px-1 text-s  ${selected ? "text-[#8080FF]" : "text-slate-200"
+          }`}
         onClick={() => handleToggle(skill)}
       >
         <span>{skill}</span>
