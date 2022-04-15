@@ -112,3 +112,22 @@ export const newProject = async (payload: newProjectPayload) => {
     throw Error(err?.response?.data?.message || "something went wrong");
   }
 };
+
+
+export const editProject = async (id: string, payload: any) => {
+  const token = localStorage.getItem("jwtToken") || "";
+  console.log(payload);
+  try {
+    const res = await axios.put("v1/project/update/" + id, payload, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    if (res.status != 200) {
+      throw Error(res?.data?.message || "something went wrong");
+    }
+    return res.data;
+  } catch (err: any) {
+    throw Error(err?.response?.data?.message || "something went wrong");
+  }
+};
