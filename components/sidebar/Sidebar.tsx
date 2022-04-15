@@ -22,8 +22,6 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
   const { user, isLoggedIn } = useContext(userContext);
 
-  console.log(filters, localFilters);
-
   const updateLocalFilters = (type: string, key: string, value: any) => {
     const updatedLocalFilters = { ...localFilters };
     const isPresent = updatedLocalFilters[type].includes(key);
@@ -141,7 +139,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                               {projectTypeArray.map((item, index) => (
                                 <div key={index} className="flex items-center">
                                   <input
-                                    id="filter-color-0"
+                                    id={item}
                                     name="skills"
                                     value="white"
                                     checked={localFilters.tech.includes(item)}
@@ -153,11 +151,11 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                                       )
                                     }
                                     type="checkbox"
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                                   />
                                   <label
-                                    htmlFor="filter-color-0"
-                                    className="ml-3 text-sm"
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
                                   >
                                     {item}
                                   </label>
@@ -218,7 +216,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                               {needsArray.map((item, index) => (
                                 <div key={index} className="flex items-center">
                                   <input
-                                    id="filter-color-0"
+                                    id={item}
                                     name="skills"
                                     value="white"
                                     type="checkbox"
@@ -233,8 +231,8 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                                     className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label
-                                    htmlFor="filter-color-0"
-                                    className="ml-3 text-sm"
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
                                   >
                                     {item}
                                   </label>
@@ -299,7 +297,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                               {projectTypeArray.map((item, index) => (
                                 <div key={index} className="flex items-center">
                                   <input
-                                    id="filter-color-0"
+                                    id={item}
                                     name="skills"
                                     value="white"
                                     type="checkbox"
@@ -314,8 +312,8 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                                     className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label
-                                    htmlFor="filter-color-0"
-                                    className="ml-3 text-sm"
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
                                   >
                                     {item}
                                   </label>
@@ -376,7 +374,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                               {openToArray.map((item, index) => (
                                 <div key={index} className="flex items-center">
                                   <input
-                                    id="filter-color-0"
+                                    id={item}
                                     name="skills"
                                     value="white"
                                     type="checkbox"
@@ -393,8 +391,8 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                                     className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label
-                                    htmlFor="filter-color-0"
-                                    className="ml-3 text-sm"
+                                    htmlFor={item}
+                                    className="ml-3 text-sm cursor-pointer"
                                   >
                                     {item}
                                   </label>
