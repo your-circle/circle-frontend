@@ -18,6 +18,7 @@ const Peer: NextPage = () => {
   const fetchPeers = async () => {
     try {
       const res = await getAllUsers(range);
+      console.log(res.data)
       setPeers(res.data);
     } catch (err: any) {
       console.error(err);

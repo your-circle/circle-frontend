@@ -7,9 +7,10 @@ type PeerCardProp = {
   data: PeerDetailsType;
 };
 const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
+  console.log(data)
   return (
     <>
-      {data.about && (
+      {data.name && (
         <Card scale>
           <Link href={`user/${data._id}`} passHref>
             <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
