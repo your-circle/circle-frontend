@@ -1,13 +1,16 @@
 import axios from "../config/axios.config";
 
-export const getUserProjects = async (id: any) => {
+export const getUserProjects = async (id: any, payload: any) => {
   const token = window.localStorage.getItem("jwtToken") || "";
+  console.log(token);
   try {
-    const res = await axios.get(`/v1/project/my-projects/${id}`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await axios.post(`/v1/project/my-projects/${id}`,
+      payload
+      , {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
     console.log("res", res);
 
     if (res.status != 200) {
@@ -15,6 +18,7 @@ export const getUserProjects = async (id: any) => {
     }
     return res.data;
   } catch (err: any) {
+
     console.log("error", err.message);
 
     // throw Error(err?.response?.data?.message || "something went wrong");
@@ -103,6 +107,25 @@ export const newProject = async (payload: newProjectPayload) => {
         authorization: `Bearer ${token}`,
       },
     });
+    return res.data;
+  } catch (err: any) {
+    throw Error(err?.response?.data?.message || "something went wrong");
+  }
+};
+
+
+export const editProject = async (id: string, payload: any) => {
+  const token = localStorage.getItem("jwtToken") || "";
+  console.log(payload);
+  try {
+    const res = await axios.put("v1/project/update/" + id, payload, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    if (res.status != 200) {
+      throw Error(res?.data?.message || "something went wrong");
+    }
     return res.data;
   } catch (err: any) {
     throw Error(err?.response?.data?.message || "something went wrong");

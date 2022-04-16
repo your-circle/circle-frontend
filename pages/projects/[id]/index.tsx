@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import { toast } from "react-toastify";
 import {
   addProjectMember,
+  editProject,
   getProject,
   joinProject,
 } from "../../../shared/services/projects.services";
@@ -14,6 +15,7 @@ import Input from "../../../shared/components/Input";
 import Card from "../../../shared/components/Card";
 import Choice from "../../../shared/components/Choice/Choice";
 import { useRouter } from "next/router";
+import { editUser } from "../../../shared/services/user.services";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
@@ -113,10 +115,13 @@ const Project: NextPage<Props> = (props: Props) => {
     setIsEditing(false);
   };
 
-  const saveChanges = async () => {
+  const saveChanges = async (e: any) => {
+    e.preventDefault();
     try {
-      // await editUser(input);
-      // fetchUser();
+
+      await editProject(router.query.id, { title: input.title, description: input.description, tech: input.tech, need: input.need })
+
+      fetchProject();
       setIsEditing(false);
     } catch (err: any) {
       toast.error(err.message || "something went wrong, try again!");
@@ -162,14 +167,13 @@ const Project: NextPage<Props> = (props: Props) => {
               </h1>
             </div>
             <form
-              onSubmit={(e) => e.preventDefault()}
-              className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
-                !isEditing ? "pointer-events-none" : ""
-              }`}
+
+              className={`flex flex-col px-10 mx-2  gap-3 ${!isEditing ? "pointer-events-none" : ""
+                }`}
             >
               <div className="flex items-center gap-4 mb-2">
                 <span className="w-[100px]">
-                  Title<span className="text-red-400">*</span>
+                  Title
                 </span>
                 <Input
                   name="title"
@@ -178,6 +182,7 @@ const Project: NextPage<Props> = (props: Props) => {
                   value={input.title}
                   onChange={onInputChange}
                   transparent={true}
+                  fullWidth={true}
                 />
               </div>
               <div className="flex items-center gap-4 mb-2">
@@ -187,6 +192,7 @@ const Project: NextPage<Props> = (props: Props) => {
                   name="description"
                   type="textarea"
                   key="description"
+                  fullWidth={true}
                   value={input.description}
                   onChange={onInputChange}
                 />
@@ -221,43 +227,57 @@ const Project: NextPage<Props> = (props: Props) => {
                 </div>
               </div>
 
-              <div className="flex justify-center items-center w-full gap-[10px] pl-[100px] ">
-                <button
-                  className="rounded-md bg-main-purple py-2 disabled:bg-slate-500 w-1/2"
-                  onClick={discardChanges}
-                  disabled={!isEditing}
-                >
-                  Discard Changes
-                </button>
-                <button
-                  className="rounded-md bg-main-purple  py-2 disabled:bg-slate-500 w-1/2"
-                  onClick={saveChanges}
-                  disabled={!isEditing}
-                >
-                  Save
-                </button>
-              </div>
+              {
+
+                isEditing
+                &&
+                <div className="flex justify-center items-center w-full gap-3">
+                  <button
+                    className="rounded-md bg-main-purple py-2 disabled:bg-slate-500 w-1/2"
+                    onClick={discardChanges}
+                    disabled={!isEditing}
+                  >
+                    Discard Changes
+                  </button>
+                  <button
+                    className="rounded-md bg-main-purple  py-2 disabled:bg-slate-500 w-1/2"
+                    onClick={saveChanges}
+                    disabled={!isEditing}
+                  >
+                    Save
+                  </button>
+                </div>
+              }
+
+
             </form>
-            <div
-              className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="edit"
-              onClick={() => setIsEditing(!isEditing)}
-            >
-              <Image
-                src="/images/edit-purple.svg"
-                alt="edit"
-                height={25}
-                width={25}
-              />
-              <h2 className="p-3 px-2"> Edit Project</h2>
-            </div>
+
+            {
+
+              !isEditing
+              &&
+
+              <div
+                className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="edit"
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                <Image
+                  src="/images/edit-purple.svg"
+                  alt="edit"
+                  height={25}
+                  width={25}
+                />
+                <h2 className="p-3 px-2"> Edit Project</h2>
+              </div>
+            }
           </div>
         </Card>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-1/4">
           <Card>
-            <div className="min-h-full sm:w-fit">
+            <div className="min-h-full sm:w-full">
               <div className="text-xl w-[350px] my-2 text-main-gradient">
                 Requests List:
               </div>
@@ -306,7 +326,7 @@ const Project: NextPage<Props> = (props: Props) => {
             </div>
           </Card>
           <Card>
-            <div className="min-h-full sm:w-fit">
+            <div className="min-h-full sm:w-full">
               <div className="text-xl w-[350px] my-2 text-main-gradient">
                 Team Members:
               </div>
@@ -442,9 +462,8 @@ const Project: NextPage<Props> = (props: Props) => {
           </div>
         ) : (
           <button
-            className={`bg-main-purple ${
-              requested ? "bg-disabled-purple" : ""
-            } rounded-sm text-white px-4 py-2 mt-4`}
+            className={`bg-main-purple ${requested ? "bg-disabled-purple" : ""
+              } rounded-sm text-white px-4 py-2 mt-4`}
             onClick={applyToProject}
             disabled={requested}
           >
@@ -457,3 +476,7 @@ const Project: NextPage<Props> = (props: Props) => {
 };
 
 export default Project;
+function fetchUser() {
+  throw new Error("Function not implemented.");
+}
+

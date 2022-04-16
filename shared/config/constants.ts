@@ -24,3 +24,4 @@ export const skillEnum = [
   "Hardware",
   "Cybersecurity",
 ];
+

@@ -73,14 +73,14 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <div className="bg-main-bg text-white mt-[20vh] min-w-full  flex flex-col items-center justify-center">
+      <div className="bg-main-bg text-white mt-6 min-w-full  flex flex-col items-center justify-center">
         <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col items-center justify-around gap-4 py-6 px-3 h-[25rem]"
+            className="flex flex-col items-center justify-around gap-2 py-6 px-3 h-[25rem]"
           >
             <span className="text-lg">Create a Circle account</span>
-            <div className="flex flex-col justify-between h-[10rem]">
+            <div className="flex flex-col justify-between h-[10rem] gap-4">
               <Input
                 icon="/images/user-icon.svg"
                 name="name"
