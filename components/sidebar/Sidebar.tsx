@@ -16,14 +16,16 @@ type Props = {
   type: string;
   filters: object;
   setFilters: any;
+  onTitleChange: any
 };
 
 const Sidebar: React.FC<Props> = (props: Props) => {
-  const { filters, setFilters } = props;
+  const { filters, setFilters, onTitleChange } = props;
   const [localFilters, setLocalFilters] = useState(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
+  const [title, setTitle] = useState('');
   const { user, isLoggedIn } = useContext(userContext);
 
   const updateLocalFilters = (type: string, key: string, value: any) => {
@@ -58,11 +60,13 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                 type="text"
                 key="text"
                 placeholder={`Search ${props.type.toLowerCase()}`}
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 className="text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm flex-1 bg-transparent"
               />
               <button
                 className="px-4 bg-blue-500 rounded-sm flex gap-2 items-center"
-              // onClick={}
+                onClick={() => onTitleChange(title)}
               >
                 <RiFindReplaceLine ></RiFindReplaceLine>
                 Search

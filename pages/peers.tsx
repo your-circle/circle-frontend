@@ -7,11 +7,13 @@ import EmptyList from "../shared/components/EmptyList";
 import { PeerDetailsType } from "../shared/schemas/peerDetails.schema";
 import Sidebar from "../components/sidebar";
 import Loading from "../shared/components/Loading";
+import { BsSearch } from "react-icons/bs";
 
 const Peer: NextPage = () => {
   const [filters, setFilters] = useState({
     from: 1,
     to: 6,
+    name: "",
     skills: [],
     open_to: [],
   });
@@ -21,6 +23,13 @@ const Peer: NextPage = () => {
   useEffect(() => {
     fetchPeers();
   }, [filters]);
+
+  const onTitleChange = (e: any) => {
+    setFilters({
+      ...filters,
+      name: e,
+    });
+  };
 
   const fetchPeers = async () => {
     try {
@@ -37,11 +46,26 @@ const Peer: NextPage = () => {
   };
   return (
     <>
-      <Sidebar type="PEERS" filters={filters} setFilters={setFilters} />
+      <Sidebar type="PEERS" filters={filters} setFilters={setFilters} onTitleChange={onTitleChange} />
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
         {/* <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
           Peers
+<<<<<<< HEAD
         </h1> */}
+
+        {/* <div className="my-2 relative">
+          <div className="absolute top-3 left-3 z-20 mt-[2px]">
+            <BsSearch />
+          </div>
+          <input
+            type="text"
+            placeholder="search by username"
+            value={filters.name}
+            onChange={onTitleChange}
+            className="bg-main-gray pl-10 pr-2 pt-2 pb-3 text-l rounded-sm border-[1px] border-gray-600"
+          />
+        </div> */}
+
         {loading ? (
           <Loading />
         ) : (
