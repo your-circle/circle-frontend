@@ -25,6 +25,9 @@ const Projects: NextPage = () => {
   const [hasMoreProject, setHasMoreProject] = useState<boolean>(true);
 
   const onTitleChange = (e: any) => {
+    setProjects([]);
+    setRange({ from: 1, to: 9 });
+    setHasMoreProject(true);
     setFilters({
       ...filters,
       title: e.target.value,
@@ -36,12 +39,13 @@ const Projects: NextPage = () => {
       setLoading(true);
       const payload = { ...filters, ...range };
       const res = await getAllProjects(payload);
-      if (res.data.length < 9) {
+      const data = res.data || [];
+      if (data.length < 9) {
         setHasMoreProject(false);
-        setProjects([...projects, ...res.data]);
+        setProjects([...projects, ...data]);
       } else {
-        console.log("new data", res.data);
-        setProjects([...projects, ...res.data]);
+        console.log("new data", data);
+        setProjects([...projects, ...data]);
         setRange((range) => ({ from: range.from + 9, to: range.to + 9 }));
         setLoading(false);
       }
