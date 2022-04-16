@@ -276,8 +276,9 @@ const Project: NextPage<Props> = (props: Props) => {
           </div>
         </Card>
         <div className="flex flex-col w-1/4">
+
           <Card>
-            <div className="min-h-full sm:w-full">
+            <div className="w-full">
               <div className="text-xl w-[350px] my-2 text-main-gradient">
                 Requests List:
               </div>
@@ -326,7 +327,7 @@ const Project: NextPage<Props> = (props: Props) => {
             </div>
           </Card>
           <Card>
-            <div className="min-h-full sm:w-full">
+            <div className="w-full">
               <div className="text-xl w-[350px] my-2 text-main-gradient">
                 Team Members:
               </div>
@@ -375,7 +376,7 @@ const Project: NextPage<Props> = (props: Props) => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex flex-col gap-2 items-center">
-        <span className=" text-2xl border-b-2 text-main-purple border-main-purple">
+        <span className=" text-2xl">
           {data.title}
         </span>
         <span>
@@ -386,13 +387,17 @@ const Project: NextPage<Props> = (props: Props) => {
             </span>
           </Link>
         </span>
-        <div className="flex flex-col gap-2 items-start">
-          <div className="w-[90%] text-center">{data.description}</div>
+        <div className="flex flex-col gap-3 items-start">
+          <div className="flex gap-4 flex-col ">
+
+            <h2 className="text-lg">About Project</h2>
+            <div className="w-[90%]">{data.description}</div>
+          </div>
           <div className="flex items-center">
             <h2 className="mr-2 w-[120px] opacity-80">Tech Stack:</h2>
             <div>
               {data?.tech?.length === 0 && (
-                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                <span className=" button-box">
                   none
                 </span>
               )}
@@ -400,7 +405,7 @@ const Project: NextPage<Props> = (props: Props) => {
                 return (
                   <span
                     key={index}
-                    className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                    className=" button-box "
                   >
                     {item}
                   </span>
@@ -412,7 +417,7 @@ const Project: NextPage<Props> = (props: Props) => {
             <h2 className="mr-2 w-[120px] opacity-80">Looking For:</h2>
             <div>
               {data?.need?.length === 0 && (
-                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                <span className=" button-box">
                   none
                 </span>
               )}
@@ -420,7 +425,7 @@ const Project: NextPage<Props> = (props: Props) => {
                 return (
                   <span
                     key={index}
-                    className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                    className=" button-box "
                   >
                     {item}
                   </span>
@@ -432,14 +437,14 @@ const Project: NextPage<Props> = (props: Props) => {
             <h2 className="mr-2 w-[120px] opacity-80">Current Team:</h2>
             <div>
               {data?.team?.length === 0 && (
-                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                <span className=" button-box">
                   none
                 </span>
               )}
               {data?.team?.map((user: any, index: number) => {
                 return (
                   <Link key={index} href={`/user/${user._id}`}>
-                    <a className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                    <a className="m-0.5 font-base mx-0.5 p-2 border-cyan-500 rounded-sm  border hover:bg-orange-300 hover:text-white ">
                       {user.name}
                     </a>
                   </Link>

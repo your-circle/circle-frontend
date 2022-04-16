@@ -137,7 +137,7 @@ const Profile: NextPage = () => {
       {/* <Card> */}
       <div className="text-white w-[360px] sm:w-fit mx-auto">
         <div className="flex gap-20 items-center py-2   mx-[45px] ">
-          <h1 className="mx-auto text-lg text-main-gradient">Your Profile</h1>
+          <h1 className="mx-auto text-lg ">Your Profile</h1>
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}

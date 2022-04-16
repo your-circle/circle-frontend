@@ -107,7 +107,7 @@ const Login: NextPage = () => {
               />
             </div>
             <button
-              className="min-w-[280px] bg-main-purple px-4 py-2.5 rounded-sm "
+              className="w-full bg-main-purple px-4 py-2.5 rounded-sm "
               onClick={handleSubmit}
             >
               Sign up
@@ -115,7 +115,7 @@ const Login: NextPage = () => {
             <span>
               Already have an account?
               <Link href="/login">
-                <a className="text-main-purple"> Log in</a>
+                <a className="text-main-purple ml-2"> Log in</a>
               </Link>
             </span>
           </form>

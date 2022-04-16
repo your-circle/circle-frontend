@@ -16,7 +16,7 @@ const Button = (props: Props) => {
           </div>
         </Link>
       ) : (
-        <div className="bg-main-purple flex p-1 items-center justify-center rounded-sm px-2 cursor-pointer ">
+        <div className="bg-main-purple flex p-1 items-center justify-center rounded-sm px-2 cursor-pointer">
           {props.children}
         </div>
       )}

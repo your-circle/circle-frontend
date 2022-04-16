@@ -9,7 +9,8 @@ import Sidebar from "../components/sidebar";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <div className="static bg-main-bg text-white min-h-screen min-w-full">
+      {/* bg-main-bg */}
+      <div className="static  text-white min-h-screen min-w-full">
         <ToastContainer />
         <Navbar />
         <Component {...pageProps} />

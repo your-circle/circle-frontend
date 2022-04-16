@@ -2,6 +2,7 @@ import Card from "../../shared/components/Card";
 import { PeerDetailsType } from "../../shared/schemas/peerDetails.schema";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineUser } from 'react-icons/ai'
 
 type PeerCardProp = {
   data: PeerDetailsType;
@@ -12,25 +13,27 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
     <>
       <Card scale>
         <Link href={`user/${data._id}`} passHref>
-          <div className="text-sm font-normal flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
-            <div className="flex justify-between items-start w-full">
-              <h2 className="text-main-gradient">@{data.name}</h2>
+          <div className="text-sm font-normal gap-2 flex flex-col items-start justify-around w-[300px] space-y-3 cursor-pointer">
+            <div className=" flex items-center w-full gap-1 text-base">
+
+              <AiOutlineUser></AiOutlineUser>
+              <span className="a p-0 m-0">{data.name}</span>
             </div>
-            <h3 className="mx-auto text-slate-300 h-[60px] overflow-hidden">
+            <h3 className="mx-auto w-full pl-1   overflow-hidden">
               {data.about || "No description available"}
             </h3>
-            <div className="flex items-center">
+            <div className="flex w-full items-center pl-1">
               {data?.skills?.length !== 0 && (
-                <h4 className="w-[65px] text-center font-light text-slate-300">
+                <h4 className="w-1/4 font-light  ">
                   Skills :
                 </h4>
               )}
-              <div className="flex flex-wrap items-center justify-center">
+              <div className="flex flex-wrap flex-1 items-center justify-start">
                 {data?.skills?.map((skill: any, index: number) => {
                   return (
                     <span
                       key={index}
-                      className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                      className=" button-box "
                     >
                       {skill}
                     </span>
@@ -38,9 +41,9 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
                 })}
               </div>
             </div>
-            <div className="flex w-full items-center">
+            <div className="flex w-full items-center pl-1">
               {data?.open_to?.length !== 0 && (
-                <h4 className="w-[65px] text-center font-light text-slate-300">
+                <h4 className="w-1/4 font-light  ">
                   Open to:
                 </h4>
               )}
@@ -49,7 +52,7 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
                   return (
                     <span
                       key={index}
-                      className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                      className=" button-box"
                     >
                       {item}
                     </span>
