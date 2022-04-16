@@ -7,7 +7,6 @@ type PeerCardProp = {
   data: PeerDetailsType;
 };
 const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
-  console.log(data)
   return (
     <>
       <Card scale>

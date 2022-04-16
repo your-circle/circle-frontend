@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { userContext } from "../../providers/userProvider";
 import { openToArray } from "../../shared/schemas/peerDetails.schema";
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import {
   needsArray,
@@ -14,10 +13,23 @@ type Props = {
   type: string;
   filters: object;
   setFilters: any;
+  setRange: any;
+  setProjects?: any;
+  setPeers?: any;
+  setHasMoreProject?: any;
+  setHasMorePeers?: any;
 };
 
 const Sidebar: React.FC<Props> = (props: Props) => {
-  const { filters, setFilters } = props;
+  const {
+    filters,
+    setFilters,
+    setRange,
+    setProjects,
+    setHasMoreProject,
+    setPeers,
+    setHasMorePeers,
+  } = props;
   const [localFilters, setLocalFilters] = useState(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
@@ -37,8 +49,22 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   };
 
   const applyFilters = async () => {
+    setRange({ from: 1, to: 9 });
+    if (props.type === "PROJECTS") {
+      setProjects([]);
+      setHasMoreProject(true);
+    }
+
+    if (props.type === "PEERS") {
+      setPeers([]);
+      setHasMorePeers(true);
+    }
     setFilters(localFilters);
   };
+
+  useEffect(() => {
+    setRange({ from: 1, to: 9 });
+  }, [props.type]);
 
   return (
     <>
@@ -51,8 +77,9 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             <IoIosArrowForward size={25}></IoIosArrowForward>
           </button>
           <div
-            className={`${sidebarStatus ? "flex" : "hidden"
-              } justify-center items-start pt-12 w-64 border-gray-border bg-main-bg border border-l-0 border-t-0 border-b-0  h-full`}
+            className={`${
+              sidebarStatus ? "flex" : "hidden"
+            } justify-center items-start pt-12 w-64 border-gray-border bg-main-bg border border-l-0 border-t-0 border-b-0  h-full`}
           >
             <button
               className="absolute top-2 right-2 cursor-pointer"
@@ -62,10 +89,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             </button>
 
             <div className="flex flex-col">
-
               <div className="flex w-full flex-col items-center">
-
-
                 <div className="filters pb-16 w-full px-[50px] bg-main-bg">
                   <div className="flex items-center justify-around px-6 pt-5 cursor-pointer">
                     <h2>Filters</h2>
@@ -120,7 +144,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                             <div className="pt-6" id="filter-section-0">
                               <div className="space-y-4">
                                 {projectTypeArray.map((item, index) => (
-                                  <div key={index} className="flex items-center">
+                                  <div
+                                    key={index}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       id={item}
                                       name="skills"
@@ -200,7 +227,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                             <div className="pt-6" id="filter-section-0">
                               <div className="space-y-4">
                                 {needsArray.map((item, index) => (
-                                  <div key={index} className="flex items-center">
+                                  <div
+                                    key={index}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       id={item}
                                       name="skills"
@@ -282,13 +312,18 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                             <div className="pt-6" id="filter-section-0">
                               <div className="space-y-4">
                                 {projectTypeArray.map((item, index) => (
-                                  <div key={index} className="flex items-center">
+                                  <div
+                                    key={index}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       id={item}
                                       name="skills"
                                       value="white"
                                       type="checkbox"
-                                      checked={localFilters.skills.includes(item)}
+                                      checked={localFilters.skills.includes(
+                                        item
+                                      )}
                                       onChange={(e) =>
                                         updateLocalFilters(
                                           "skills",
@@ -360,7 +395,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                             <div className="pt-6" id="filter-section-0">
                               <div className="space-y-4">
                                 {openToArray.map((item, index) => (
-                                  <div key={index} className="flex items-center">
+                                  <div
+                                    key={index}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       id={item}
                                       name="skills"
@@ -424,12 +462,15 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   );
 };
 
-
 const DivCheckbox: React.FC<{}> = () => {
-
   return (
     <div className="bg-white border-2 rounded-md border-blue-400 w-4 h-4 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
-      <svg className="fill-current hidden w-3 h-3 text-blue-600 pointer-events-none" version="1.1" viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="fill-current hidden w-3 h-3 text-blue-600 pointer-events-none"
+        version="1.1"
+        viewBox="0 0 17 12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g fill="none" fillRule="evenodd">
           <g transform="translate(-9 -11)" fill="#1F73F1" fillRule="nonzero">
             <path d="m25.576 11.414c0.56558 0.55188 0.56558 1.4439 0 1.9961l-9.404 9.176c-0.28213 0.27529-0.65247 0.41385-1.0228 0.41385-0.37034 0-0.74068-0.13855-1.0228-0.41385l-4.7019-4.588c-0.56584-0.55188-0.56584-1.4442 0-1.9961 0.56558-0.55214 1.4798-0.55214 2.0456 0l3.679 3.5899 8.3812-8.1779c0.56558-0.55214 1.4798-0.55214 2.0456 0z" />
@@ -437,8 +478,7 @@ const DivCheckbox: React.FC<{}> = () => {
         </g>
       </svg>
     </div>
-  )
-
-}
+  );
+};
 
 export default Sidebar;
