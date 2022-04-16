@@ -13,14 +13,23 @@ type Props = {
   type: string;
   filters: object;
   setFilters: any;
-  setProjects: any;
   setRange: any;
-  setHasMoreProject: any;
+  setProjects?: any;
+  setPeers?: any;
+  setHasMoreProject?: any;
+  setHasMorePeers?: any;
 };
 
 const Sidebar: React.FC<Props> = (props: Props) => {
-  const { filters, setFilters, setProjects, setRange, setHasMoreProject } =
-    props;
+  const {
+    filters,
+    setFilters,
+    setRange,
+    setProjects,
+    setHasMoreProject,
+    setPeers,
+    setHasMorePeers,
+  } = props;
   const [localFilters, setLocalFilters] = useState(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
@@ -40,11 +49,22 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   };
 
   const applyFilters = async () => {
-    setProjects([]);
     setRange({ from: 1, to: 9 });
-    setHasMoreProject(true);
+    if (props.type === "PROJECTS") {
+      setProjects([]);
+      setHasMoreProject(true);
+    }
+
+    if (props.type === "PEERS") {
+      setPeers([]);
+      setHasMorePeers(true);
+    }
     setFilters(localFilters);
   };
+
+  useEffect(() => {
+    setRange({ from: 1, to: 9 });
+  }, [props.type]);
 
   return (
     <>

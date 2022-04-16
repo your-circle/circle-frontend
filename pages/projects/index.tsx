@@ -43,8 +43,8 @@ const Projects: NextPage = () => {
       if (data.length < 9) {
         setHasMoreProject(false);
         setProjects([...projects, ...data]);
+        setLoading(false);
       } else {
-        console.log("new data", data);
         setProjects([...projects, ...data]);
         setRange((range) => ({ from: range.from + 9, to: range.to + 9 }));
         setLoading(false);
@@ -96,13 +96,17 @@ const Projects: NextPage = () => {
               <Loading />
             </div>
           }
-          endMessage={<h4 className="text-center mb-4">You Have Seen All</h4>}
+          endMessage={
+            projects.length !== 0 && (
+              <h4 className="text-center mb-4">You Have Seen All</h4>
+            )
+          }
         >
           <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
             {projects.length === 0 && !loading ? (
               <>
                 <span></span>
-                <EmptyList message="No Projects available" />
+                <EmptyList message="No Projects Available" />
               </>
             ) : (
               projects.map((project: ProjectDetailsType, index: number) => {
