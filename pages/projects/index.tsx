@@ -62,7 +62,6 @@ const Projects: NextPage = () => {
 
   return (
     <>
-
       {/* <Sidebar type="PROJECTS" filters={filters} setFilters={setFilters} onTitleChange={onTitleChange} /> */}
 
       <Sidebar
@@ -75,13 +74,9 @@ const Projects: NextPage = () => {
         onTitleChange={onTitleChange}
       />
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-
         {loading ? (
           <Loading />
         ) : (
-
-
-
           <InfiniteScroll
             dataLength={projects.length}
             next={fetchProjects}
@@ -97,7 +92,6 @@ const Projects: NextPage = () => {
               )
             }
           >
-
             <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
               {projects.length === 0 && !loading ? (
                 <>
@@ -111,10 +105,7 @@ const Projects: NextPage = () => {
               )}
             </div>
           </InfiniteScroll>
-
-        )
-        }
-
+        )}
       </div>
     </>
   );

@@ -62,7 +62,7 @@ input:checked + div svg {
 
 /* width */
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
@@ -73,6 +73,7 @@ input:checked + div svg {
 /* Handle */
 *::-webkit-scrollbar-thumb {
   background: #888;
+  border-radius: 20px;
 }
 
 /* Handle on hover */
@@ -109,7 +110,7 @@ input:checked + div svg {
 @layer base {
   /* Scroll thumb styles */
   .scrollbar::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
   }
   .scrollbar::-webkit-scrollbar-thumb {
     background: #bcb8b8;

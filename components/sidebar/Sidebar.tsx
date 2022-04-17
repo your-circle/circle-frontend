@@ -3,9 +3,9 @@ import Link from "next/link";
 import { userContext } from "../../providers/userProvider";
 import { openToArray } from "../../shared/schemas/peerDetails.schema";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { AiOutlineClose } from 'react-icons/ai'
-import { RiFindReplaceLine } from 'react-icons/ri'
-import { BiFilterAlt } from 'react-icons/bi'
+import { AiOutlineClose } from "react-icons/ai";
+import { RiFindReplaceLine } from "react-icons/ri";
+import { BiFilterAlt } from "react-icons/bi";
 
 import {
   needsArray,
@@ -33,15 +33,14 @@ const Sidebar: React.FC<Props> = (props: Props) => {
     setHasMoreProject,
     setPeers,
     setHasMorePeers,
-    onTitleChange
+    onTitleChange,
   } = props;
   const [localFilters, setLocalFilters] = useState(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const { user, isLoggedIn } = useContext(userContext);
-
 
   const updateLocalFilters = (type: string, key: string, value: any) => {
     const updatedLocalFilters = { ...localFilters };
@@ -67,10 +66,11 @@ const Sidebar: React.FC<Props> = (props: Props) => {
       setHasMorePeers(true);
     }
     setFilters(localFilters);
+    setSidebarStatus(false);
   };
 
   useEffect(() => {
-    console.log(setRange)
+    console.log(setRange);
     setRange({ from: 1, to: 9 });
   }, [props.type]);
 
@@ -78,11 +78,8 @@ const Sidebar: React.FC<Props> = (props: Props) => {
     <>
       <div className="w-9/12 z-20 m-auto scrollbar overflow-y-scroll">
         <>
-          <div
-            className={`flex m-1`}
-
-          >
-            <div className="flex flex-row gap-3 w-full my-3">
+          <div className={`flex m-1`}>
+            <div className="flex flex-col sm:flex-row gap-3 w-full my-3">
               <div className="flex flex-1">
                 <input
                   name="title"
@@ -97,31 +94,30 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                   className="px-4 bg-blue-500 rounded-sm flex gap-2 items-center"
                   onClick={() => onTitleChange(title)}
                 >
-                  <RiFindReplaceLine ></RiFindReplaceLine>
+                  <RiFindReplaceLine></RiFindReplaceLine>
                   Search
                 </button>
               </div>
 
-              <div>
+              <div className="flex justify-center">
                 <button
-                  className="w-full bg-blue-500 px-4 py-2.5 rounded-sm flex gap-2 items-center"
-                  // onClick={}
+                  className="w-fit h-full bg-blue-500 px-4 py-2.5 rounded-sm flex gap-2 items-center"
                   onClick={() => setSidebarStatus(!sidebarStatus)}
                 >
                   <BiFilterAlt></BiFilterAlt>
-                  <span>
-                    Filters
-                  </span>
+                  <span>Filters</span>
                 </button>
               </div>
             </div>
           </div>
           <div
-            className={`${sidebarStatus ? ' visible' : 'hidden'
-              } justify-center items-start pt-12 h-10/12 w-1/4 border-gray-border bg-main-bg border  flex 
+            className={`${
+              sidebarStatus ? " visible" : "hidden"
+            } justify-center items-start pt-12 h-10/12 w-fit px-10 py-4 border-gray-border bg-main-bg border  flex 
             z-50
             inset-center
-            absolute
+            fixed
+            max-h-[90vh]
             overflow-auto
             py-4
             `}
