@@ -118,8 +118,12 @@ const Project: NextPage<Props> = (props: Props) => {
   const saveChanges = async (e: any) => {
     e.preventDefault();
     try {
-
-      await editProject(router.query.id, { title: input.title, description: input.description, tech: input.tech, need: input.need })
+      await editProject(router.query.id, {
+        title: input.title,
+        description: input.description,
+        tech: input.tech,
+        need: input.need,
+      });
 
       fetchProject();
       setIsEditing(false);
@@ -167,14 +171,12 @@ const Project: NextPage<Props> = (props: Props) => {
               </h1>
             </div>
             <form
-
-              className={`flex flex-col px-10 mx-2  gap-3 ${!isEditing ? "pointer-events-none" : ""
-                }`}
+              className={`flex flex-col px-10 mx-2  gap-3 ${
+                !isEditing ? "pointer-events-none" : ""
+              }`}
             >
               <div className="flex items-center gap-4 mb-2">
-                <span className="w-[100px]">
-                  Title
-                </span>
+                <span className="w-[100px]">Title</span>
                 <Input
                   name="title"
                   type="text"
@@ -227,36 +229,27 @@ const Project: NextPage<Props> = (props: Props) => {
                 </div>
               </div>
 
-              {
-
-                isEditing
-                &&
+              {isEditing && (
                 <div className="flex justify-center items-center w-full gap-3">
                   <button
-                    className="rounded-md bg-main-purple py-2 disabled:bg-slate-500 w-1/2"
+                    className="rounded-md bg-blue-500 py-2 disabled:bg-slate-500 w-1/2"
                     onClick={discardChanges}
                     disabled={!isEditing}
                   >
                     Discard Changes
                   </button>
                   <button
-                    className="rounded-md bg-main-purple  py-2 disabled:bg-slate-500 w-1/2"
+                    className="rounded-md bg-blue-500  py-2 disabled:bg-slate-500 w-1/2"
                     onClick={saveChanges}
                     disabled={!isEditing}
                   >
                     Save
                   </button>
                 </div>
-              }
-
-
+              )}
             </form>
 
-            {
-
-              !isEditing
-              &&
-
+            {!isEditing && (
               <div
                 className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple"
                 data-bs-toggle="tooltip"
@@ -272,11 +265,10 @@ const Project: NextPage<Props> = (props: Props) => {
                 />
                 <h2 className="p-3 px-2"> Edit Project</h2>
               </div>
-            }
+            )}
           </div>
         </Card>
         <div className="flex flex-col w-1/4">
-
           <Card>
             <div className="w-full">
               <div className="text-xl w-[350px] my-2 text-main-gradient">
@@ -376,9 +368,7 @@ const Project: NextPage<Props> = (props: Props) => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex flex-col gap-2 items-center">
-        <span className=" text-2xl">
-          {data.title}
-        </span>
+        <span className=" text-2xl">{data.title}</span>
         <span>
           by{" "}
           <Link href={`/user/${data._id}`} passHref>
@@ -389,7 +379,6 @@ const Project: NextPage<Props> = (props: Props) => {
         </span>
         <div className="flex flex-col gap-3 items-start">
           <div className="flex gap-4 flex-col ">
-
             <h2 className="text-lg">About Project</h2>
             <div className="w-[90%]">{data.description}</div>
           </div>
@@ -397,16 +386,11 @@ const Project: NextPage<Props> = (props: Props) => {
             <h2 className="mr-2 w-[120px] opacity-80">Tech Stack:</h2>
             <div>
               {data?.tech?.length === 0 && (
-                <span className=" button-box">
-                  none
-                </span>
+                <span className=" button-box">none</span>
               )}
               {data?.tech?.map((item, index) => {
                 return (
-                  <span
-                    key={index}
-                    className=" button-box "
-                  >
+                  <span key={index} className=" button-box ">
                     {item}
                   </span>
                 );
@@ -417,16 +401,11 @@ const Project: NextPage<Props> = (props: Props) => {
             <h2 className="mr-2 w-[120px] opacity-80">Looking For:</h2>
             <div>
               {data?.need?.length === 0 && (
-                <span className=" button-box">
-                  none
-                </span>
+                <span className=" button-box">none</span>
               )}
               {data?.need?.map((item, index) => {
                 return (
-                  <span
-                    key={index}
-                    className=" button-box "
-                  >
+                  <span key={index} className=" button-box ">
                     {item}
                   </span>
                 );
@@ -437,9 +416,7 @@ const Project: NextPage<Props> = (props: Props) => {
             <h2 className="mr-2 w-[120px] opacity-80">Current Team:</h2>
             <div>
               {data?.team?.length === 0 && (
-                <span className=" button-box">
-                  none
-                </span>
+                <span className=" button-box">none</span>
               )}
               {data?.team?.map((user: any, index: number) => {
                 return (
@@ -467,8 +444,9 @@ const Project: NextPage<Props> = (props: Props) => {
           </div>
         ) : (
           <button
-            className={`bg-main-purple ${requested ? "bg-disabled-purple" : ""
-              } rounded-sm text-white px-4 py-2 mt-4`}
+            className={`bg-blue-500 ${
+              requested ? "bg-disabled-purple" : ""
+            } rounded-sm text-white px-4 py-2 mt-4`}
             onClick={applyToProject}
             disabled={requested}
           >
@@ -484,4 +462,3 @@ export default Project;
 function fetchUser() {
   throw new Error("Function not implemented.");
 }
-

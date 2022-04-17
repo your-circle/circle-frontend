@@ -10,7 +10,7 @@ const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   return (
-    <nav className={`w-full sticky top-0 py-3 z-50 bg-main-bg`}>
+    <nav className={`w-full sticky top-0 px-4 py-3 z-50 bg-main-bg`}>
       <section className="flex justify-between items-center px-3 p-1">
         <Link href="/">
           {/* <h1 className="text-2xl text-white cursor-pointer">circle</h1> */}
@@ -18,7 +18,7 @@ const Navbar: React.FC<PropTypes> = () => {
             src={`/images/logo.png`}
             width={120}
             height={42}
-            className=""
+            className="cursor-pointer ml-4"
             alt="nav burger icon"
           />
         </Link>
