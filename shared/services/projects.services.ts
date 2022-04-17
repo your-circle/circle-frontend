@@ -3,7 +3,6 @@ import axios from "../config/axios.config";
 
 export const getUserProjects = async (id: any, payload: any) => {
   const token = window.localStorage.getItem("jwtToken") || "";
-  console.log(token);
   try {
     const res = await axios.post(`/v1/project/my-projects/${id}`, payload, {
       headers: {
@@ -37,7 +36,7 @@ export const getAllProjects = async (payload: any) => {
   }
 };
 
-export const getProject = async (id: string) => {
+export const getProject = async (id: any) => {
   try {
     const res = await axios.get(`v1/project/${id}`);
     if (res.status != 200) {
@@ -113,7 +112,6 @@ export const newProject = async (payload: newProjectPayload) => {
 
 export const editProject = async (id: string, payload: any) => {
   const token = localStorage.getItem("jwtToken") || "";
-  console.log(payload);
   try {
     const res = await axios.put("v1/project/update/" + id, payload, {
       headers: {

@@ -11,13 +11,13 @@ import { getUserProjects } from "../../shared/services/projects.services";
 import useAuth from "../../hooks/useAuth";
 import { PeerDetailsType } from "../../shared/schemas/peerDetails.schema";
 import Link from "next/link";
-import { AiOutlineLink } from 'react-icons/ai'
+import { AiOutlineLink } from "react-icons/ai";
 import Image from "next/image";
 import Button from "../../shared/components/Button";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
-  const { id } = context.params;
+  const id = context.params?.id;
   let user = {};
   try {
     const userResponse = await getUser(id);
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-type Props = { user: PeerDetailsType, id: string };
+type Props = { user: PeerDetailsType; id: string };
 
 const Peer: NextPage<Props> = (props: Props) => {
   useAuth();
@@ -57,15 +57,14 @@ const Peer: NextPage<Props> = (props: Props) => {
     <>
       <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
         <h1 className="text-center text-2xl  my-2 border-b-2 border-cyan-500  capitalize">
-          {user.name}'s Profile
+          {user.name}
+          {"'s Profile"}
         </h1>
 
         <div className="flex flex-col gap-2 items-start">
           <h2>About</h2>
           <div className="w-[90%] text-start my-3">{user.about}</div>
           <div className="flex flex-col gap-2">
-
-
             <h2>Contact peer</h2>
             {user.email && (
               <div className="flex items-center">
@@ -73,7 +72,6 @@ const Peer: NextPage<Props> = (props: Props) => {
                 <span>{user.email}</span>
               </div>
             )}
-
 
             {user.github && (
               <div className="flex items-center">
@@ -93,7 +91,10 @@ const Peer: NextPage<Props> = (props: Props) => {
                 <h2 className="mr-2 w-[80px] opacity-80 capitalize hover:scale-110">
                   linkedin:{" "}
                 </h2>
-                <Link href={`https://www.linkedin.com/${user.linkedin}`} passHref>
+                <Link
+                  href={`https://www.linkedin.com/${user.linkedin}`}
+                  passHref
+                >
                   <a target="_blank" className="flex items-center">
                     {user.linkedin}
                     <div className="ml-2 mt-1">
@@ -121,20 +122,14 @@ const Peer: NextPage<Props> = (props: Props) => {
           </div>
 
           <div className="flex items-center my-2">
-
             <h2 className="mr-2 w-[80px] opacity-80 capitalize">Skills:</h2>
             <div>
               {user.skills?.length === 0 && (
-                <span className=" button-box ">
-                  not available
-                </span>
+                <span className=" button-box ">not available</span>
               )}
               {user.skills?.map((item, index) => {
                 return (
-                  <span
-                    key={index}
-                    className=" button-box "
-                  >
+                  <span key={index} className=" button-box ">
                     {item}
                   </span>
                 );
@@ -145,16 +140,11 @@ const Peer: NextPage<Props> = (props: Props) => {
             <h2 className="mr-2 w-[80px] opacity-80 capitalize">open to:</h2>
             <div>
               {user.open_to?.length === 0 && (
-                <span className=" button-box ">
-                  none
-                </span>
+                <span className=" button-box ">none</span>
               )}
               {user.open_to?.map((item, index) => {
                 return (
-                  <span
-                    key={index}
-                    className=" button-box "
-                  >
+                  <span key={index} className=" button-box ">
                     {item}
                   </span>
                 );
@@ -162,17 +152,15 @@ const Peer: NextPage<Props> = (props: Props) => {
             </div>
           </div>
 
-          {
-            user._id == id
-            &&
+          {user._id == id && (
             <div className="flex w-full justify-center my-3">
-              < Button href="/profile/edit">
+              <Button href="/profile/edit">
                 <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
                   Edit
                 </h1>
               </Button>
             </div>
-          }
+          )}
         </div>
 
         {/* user projects */}

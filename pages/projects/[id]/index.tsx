@@ -15,11 +15,10 @@ import Input from "../../../shared/components/Input";
 import Card from "../../../shared/components/Card";
 import Choice from "../../../shared/components/Choice/Choice";
 import { useRouter } from "next/router";
-import { editUser } from "../../../shared/services/user.services";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
-  const { id } = context.params;
+  const id = context.params?.id;
   let projectData;
   try {
     projectData = await getProject(id);
@@ -35,9 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 type Props = { data: ProjectDetailsType };
 
 const Project: NextPage<Props> = (props: Props) => {
-  const router = useRouter();
+  const router: any = useRouter();
   const { user } = useContext(userContext);
-  const [data, setData] = useState(props.data);
+  const [data, setData] = useState<any>(props.data);
   const [requested, setRequested] = useState<boolean>(false);
   const [isMember, setIsMember] = useState<boolean>(false);
   const defaultInput = {
@@ -49,7 +48,7 @@ const Project: NextPage<Props> = (props: Props) => {
     team: [],
     is_team_full: false,
   };
-  const [input, setInput] = useState(defaultInput);
+  const [input, setInput] = useState<any>(defaultInput);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const allNeeds = ["Mentor", "Developers"];
@@ -80,7 +79,7 @@ const Project: NextPage<Props> = (props: Props) => {
   };
 
   const resetInput = () => {
-    let changes = {};
+    let changes: any = {};
     for (const [key, value] of Object.entries(data)) {
       changes[key] = value;
     }
@@ -203,7 +202,7 @@ const Project: NextPage<Props> = (props: Props) => {
               <div className="h-full focus:border-gray-800 rounded-sm w-full flex flex-col  justify-center items-center">
                 <div className="flex gap-2 flex-wrap my-2 border-gray-border border w-full px-3 py-2">
                   {input.need.length !== 0 &&
-                    input.need.map((item, index) => (
+                    input.need.map((item: any, index: number) => (
                       <Choice
                         choice={item}
                         key={index}
@@ -388,7 +387,7 @@ const Project: NextPage<Props> = (props: Props) => {
               {data?.tech?.length === 0 && (
                 <span className=" button-box">none</span>
               )}
-              {data?.tech?.map((item, index) => {
+              {data?.tech?.map((item: any, index: number) => {
                 return (
                   <span key={index} className=" button-box ">
                     {item}
@@ -403,7 +402,7 @@ const Project: NextPage<Props> = (props: Props) => {
               {data?.need?.length === 0 && (
                 <span className=" button-box">none</span>
               )}
-              {data?.need?.map((item, index) => {
+              {data?.need?.map((item: any, index: number) => {
                 return (
                   <span key={index} className=" button-box ">
                     {item}

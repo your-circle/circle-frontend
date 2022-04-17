@@ -40,9 +40,7 @@ const Peer: NextPage = () => {
       const payload = { ...filters, ...range };
       const res = await getAllUsers(payload);
       const data = res.data || [];
-      console.log(data);
       if (data.length < 9) {
-        console.log("less than 9");
         console.log(peers);
         setHasMorePeers(false);
         setPeers([...peers, ...data]);
@@ -66,8 +64,6 @@ const Peer: NextPage = () => {
 
   return (
     <>
-
-
       <Sidebar
         type="PEERS"
         filters={filters}
@@ -79,12 +75,9 @@ const Peer: NextPage = () => {
       />
 
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-
-
         {loading ? (
           <Loading />
         ) : (
-
           <InfiniteScroll
             dataLength={peers.length}
             next={fetchPeers}
@@ -100,7 +93,6 @@ const Peer: NextPage = () => {
               )
             }
           >
-
             <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
               {peers.length === 0 && !loading ? (
                 <>
@@ -115,7 +107,7 @@ const Peer: NextPage = () => {
             </div>
           </InfiniteScroll>
         )}
-      </div >
+      </div>
     </>
   );
 };

@@ -3,7 +3,6 @@ import axios from "../config/axios.config";
 export const getUser = async (id: any) => {
   try {
     const res = await axios.get(`v1/user/${id}`);
-    console.log("res", res.data);
 
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");

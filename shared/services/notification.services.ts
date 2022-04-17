@@ -12,7 +12,6 @@ export const getNotification = async (payload: any) => {
     if (res.status !== 200) {
       throw Error(res?.data?.message || "Can't get the Notification");
     }
-    console.log("notification", res.data);
     return res.data;
   } catch (err: any) {
     console.log("error", err.message);

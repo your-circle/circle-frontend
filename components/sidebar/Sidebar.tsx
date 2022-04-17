@@ -35,14 +35,13 @@ const Sidebar: React.FC<Props> = (props: Props) => {
     setHasMorePeers,
     onTitleChange,
   } = props;
-  const [localFilters, setLocalFilters] = useState(filters);
+  const [localFilters, setLocalFilters] = useState<any>(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
   const [title, setTitle] = useState("");
-  const { user, isLoggedIn } = useContext(userContext);
 
-  const updateLocalFilters = (type: string, key: string, value: any) => {
+  const updateLocalFilters = (type: any, key: string, value: any) => {
     const updatedLocalFilters = { ...localFilters };
     const isPresent = updatedLocalFilters[type].includes(key);
     if (value && !isPresent) {
