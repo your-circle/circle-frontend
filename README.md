@@ -1,6 +1,6 @@
 # 🚀 Circle
 
-A platform to build a team to work on your projects
+A platform to find team members and mentors for your projects.
 
 `Frontend Stack`
 
