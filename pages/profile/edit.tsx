@@ -53,7 +53,7 @@ const Profile: NextPage = () => {
   }, [user]);
 
   const resetInput = () => {
-    let changes = {};
+    let changes: any = {};
     for (const [key, value] of Object.entries(user)) {
       changes[key] = value;
     }

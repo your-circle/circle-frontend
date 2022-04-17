@@ -47,7 +47,6 @@ const Login: NextPage = () => {
     // login
     const signupApiCall = async () => {
       const res = await signup(input);
-      console.log("signup", res.data);
       updateUser(res.data);
       changeLogInStatus(true);
       localStorage.setItem("jwtToken", res.data.token);

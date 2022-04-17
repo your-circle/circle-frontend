@@ -33,7 +33,7 @@ const NewProject: NextPage = () => {
   ];
   const allOpenTo: Array<string> = ["Mentor", "Developers"];
   // new post state
-  const [input, setInput] = useState<inputType>({
+  const [input, setInput] = useState<any>({
     title: "",
     description: "",
     tech: [],
@@ -44,6 +44,8 @@ const NewProject: NextPage = () => {
 
   // input change handler
   const onInputChange = (name: string, value: string) => {
+    console.log(name, value);
+
     setInput({
       ...input,
       [name]: value,
@@ -92,7 +94,7 @@ const NewProject: NextPage = () => {
             <H2 title="Title of Project"></H2>
             <div className="w-[260px] sm:w-full">
               <Input
-                name="Enter title"
+                name="title"
                 type="text"
                 key="title"
                 value={input.title}
@@ -104,7 +106,7 @@ const NewProject: NextPage = () => {
             <H2 title="Description of Project"></H2>
             <div className="w-[260px] sm:w-full">
               <Input
-                name="Enter description"
+                name="description"
                 type="textarea"
                 key="description"
                 value={input.description}
@@ -119,7 +121,7 @@ const NewProject: NextPage = () => {
               <div className=" focus:border-gray-800 rounded-sm">
                 <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
                   {input.tech.length !== 0 &&
-                    input.tech.map((tech, index) => (
+                    input.tech.map((tech: any, index: number) => (
                       <Choice
                         choice={tech}
                         key={index}
@@ -154,7 +156,7 @@ const NewProject: NextPage = () => {
               <div className="focus:border-gray-800 rounded-sm w-full">
                 <div className="flex gap-2 flex-wrap my-2 border-slate-500 rounded-md border px-3 py-1">
                   {input.need.length !== 0 &&
-                    input.need.map((tech, index) => (
+                    input.need.map((tech: any, index: number) => (
                       <Choice
                         choice={tech}
                         key={index}
