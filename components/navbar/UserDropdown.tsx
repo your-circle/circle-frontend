@@ -124,7 +124,7 @@ const UserDropdown: React.FC = () => {
               Logout
             </span>
           ) : (
-            <FiLogOut size={20}></FiLogOut>
+            <FiLogOut size={20} onClick={Logout}></FiLogOut>
           )}
         </>
       ) : (

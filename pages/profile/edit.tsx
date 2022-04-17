@@ -7,7 +7,7 @@ import { getUser, editUser } from "../../shared/services/user.services";
 import { userContext } from "../../providers/userProvider";
 import { toast } from "react-toastify";
 import { skillEnum } from "../../shared/config/constants";
-import { openToArray } from '../../shared/schemas/peerDetails.schema'
+import { openToArray } from "../../shared/schemas/peerDetails.schema";
 import Card from "../../shared/components/Card";
 
 const Profile: NextPage = () => {
@@ -141,14 +141,13 @@ const Profile: NextPage = () => {
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${!isEditing ? "pointer-events-none" : ""
-            }`}
+          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
+            !isEditing ? "pointer-events-none" : ""
+          }`}
         >
           <h2>Basic Informations</h2>
           <div className="flex items-center gap-4 mb-2 justify-between">
-            <span className="w-[100px]">
-              Username
-            </span>
+            <span className="w-[100px]">Username</span>
             <Input
               name="name"
               type="text"
@@ -161,9 +160,7 @@ const Profile: NextPage = () => {
           </div>
 
           <div className="flex items-center gap-4 mb-2 justify-between">
-            <span className="hidden sm:block w-[100px]">
-              Email
-            </span>
+            <span className="hidden sm:block w-[100px]">Email</span>
             <Input
               name="email"
               type="text"
@@ -286,7 +283,6 @@ const Profile: NextPage = () => {
               value={input.github}
               onChange={onInputChange}
               fullWidth={true}
-
             />
           </div>
           <div className="flex items-center gap-4 mb-2">
@@ -299,7 +295,6 @@ const Profile: NextPage = () => {
               value={input.linkedin}
               onChange={onInputChange}
               fullWidth={true}
-
             />
           </div>
           <div className="flex items-center gap-4 mb-2">
@@ -312,40 +307,30 @@ const Profile: NextPage = () => {
               value={input.twitter}
               onChange={onInputChange}
               fullWidth={true}
-
             />
           </div>
 
-          {
-
-            isEditing
-
-            &&
+          {isEditing && (
             <div className="flex justify-center items-center w-full gap-[10px]">
               <button
-                className="rounded-md bg-main-purple py-2 disabled:bg-slate-500 w-1/2"
+                className="rounded-md bg-blue-500 py-2 disabled:bg-slate-500 w-1/2"
                 onClick={discardChanges}
                 disabled={!isEditing}
               >
                 Discard Changes
               </button>
               <button
-                className="rounded-md bg-main-purple  py-2 disabled:bg-slate-500 w-1/2"
+                className="rounded-md bg-blue-500  py-2 disabled:bg-slate-500 w-1/2"
                 onClick={saveChanges}
                 disabled={!isEditing}
               >
                 Save
               </button>
             </div>
-
-
-          }
+          )}
         </form>
 
-        {
-          !isEditing
-
-          &&
+        {!isEditing && (
           <div
             className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple mb-6 w-11/12 m-auto"
             onClick={() => setIsEditing(true)}
@@ -358,11 +343,10 @@ const Profile: NextPage = () => {
             />
             <h2 className="p-3 px-2"> Edit Profile</h2>
           </div>
-        }
-
+        )}
       </div>
       {/* </Card > */}
-    </div >
+    </div>
   );
 };
 
@@ -382,8 +366,9 @@ const Skill = ({
   return (
     <Card scale={false} hoverBorder={true}>
       <div
-        className={`flex items-center cursor-pointer px-1 text-s  ${selected ? "text-[#8080FF]" : "text-slate-200"
-          }`}
+        className={`flex items-center cursor-pointer px-1 text-s  ${
+          selected ? "text-[#8080FF]" : "text-slate-200"
+        }`}
         onClick={() => handleToggle(skill)}
       >
         <span>{skill}</span>

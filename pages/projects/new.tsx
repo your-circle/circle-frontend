@@ -91,7 +91,6 @@ const NewProject: NextPage = () => {
           <div className="flex flex-col gap-3 items-start">
             <H2 title="Title of Project"></H2>
             <div className="w-[260px] sm:w-full">
-
               <Input
                 name="Enter title"
                 type="text"
@@ -185,7 +184,7 @@ const NewProject: NextPage = () => {
             </div>
           </div>
 
-          <button className="rounded-md bg-main-purple px-4 py-3 w-full">
+          <button className="rounded-md bg-blue-500 px-4 py-3 w-full">
             {posting ? "Adding project to Circle" : "Add Project"}
           </button>
         </form>
@@ -195,11 +194,8 @@ const NewProject: NextPage = () => {
   );
 };
 
-
 const H2: React.FC<{ title: string }> = (props) => {
-  return <h2 className="ml-1 mt-2 text-sm">{props.title}</h2>
-}
-
-
+  return <h2 className="ml-1 mt-2 text-sm">{props.title}</h2>;
+};
 
 export default NewProject;

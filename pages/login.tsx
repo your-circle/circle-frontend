@@ -89,7 +89,6 @@ const Login: NextPage = () => {
                 name="email"
                 type="text"
                 key="email"
-
                 value={input.email}
                 onChange={onInputChange}
               />
@@ -104,7 +103,7 @@ const Login: NextPage = () => {
             </div>
 
             <button
-              className="w-full bg-main-purple px-4 py-2.5 rounded-sm "
+              className="w-full bg-blue-500 px-4 py-2.5 rounded-sm "
               onClick={handleSubmit}
             >
               Log in

@@ -119,7 +119,6 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             fixed
             max-h-[90vh]
             overflow-auto
-            py-4
             `}
           >
             <button
@@ -478,7 +477,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
 
                   <button
                     onClick={applyFilters}
-                    className="px-6 my-4 text-center border border-gray-border rounded-md p-2 cursor-pointer bg-main-purple"
+                    className="px-6 my-4 text-center border border-gray-border rounded-md p-2 cursor-pointer bg-blue-500"
                   >
                     Apply Filters
                   </button>
