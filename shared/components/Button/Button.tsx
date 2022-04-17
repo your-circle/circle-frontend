@@ -11,12 +11,12 @@ const Button = (props: Props) => {
     <>
       {props.href ? (
         <Link href={props.href} passHref>
-          <div className="bg-main-purple flex p-1 items-center justify-center rounded-sm px-2 cursor-pointer ">
+          <div className="bg-blue-500 flex p-1 items-center justify-center rounded-sm px-2 cursor-pointer ">
             {props.children}
           </div>
         </Link>
       ) : (
-        <div className="bg-main-purple flex p-1 items-center justify-center rounded-sm px-2 cursor-pointer ">
+        <div className="bg-blue-500 flex p-1 items-center justify-center rounded-sm px-2 cursor-pointer">
           {props.children}
         </div>
       )}

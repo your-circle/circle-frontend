@@ -11,6 +11,7 @@ import { getUserProjects } from "../../shared/services/projects.services";
 import useAuth from "../../hooks/useAuth";
 import { PeerDetailsType } from "../../shared/schemas/peerDetails.schema";
 import Link from "next/link";
+import { AiOutlineLink } from 'react-icons/ai'
 import Image from "next/image";
 import Button from "../../shared/components/Button";
 
@@ -54,26 +55,77 @@ const Peer: NextPage<Props> = (props: Props) => {
 
   return (
     <>
-      <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-2 items-center">
-        <h1 className="text-center text-2xl text-main-gradient my-2 border-b-2 border-[#6A78C1] uppercase">
+      <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
+        <h1 className="text-center text-2xl  my-2 border-b-2 border-cyan-500  capitalize">
           {user.name}'s Profile
         </h1>
-        {
-          user._id == id
-          &&
-          < Button href="/profile/edit">
-            <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200 w-16 p-1 text-center">
-              Edit
-            </h1>
-          </Button>
-        }
+
         <div className="flex flex-col gap-2 items-start">
-          <div className="w-[90%] text-center">{user.about}</div>
-          <div className="flex items-center">
-            <h2 className="mr-2 w-[80px] opacity-80">Skills:</h2>
+          <h2>About</h2>
+          <div className="w-[90%] text-start my-3">{user.about}</div>
+          <div className="flex flex-col gap-2">
+
+
+            <h2>Contact peer</h2>
+            {user.email && (
+              <div className="flex items-center">
+                <h2 className="mr-2 w-[80px] opacity-80 capitalize">Email:</h2>
+                <span>{user.email}</span>
+              </div>
+            )}
+
+
+            {user.github && (
+              <div className="flex items-center">
+                <h2 className="mr-2 w-[80px] opacity-80 capitalize">github:</h2>
+                <Link href={`https://www.github.com/${user.github}`} passHref>
+                  <a target="_blank" className="flex items-center">
+                    {user.github}
+                    <div className="ml-2 mt-1">
+                      <AiOutlineLink></AiOutlineLink>
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            )}
+            {user.linkedin && (
+              <div className="flex items-center">
+                <h2 className="mr-2 w-[80px] opacity-80 capitalize hover:scale-110">
+                  linkedin:{" "}
+                </h2>
+                <Link href={`https://www.linkedin.com/${user.linkedin}`} passHref>
+                  <a target="_blank" className="flex items-center">
+                    {user.linkedin}
+                    <div className="ml-2 mt-1">
+                      <AiOutlineLink></AiOutlineLink>
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            )}
+            {user.twitter && (
+              <div className="flex items-center">
+                <h2 className="mr-2 w-[80px] opacity-80 capitalize">
+                  twitter:{" "}
+                </h2>
+                <Link href={`https://www.twitter.com/${user.twitter}`} passHref>
+                  <a target="_blank" className="flex items-center">
+                    {user.twitter}
+                    <div className="ml-2 mt-1">
+                      <AiOutlineLink></AiOutlineLink>
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center my-2">
+
+            <h2 className="mr-2 w-[80px] opacity-80 capitalize">Skills:</h2>
             <div>
               {user.skills?.length === 0 && (
-                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                <span className=" button-box ">
                   not available
                 </span>
               )}
@@ -81,7 +133,7 @@ const Peer: NextPage<Props> = (props: Props) => {
                 return (
                   <span
                     key={index}
-                    className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                    className=" button-box "
                   >
                     {item}
                   </span>
@@ -90,10 +142,10 @@ const Peer: NextPage<Props> = (props: Props) => {
             </div>
           </div>
           <div className="flex items-center">
-            <h2 className="mr-2 w-[80px] opacity-80">open to:</h2>
+            <h2 className="mr-2 w-[80px] opacity-80 capitalize">open to:</h2>
             <div>
               {user.open_to?.length === 0 && (
-                <span className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 ">
+                <span className=" button-box ">
                   none
                 </span>
               )}
@@ -101,7 +153,7 @@ const Peer: NextPage<Props> = (props: Props) => {
                 return (
                   <span
                     key={index}
-                    className="px-2 m-0.5 rounded-sm font-extralight bg-gradient text-neutral-800 "
+                    className=" button-box "
                   >
                     {item}
                   </span>
@@ -109,71 +161,20 @@ const Peer: NextPage<Props> = (props: Props) => {
               })}
             </div>
           </div>
-          {user.email && (
-            <div className="flex items-center">
-              <h2 className="mr-2 w-[80px] opacity-80">Email:</h2>
-              <span>{user.email}</span>
+
+          {
+            user._id == id
+            &&
+            <div className="flex w-full justify-center my-3">
+              < Button href="/profile/edit">
+                <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
+                  Edit
+                </h1>
+              </Button>
             </div>
-          )}
-          {user.github && (
-            <div className="flex items-center">
-              <h2 className="mr-2 w-[80px] opacity-80">github:</h2>
-              <Link href={`https://www.github.com/${user.github}`} passHref>
-                <a target="_blank" className="flex items-center">
-                  {user.github}
-                  <div className="ml-2 mt-1">
-                    <Image
-                      src="/images/link.svg"
-                      alt="link"
-                      height={16}
-                      width={16}
-                    />
-                  </div>
-                </a>
-              </Link>
-            </div>
-          )}
-          {user.linkedin && (
-            <div className="flex items-center">
-              <h2 className="mr-2 w-[80px] opacity-80 hover:scale-110">
-                linkedin:{" "}
-              </h2>
-              <Link href={`https://www.linkedin.com/${user.linkedin}`} passHref>
-                <a target="_blank" className="flex items-center">
-                  {user.linkedin}
-                  <div className="ml-2 mt-1">
-                    <Image
-                      src="/images/link.svg"
-                      alt="link"
-                      height={16}
-                      width={16}
-                    />
-                  </div>
-                </a>
-              </Link>
-            </div>
-          )}
-          {user.twitter && (
-            <div className="flex items-center">
-              <h2 className="mr-2 w-[80px] opacity-80 hover:scale-110">
-                twitter:{" "}
-              </h2>
-              <Link href={`https://www.twitter.com/${user.twitter}`} passHref>
-                <a target="_blank" className="flex items-center">
-                  {user.twitter}
-                  <div className="ml-2 mt-1">
-                    <Image
-                      src="/images/link.svg"
-                      alt="link"
-                      height={16}
-                      width={16}
-                    />
-                  </div>
-                </a>
-              </Link>
-            </div>
-          )}
+          }
         </div>
+
         {/* user projects */}
         <h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple">
           Projects

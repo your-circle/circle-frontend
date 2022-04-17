@@ -1,17 +1,57 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* @import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap"); */
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: inter-var, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
-    "Segoe UI Symbo";
-  background-color: #0f1319;
+  font-family: Ubuntu, Arial, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  /* background-color: #0f1319; */
+  background-color: rgb(14, 18, 23);
 }
+.bg-c {
+  background-color: rgb(14, 18, 23);
+}
+
+a,
+.a,
+.a2 {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 0.3rem;
+}
+.a2 {
+  display: inline-flex;
+}
+a:after,
+.a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+a:hover:after,
+.a:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+body > * {
+  background-color: rgb(14, 18, 23) !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 input:checked + div {
   @apply border-blue-500;
@@ -22,7 +62,7 @@ input:checked + div svg {
 
 /* width */
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
@@ -33,6 +73,7 @@ input:checked + div svg {
 /* Handle */
 *::-webkit-scrollbar-thumb {
   background: #888;
+  border-radius: 20px;
 }
 
 /* Handle on hover */
@@ -45,19 +86,31 @@ input:checked + div svg {
   opacity: 100;
 } */
 
+.inset-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @layer components {
   .text-main-gradient {
-    @apply text-transparent bg-clip-text bg-gradient-to-br from-[#7362D1] to-[#618EB0];
+    /* @apply text-transparent bg-clip-text bg-gradient-to-br from-[#7362D1] to-[#618EB0]; */
+    @apply text-white;
   }
   .bg-gradient {
+    /* @apply bg-gradient-to-br from-[#7362D1] to-[#618EB0]; */
     @apply bg-gradient-to-br from-[#7362D1] to-[#618EB0];
+  }
+  .button-box {
+    @apply m-0.5 mx-0.5 px-2 cursor-pointer border-cyan-500 rounded-sm  border hover:bg-cyan-500 hover:text-white;
   }
 }
 
 @layer base {
   /* Scroll thumb styles */
   .scrollbar::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
   }
   .scrollbar::-webkit-scrollbar-thumb {
     background: #bcb8b8;

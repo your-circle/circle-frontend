@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { userContext } from "../providers/userProvider";
 import Loading from "../shared/components/Loading/Loading";
+import Lottie from "lottie-react";
+import teamworkAnimation from "../public/lottie-files/teamwork.json";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -14,17 +16,32 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="flex items-center h-[calc(100vh-60px)]">
-      <div className="home-text text-5xl basis-3/6 px-6 py-2 text-center text-transparent bg-clip-text bg-gradient-to-tr from-[#B679D2] via-[#8FD89A] to-[#E8735C]">
-        Build your teams for projects and hackathons
+    <div className="flex items-start flex-col md:items-center md:flex-row md:justify-between h-[calc(100vh-74px)]">
+      <div className="flex flex-col ml-4 w-fit md:w-1/2">
+        <div className="flex flex-col items-start home-text basis-3/6 px-6 py-2 text-center text-transparent bg-clip-text">
+          <div className="flex gap-[10px] md:gap-0 md:flex-col md:items-start">
+            <span className="text-4xl md:text-4xl font-semibold lg:text-6xl text-white">
+              Build
+            </span>
+            <span className="text-4xl md:text-4xl font-bold lg:text-6xl text-blue-500">
+              Awesome Team
+            </span>
+          </div>
+          <span className="text-3xl md:text-3xl lg:text-5xl text-white">
+            For Your Next Project
+          </span>
+        </div>
+        <button
+          onClick={() => router.push("/login")}
+          className="bg-blue-500 text-xl px-6 py-2 my-4 ml-6 rounded-md w-fit"
+        >
+          Get Started
+        </button>
       </div>
-      <div className="w-full basis-3/6 flex justify-center">
-        <Image
-          src="/images/home-icon.jpg"
-          alt="logout"
-          width={450}
-          height={250}
-        />
+      <div className="flex w-full md:w-1/2 h-fit">
+        <div className="w-[700px] md:w-[500px]">
+          <Lottie animationData={teamworkAnimation} loop />
+        </div>
       </div>
     </div>
   );

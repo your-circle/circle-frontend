@@ -30,7 +30,7 @@ const Peer: NextPage = () => {
     setHasMorePeers(true);
     setFilters({
       ...filters,
-      name: e.target.value,
+      name: e,
     });
   };
 
@@ -66,6 +66,8 @@ const Peer: NextPage = () => {
 
   return (
     <>
+
+
       <Sidebar
         type="PEERS"
         filters={filters}
@@ -73,52 +75,47 @@ const Peer: NextPage = () => {
         setRange={setRange}
         setPeers={setPeers}
         setHasMorePeers={setHasMorePeers}
+        onTitleChange={onTitleChange}
       />
+
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-        <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          Peers
-        </h1>
-        <div className="my-2 relative">
-          <div className="absolute top-3 left-3 z-20 mt-[2px]">
-            <BsSearch />
-          </div>
-          <input
-            type="text"
-            placeholder="search by username"
-            value={filters.name}
-            onChange={onTitleChange}
-            className="bg-main-gray pl-10 pr-2 pt-2 pb-3 text-l rounded-sm border-[1px] border-gray-600"
-          />
-        </div>
-        <InfiniteScroll
-          dataLength={peers.length}
-          next={fetchPeers}
-          hasMore={hasMorePeers}
-          loader={
-            <div className="mx-auto w-fit">
-              <Loading />
+
+
+        {loading ? (
+          <Loading />
+        ) : (
+
+          <InfiniteScroll
+            dataLength={peers.length}
+            next={fetchPeers}
+            hasMore={hasMorePeers}
+            loader={
+              <div className="mx-auto w-fit">
+                <Loading />
+              </div>
+            }
+            endMessage={
+              peers.length !== 0 && (
+                <h4 className="text-center mb-4">You Have Seen All</h4>
+              )
+            }
+          >
+
+            <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
+              {peers.length === 0 && !loading ? (
+                <>
+                  <span></span>
+                  <EmptyList message="No users available" />
+                </>
+              ) : (
+                peers?.map((peer: PeerDetailsType, index: any) => {
+                  return <PeerCard data={peer} key={index} />;
+                })
+              )}
             </div>
-          }
-          endMessage={
-            peers.length !== 0 && (
-              <h4 className="text-center mb-4">You Have Seen All</h4>
-            )
-          }
-        >
-          <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
-            {peers.length === 0 && !loading ? (
-              <>
-                <span></span>
-                <EmptyList message="No users available" />
-              </>
-            ) : (
-              peers?.map((peer: PeerDetailsType, index: any) => {
-                return <PeerCard data={peer} key={index} />;
-              })
-            )}
-          </div>
-        </InfiniteScroll>
-      </div>
+          </InfiniteScroll>
+        )}
+      </div >
     </>
   );
 };
