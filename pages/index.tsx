@@ -18,12 +18,18 @@ const Home: NextPage = () => {
   return (
     <div className="flex items-start flex-col md:items-center md:flex-row md:justify-between h-[calc(100vh-74px)]">
       <div className="flex flex-col ml-4 w-fit md:w-1/2">
-        <div className="flex flex-col items-start home-text basis-3/6 px-6 py-2 text-center text-transparent bg-clip-text bg-gradient-to-tr from-[#B679D2] via-[#8FD89A] to-[#E8735C]">
+        <div className="flex flex-col items-start home-text basis-3/6 px-6 py-2 text-center text-transparent bg-clip-text">
           <div className="flex gap-[10px] md:gap-0 md:flex-col md:items-start">
-            <span className="text-5xl lg:text-5xl">Build </span>
-            <span className="text-5xl lg:text-7xl">Awesome Team</span>
+            <span className="text-4xl md:text-4xl font-semibold lg:text-6xl text-white">
+              Build
+            </span>
+            <span className="text-4xl md:text-4xl font-bold lg:text-6xl text-blue-500">
+              Awesome Team
+            </span>
           </div>
-          <span className="text-4xl lg:text-5xl">For Your Next Project</span>
+          <span className="text-3xl md:text-3xl lg:text-5xl text-white">
+            For Your Next Project
+          </span>
         </div>
         <button
           onClick={() => router.push("/login")}
