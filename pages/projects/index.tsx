@@ -30,7 +30,7 @@ const Projects: NextPage = () => {
     setHasMoreProject(true);
     setFilters({
       ...filters,
-      title: e.target.value,
+      title: e,
     });
   };
 
@@ -62,6 +62,8 @@ const Projects: NextPage = () => {
 
   return (
     <>
+      {/* <Sidebar type="PROJECTS" filters={filters} setFilters={setFilters} onTitleChange={onTitleChange} /> */}
+
       <Sidebar
         type="PROJECTS"
         filters={filters}
@@ -69,52 +71,41 @@ const Projects: NextPage = () => {
         setRange={setRange}
         setProjects={setProjects}
         setHasMoreProject={setHasMoreProject}
+        onTitleChange={onTitleChange}
       />
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-        <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
-          Projects
-        </h1>
-        <div className="my-2 relative">
-          <div className="absolute top-3 left-3 z-20 mt-[2px]">
-            <BsSearch />
-          </div>
-          <input
-            type="text"
-            placeholder="search by title"
-            value={filters.title}
-            onChange={onTitleChange}
-            className="bg-main-gray pl-10 pr-2 pt-2 pb-3 text-l rounded-sm border-[1px] border-gray-600"
-          />
-        </div>
-
-        <InfiniteScroll
-          dataLength={projects.length}
-          next={fetchProjects}
-          hasMore={hasMoreProject}
-          loader={
-            <div className="mx-auto w-fit">
-              <Loading />
+        {loading ? (
+          <Loading />
+        ) : (
+          <InfiniteScroll
+            dataLength={projects.length}
+            next={fetchProjects}
+            hasMore={hasMoreProject}
+            loader={
+              <div className="mx-auto w-fit">
+                <Loading />
+              </div>
+            }
+            endMessage={
+              projects.length !== 0 && (
+                <h4 className="text-center mb-4">You Have Seen All</h4>
+              )
+            }
+          >
+            <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
+              {projects.length === 0 && !loading ? (
+                <>
+                  <span></span>
+                  <EmptyList message="No Projects Available" />
+                </>
+              ) : (
+                projects.map((project: ProjectDetailsType, index: number) => {
+                  return <ProjectCard data={project} key={index} />;
+                })
+              )}
             </div>
-          }
-          endMessage={
-            projects.length !== 0 && (
-              <h4 className="text-center mb-4">You Have Seen All</h4>
-            )
-          }
-        >
-          <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
-            {projects.length === 0 && !loading ? (
-              <>
-                <span></span>
-                <EmptyList message="No Projects Available" />
-              </>
-            ) : (
-              projects.map((project: ProjectDetailsType, index: number) => {
-                return <ProjectCard data={project} key={index} />;
-              })
-            )}
-          </div>
-        </InfiniteScroll>
+          </InfiniteScroll>
+        )}
       </div>
     </>
   );

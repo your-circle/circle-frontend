@@ -3,6 +3,9 @@ import Link from "next/link";
 import { userContext } from "../../providers/userProvider";
 import { openToArray } from "../../shared/schemas/peerDetails.schema";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { AiOutlineClose } from "react-icons/ai";
+import { RiFindReplaceLine } from "react-icons/ri";
+import { BiFilterAlt } from "react-icons/bi";
 
 import {
   needsArray,
@@ -18,6 +21,7 @@ type Props = {
   setPeers?: any;
   setHasMoreProject?: any;
   setHasMorePeers?: any;
+  onTitleChange?: any;
 };
 
 const Sidebar: React.FC<Props> = (props: Props) => {
@@ -29,11 +33,13 @@ const Sidebar: React.FC<Props> = (props: Props) => {
     setHasMoreProject,
     setPeers,
     setHasMorePeers,
+    onTitleChange,
   } = props;
   const [localFilters, setLocalFilters] = useState(filters);
   const [sidebarStatus, setSidebarStatus] = useState(false);
   const [dropdownSkills, setDropdownSkills] = useState(false);
   const [dropdownNeeds, setDropdownNeeds] = useState(false);
+  const [title, setTitle] = useState("");
   const { user, isLoggedIn } = useContext(userContext);
 
   const updateLocalFilters = (type: string, key: string, value: any) => {
@@ -60,32 +66,67 @@ const Sidebar: React.FC<Props> = (props: Props) => {
       setHasMorePeers(true);
     }
     setFilters(localFilters);
+    setSidebarStatus(false);
   };
 
   useEffect(() => {
+    console.log(setRange);
     setRange({ from: 1, to: 9 });
   }, [props.type]);
 
   return (
     <>
-      <div className="fixed left-0 h-full z-20 scrollbar overflow-y-scroll">
+      <div className="w-9/12 z-20 m-auto scrollbar overflow-y-scroll">
         <>
-          <button
-            className={`${sidebarStatus ? "hidden" : "flex"} m-1`}
-            onClick={() => setSidebarStatus(!sidebarStatus)}
-          >
-            <IoIosArrowForward size={25}></IoIosArrowForward>
-          </button>
+          <div className={`flex m-1`}>
+            <div className="flex flex-col sm:flex-row gap-3 w-full my-3">
+              <div className="flex flex-1">
+                <input
+                  name="title"
+                  type="text"
+                  key="text"
+                  placeholder={`Search ${props.type.toLowerCase()}`}
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
+                  className="text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm flex-1 bg-transparent"
+                />
+                <button
+                  className="px-4 bg-blue-500 rounded-sm flex gap-2 items-center"
+                  onClick={() => onTitleChange(title)}
+                >
+                  <RiFindReplaceLine></RiFindReplaceLine>
+                  Search
+                </button>
+              </div>
+
+              <div className="flex justify-center">
+                <button
+                  className="w-fit h-full bg-blue-500 px-4 py-2.5 rounded-sm flex gap-2 items-center"
+                  onClick={() => setSidebarStatus(!sidebarStatus)}
+                >
+                  <BiFilterAlt></BiFilterAlt>
+                  <span>Filters</span>
+                </button>
+              </div>
+            </div>
+          </div>
           <div
             className={`${
-              sidebarStatus ? "flex" : "hidden"
-            } justify-center items-start pt-12 w-64 border-gray-border bg-main-bg border border-l-0 border-t-0 border-b-0  h-full`}
+              sidebarStatus ? " visible" : "hidden"
+            } justify-center items-start pt-12 h-10/12 w-fit px-10 py-4 border-gray-border bg-main-bg border  flex 
+            z-50
+            inset-center
+            fixed
+            max-h-[90vh]
+            overflow-auto
+            py-4
+            `}
           >
             <button
               className="absolute top-2 right-2 cursor-pointer"
               onClick={() => setSidebarStatus(!sidebarStatus)}
             >
-              <IoIosArrowBack size={25}></IoIosArrowBack>
+              <AiOutlineClose size={25}></AiOutlineClose>
             </button>
 
             <div className="flex flex-col">
@@ -444,7 +485,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                 </div>
               </div>
 
-              {isLoggedIn && (
+              {/* {isLoggedIn && (
                 <div className="space-y-2 flex flex-col items-center">
                   <button className="px-6 w-[170px] text-center border border-gray-border rounded-md p-2 cursor-pointer hover:bg-main-purple">
                     <Link href={`/projects/new`}> Add a Project</Link>
@@ -453,7 +494,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                     <Link href={`/user/${user._id}`}> My Projects</Link>
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </>

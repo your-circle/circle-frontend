@@ -51,9 +51,11 @@ const Input = (props: Props) => {
           type={props.type}
           value={props.value}
           onChange={(e) => props.onChange(props.name, e.target.value)}
-          className={`text-white h-full px-4 py-3 relative ${props.icon ? "pl-9" : "pl-4"
-            } ${props.transparent ? "bg-transparent" : "bg-secondary-bg"} ${props.fullWidth ? "w-full" : "min-w-[280px]"
-            }  focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm  `}
+          className={`text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm 
+                      ${props.icon ? "pl-9" : "pl-4"}  
+                     ${props.transparent ? "bg-transparent" : "bg-secondary-bg"} 
+                     ${props.fullWidth ? "w-full" : "min-w-[280px]"}  
+                      `}
         />
       )}
     </div>
