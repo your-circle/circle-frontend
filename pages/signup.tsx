@@ -77,10 +77,11 @@ const Login: NextPage = () => {
           <form
             onSubmit={(e) => e.preventDefault()}
             className="flex flex-col items-center justify-around gap-2 py-6 px-3 h-[25rem]"
+            autoComplete="chrome-off"
           >
             <span className="text-lg">Create a Circle account</span>
             <div className="flex flex-col justify-between h-[10rem] gap-4">
-              <Input
+              <Input auth
                 icon="/images/user-icon.svg"
                 name="name"
                 type="text"
@@ -89,6 +90,7 @@ const Login: NextPage = () => {
                 onChange={onInputChange}
               />
               <Input
+                auth
                 icon="/images/email-icon.svg"
                 name="email"
                 type="text"
@@ -96,7 +98,7 @@ const Login: NextPage = () => {
                 value={input.email}
                 onChange={onInputChange}
               />
-              <Input
+              <Input auth
                 icon="/images/password-icon.svg"
                 name="password"
                 type="password"

@@ -8,18 +8,23 @@ const NotificationCard: React.FC<NotificationCardType> = (props) => {
   return (
     <div className="w-3/4  bg-main-gray border border-gray p-4 border-gray-border">
       {/* <Card> */}
-      <Link href={`projects/${project}`}>
-        <a className="flex item-center gap-3">
-          <div>
-            <div className="flex justify-between">
-              <span className="opacity-80">{props.type}</span>
-              {/* comment for future use */}
-              {/* <span className="opacity-80">{props.createdAt || "time"}</span> */}
-            </div>
-            <div>{title}</div>
+      <div
+
+        className=" cursor-pointer"
+        onClick={() => {
+          window.location.href = `projects/${project}`;
+        }}>
+
+        <div>
+          <div className="flex justify-between">
+            <span className="opacity-80">{props.type}</span>
+            {/* comment for future use */}
+            {/* <span className="opacity-80">{props.createdAt || "time"}</span> */}
           </div>
-        </a>
-      </Link>
+          <div>{title}</div>
+        </div>
+
+      </div>
       {/* </Card> */}
     </div>
   );

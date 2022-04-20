@@ -18,17 +18,20 @@ body {
 
 a,
 .a,
-.a2 {
+.a2,
+.underline-a {
   display: inline-block;
   position: relative;
   padding-bottom: 0.3rem;
 }
-.a2 {
+.a2,
+.underline-a {
   display: inline-flex;
 }
 a:after,
 .a:after,
-a:visited {
+a:visited,
+.underline-a:after {
   background: none repeat scroll 0 0 transparent;
   bottom: 0;
   content: "";
@@ -40,8 +43,10 @@ a:visited {
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
+
 a:hover:after,
-.a:hover:after {
+.a:hover:after,
+.underline-a::after {
   width: 100%;
   left: 0;
 }

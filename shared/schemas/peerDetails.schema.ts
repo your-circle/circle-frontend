@@ -1,7 +1,10 @@
 import { skillEnum } from "../config/constants";
+
+// import { skillEnum } from "../constants";
 export type PeerDetailsType = {
   _id: string;
   name: string;
+  username: string;
   about: string;
   email: string;
   discord?: string;

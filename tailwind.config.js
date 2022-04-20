@@ -17,7 +17,7 @@ module.exports = {
         "card-bg": "#1c1f26",
       },
       boxShadow: {
-        "3xl": "0 0px 3px 0 #3b82f6",
+        "3xl": "0 0px 3px 0 #525866",
       },
     },
   },

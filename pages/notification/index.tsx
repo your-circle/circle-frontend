@@ -19,7 +19,17 @@ const Notification: NextPage = () => {
 
   useEffect(() => {
     fetchNotifications();
+
+    // const data = setInterval(() => {
+    //   fetchNotifications();
+    // }, 50000)
+
+    // return () => {
+    // clearInterval(data)
+    // };
+
   }, [range]);
+
 
   const fetchNotifications = async () => {
     try {

@@ -41,11 +41,10 @@ const useAuth = () => {
     console.log("clearing storage");
     updateUser({});
     changeLogInStatus(false);
-    localStorage.removeItem("jwtToken");
+    localStorage.clear();
   };
   const ChangeRoute = () => {
 
-    console.log(window.location.href.split('/'))
     if (!(window.location.href.includes('login') || window.location.href.includes('signup') || window.location.href.split('/').length == 3 || window.location.href.split('/')[3] == '')) {
       window.location.href = '/'
     }

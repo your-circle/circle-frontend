@@ -8,6 +8,11 @@ type PeerCardProp = {
   data: PeerDetailsType;
 };
 const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
+  if (!data.about) {
+
+    return <></>
+
+  }
   return (
     <>
       <Card scale>
@@ -17,6 +22,11 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
 
               <AiOutlineUser></AiOutlineUser>
               <span className="a p-0 m-0">{data.name}</span>
+              {
+                data.username
+                &&
+                <span className="a self-end p-0 m-0">{data.username}</span>
+              }
             </div>
             <h3 className="mx-auto w-full pl-1   overflow-hidden">
               {data.about || "No description available"}

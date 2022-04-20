@@ -43,7 +43,8 @@ const Login: NextPage = () => {
         updateUser(res.data);
         changeLogInStatus(true);
         localStorage.setItem("jwtToken", res.data.token);
-        router.push("/projects");
+        // router.push("/projects");
+        router.push("/profile/edit");
       };
       toast.promise(
         loginApiCall,
@@ -84,6 +85,7 @@ const Login: NextPage = () => {
 
             <div className="flex flex-col justify-between h-[6rem] gap-4 my-3">
               <Input
+                auth
                 icon="/images/email-icon.svg"
                 name="email"
                 type="text"
@@ -92,6 +94,7 @@ const Login: NextPage = () => {
                 onChange={onInputChange}
               />
               <Input
+                auth
                 icon="/images/password-icon.svg"
                 name="password"
                 type="password"

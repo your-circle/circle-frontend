@@ -12,7 +12,6 @@ const Navbar: React.FC<PropTypes> = () => {
   const { user, isLoggedIn, updateUser, changeLogInStatus } =
     useContext(userContext);
 
-
   // if (!isLoggedIn) {
   //   return <></>
   // }

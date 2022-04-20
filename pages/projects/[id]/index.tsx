@@ -170,9 +170,8 @@ const Project: NextPage<Props> = (props: Props) => {
               </h1>
             </div>
             <form
-              className={`flex flex-col px-10 mx-2  gap-3 ${
-                !isEditing ? "pointer-events-none" : ""
-              }`}
+              className={`flex flex-col px-10 mx-2  gap-3 ${!isEditing ? "pointer-events-none" : ""
+                }`}
             >
               <div className="flex items-center gap-4 mb-2">
                 <span className="w-[100px]">Title</span>
@@ -443,9 +442,8 @@ const Project: NextPage<Props> = (props: Props) => {
           </div>
         ) : (
           <button
-            className={`bg-blue-500 ${
-              requested ? "bg-disabled-purple" : ""
-            } rounded-sm text-white px-4 py-2 mt-4`}
+            className={`bg-blue-500 ${requested ? "bg-disabled-purple" : ""
+              } rounded-sm text-white px-4 py-2 mt-4`}
             onClick={applyToProject}
             disabled={requested}
           >

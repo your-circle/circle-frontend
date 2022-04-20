@@ -9,12 +9,17 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineNotificationsActive } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
+import { setInterval } from "timers";
+import { getNotificationStatus } from '../../shared/services/notification.services'
 
 const UserDropdown: React.FC = () => {
   const isMobileView = useMediaQuery("(max-width:768px)");
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
+  const [isNewNotification, setIsNewNotification] = useState<Boolean>(false);
+
   const { user, isLoggedIn, updateUser, changeLogInStatus } =
     useContext(userContext);
 
@@ -30,6 +35,35 @@ const UserDropdown: React.FC = () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [showDropdown]);
+
+  useEffect(() => {
+
+    // console.log(user)
+
+    if (!isLoggedIn) {
+      return;
+    }
+    getNotificationStatus().then((res) => {
+      setIsNewNotification(res.data)
+    }
+    ).catch(() => {
+      setIsNewNotification(false)
+    })
+
+    const notification_loop = setInterval(async () => {
+      getNotificationStatus().then((res) => {
+        setIsNewNotification(res.data)
+      }
+      ).catch(() => {
+        setIsNewNotification(false)
+      })
+    }, 10000)
+
+    return () => {
+
+      clearInterval(notification_loop)
+    };
+  }, []);
 
   const Logout = () => {
     updateUser({});
@@ -99,7 +133,7 @@ const UserDropdown: React.FC = () => {
                 <BsBookmarkPlus></BsBookmarkPlus> <span> Add Project</span>
               </a>
             </Link>
-            <Link href={`/notification`}>
+            {/* <Link href={`/notification`}>
               <a
                 className="flex items-center gap-2 px-4 py-2    text-sm      "
                 role="menuitem"
@@ -107,7 +141,7 @@ const UserDropdown: React.FC = () => {
                 <IoMdNotificationsOutline></IoMdNotificationsOutline>{" "}
                 <span> Notifications</span>
               </a>
-            </Link>
+            </Link> */}
             <a
               className="flex items-center gap-2 px-4 py-2    text-sm       "
               role="menuitem"
@@ -120,9 +154,18 @@ const UserDropdown: React.FC = () => {
             <>
             </>
           ) : (
-            <Link href={`/notification`}>
-              <IoMdNotificationsOutline size={20}></IoMdNotificationsOutline>
-            </Link>
+            <>
+              <Link href={`/notification`} >
+                <div onClick={() => setIsNewNotification(false)} className={`${isNewNotification && " text-main-purple animate-bounce"}`} >
+
+                  {isNewNotification ?
+                    <MdOutlineNotificationsActive size={22}></MdOutlineNotificationsActive>
+                    :
+                    <IoMdNotificationsOutline size={22}></IoMdNotificationsOutline>
+                  }
+                </div>
+              </Link>
+            </>
           )}
         </>
       ) : (

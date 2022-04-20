@@ -69,7 +69,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(setRange);
+    // console.log(setRange);
     setRange({ from: 1, to: 9 });
   }, [props.type]);
 
@@ -85,7 +85,12 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                   type="text"
                   key="text"
                   placeholder={`Search ${props.type.toLowerCase()}`}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => {
+                    setTitle(e.target.value)
+                    if (e.target.value.length == 0 && title.length > 0) {
+                      onTitleChange("")
+                    }
+                  }}
                   value={title}
                   className="text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm flex-1 bg-transparent"
                 />
@@ -126,6 +131,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             >
               <AiOutlineClose size={25}></AiOutlineClose>
             </button>
+
 
             <div className="flex flex-col">
               <div className="flex w-full flex-col items-center">
@@ -497,6 +503,9 @@ const Sidebar: React.FC<Props> = (props: Props) => {
           </div>
         </>
       </div>
+
+
+
     </>
   );
 };

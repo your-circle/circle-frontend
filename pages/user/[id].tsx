@@ -62,6 +62,8 @@ const Peer: NextPage<Props> = (props: Props) => {
         </h1>
 
         <div className="flex flex-col gap-2 items-start">
+          <h2>User Name</h2>
+          <div className="w-[90%] text-start my-3">{user.username}</div>
           <h2>About</h2>
           <div className="w-[90%] text-start my-3">{user.about}</div>
           <div className="flex flex-col gap-2">

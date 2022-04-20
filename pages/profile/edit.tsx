@@ -11,11 +11,11 @@ import { openToArray } from "../../shared/schemas/peerDetails.schema";
 import Card from "../../shared/components/Card";
 
 const Profile: NextPage = () => {
-  useAuth();
+  // useAuth();
   const { user, updateUser } = useContext(userContext);
 
   type inputType = {
-    name: string;
+    username: string;
     email: string;
     avatarSeed: String;
     skills: string[];
@@ -26,7 +26,7 @@ const Profile: NextPage = () => {
     twitter: string;
   };
   const defaultInput = {
-    name: "",
+    username: "",
     email: "",
     avatarSeed: "",
     skills: [],
@@ -137,22 +137,21 @@ const Profile: NextPage = () => {
       {/* <Card> */}
       <div className="text-white w-[360px] sm:w-fit mx-auto">
         <div className="flex gap-20 items-center py-2   mx-[45px] ">
-          <h1 className="mx-auto text-lg ">Your Profile</h1>
+          <h1 className="mx-auto text-lg ">{user.name} Profile</h1>
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
-            !isEditing ? "pointer-events-none" : ""
-          }`}
+          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${!isEditing ? "pointer-events-none" : ""
+            }`}
         >
           <h2>Basic Informations</h2>
           <div className="flex items-center gap-4 mb-2 justify-between">
             <span className="w-[100px]">Username</span>
             <Input
-              name="name"
+              name="username"
               type="text"
               key="name"
-              value={input.name}
+              value={input.username}
               onChange={onInputChange}
               fullWidth={true}
               transparent={true}
@@ -366,9 +365,8 @@ const Skill = ({
   return (
     <Card scale={false} hoverBorder={true}>
       <div
-        className={`flex items-center cursor-pointer px-1 text-s  ${
-          selected ? "text-[#8080FF]" : "text-slate-200"
-        }`}
+        className={`flex items-center cursor-pointer px-1 text-s  ${selected ? "text-[#8080FF]" : "text-slate-200"
+          }`}
         onClick={() => handleToggle(skill)}
       >
         <span>{skill}</span>

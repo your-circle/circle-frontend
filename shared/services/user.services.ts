@@ -2,7 +2,7 @@ import { API, APIWithToken } from "../config/axios.config";
 
 export const getUser = async (id: any) => {
   try {
-    const res = await APIWithToken.get(`v1/user/${id}`);
+    const res = await API.get(`v1/user/${id}`);
 
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");

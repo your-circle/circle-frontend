@@ -9,7 +9,20 @@ import Sidebar from "../components/sidebar";
 import useAuth from "../hooks/useAuth";
 function MyApp({ Component, pageProps }: AppProps) {
 
-  // useAuth()
+
+
+  // useEffect(() => {
+
+  //   if (!window.localStorage.getItem("jwtToken")) {
+  //     if (!(window.location.href.includes('login') || window.location.href.includes('signup') || window.location.href.split('/').length == 3 || window.location.href.split('/')[3] == '')) {
+  //       window.location.href = '/'
+  //     }
+  //   }
+
+  // }, [])
+
+  useAuth()
+
   return (
     <UserContextProvider>
       {/* bg-main-bg */}

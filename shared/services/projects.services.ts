@@ -1,4 +1,4 @@
-import Axios from "axios";
+
 import { API, APIWithToken } from "../config/axios.config";
 
 export const getUserProjects = async (id: any, payload: any) => {
@@ -33,13 +33,13 @@ export const getAllProjects = async (payload: any) => {
 
 export const getProject = async (id: any) => {
   try {
-    const res = await APIWithToken.get(`v1/project/${id}`);
+    const res = await API.get(`v1/project/${id}`);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
     return res.data;
   } catch (err: any) {
-    console.error(err);
+    console.log(err);
   }
 };
 
