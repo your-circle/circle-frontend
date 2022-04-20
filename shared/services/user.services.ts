@@ -1,8 +1,8 @@
-import axios from "../config/axios.config";
+import { API, APIWithToken } from "../config/axios.config";
 
 export const getUser = async (id: any) => {
   try {
-    const res = await axios.get(`v1/user/${id}`);
+    const res = await APIWithToken.get(`v1/user/${id}`);
 
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
@@ -15,7 +15,7 @@ export const getUser = async (id: any) => {
 
 export const getAllUsers = async (payload: any) => {
   try {
-    const res = await axios.post(`v1/user/all`, payload);
+    const res = await APIWithToken.post(`v1/user/all`, payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
@@ -28,11 +28,7 @@ export const getAllUsers = async (payload: any) => {
 export const editUser = async (payload: any) => {
   const token = localStorage.getItem("jwtToken") || "";
   try {
-    const res = await axios.put("v1/user/update", payload, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await APIWithToken.put("v1/user/update", payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }

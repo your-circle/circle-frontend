@@ -12,7 +12,7 @@ const Card = (props: Props) => {
     // bg-main-gray border
     <div
 
-      className={`m-2 p-[3px] rounded-md w-max h-full  border  border-gray-border  ${props.scale ? "hover:scale-105" : ""
+      className={`m-3 p-[3px] cursor-pointer rounded-lg w-max h-full  border  border-gray-border bg-card-bg  ${props.scale ? "hover:shadow-3xl " : ""
         } transition-all  ${props.hoverBorder ? "hover:border-slate-300" : ""}
         
 

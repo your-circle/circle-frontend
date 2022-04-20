@@ -38,22 +38,10 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               {data.title}
             </h2>
             <div className="h-[60px]  mt-2 overflow-hidden">
-              <h3 className="table-cell text-slate-300 w-full text-center text-md align-middle">
-                {data.description}
+              <h3 className="table-cell text-slate-300 w-full text-center capitalize text-md align-middle">
+                {data.description.length > 110 ? data.description.slice(0, 110) + "..." : data.description}
               </h3>
             </div>
-          </div>
-          <div className="flex  items-center justify-center w-full overflow-hidden rounded-sm">
-            {data?.tech?.map((item, index) => {
-              return (
-                <span
-                  key={index}
-                  className=" button-box"
-                >
-                  {item}
-                </span>
-              );
-            })}
           </div>
           <div className="flex items-center justify-center w-full rounded-sm  overflow-hidden font-base">
             {data?.need?.length !== 0 && <h4 className="px-1">Looking for</h4>}
@@ -68,6 +56,20 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               );
             })}
           </div>
+
+          <div className="flex  items-center justify-center w-full overflow-hidden rounded-sm">
+            {data?.tech?.map((item, index) => {
+              return (
+                <span
+                  key={index}
+                  className=" button-box"
+                >
+                  {item}
+                </span>
+              );
+            })}
+          </div>
+
         </div>
       </Link>
     </Card>

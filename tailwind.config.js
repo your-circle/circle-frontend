@@ -9,11 +9,15 @@ module.exports = {
     extend: {
       colors: {
         "main-bg": "#0F1319",
-        "main-purple": "#7362D1",
+        "main-purple": "#3b82f6",
         "gray-border": "#525866",
         "main-gray": "#1d1f27",
         "disabled-purple": "#a198d1",
         "secondary-bg": "#343347",
+        "card-bg": "#1c1f26",
+      },
+      boxShadow: {
+        "3xl": "0 0px 3px 0 #3b82f6",
       },
     },
   },

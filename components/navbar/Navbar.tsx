@@ -3,11 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import Navlinks from "./Navlinks";
 import UserDropdown from "./UserDropdown";
+import { userContext } from "../../providers/userProvider";
 
 type PropTypes = {};
 
 const Navbar: React.FC<PropTypes> = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
+  const { user, isLoggedIn, updateUser, changeLogInStatus } =
+    useContext(userContext);
+
+
+  // if (!isLoggedIn) {
+  //   return <></>
+  // }
 
   return (
     <nav className={`w-full sticky top-0 px-4 py-3 z-50 bg-main-bg`}>
@@ -25,14 +33,18 @@ const Navbar: React.FC<PropTypes> = () => {
           /> */}
         </Link>
 
-        <section className="hidden md:flex gap-10 items-center">
-          <div className=" flex justify-around gap-10 mx-1">
-            <Navlinks />
-          </div>
-          <div className="flex">
-            <UserDropdown />
-          </div>
-        </section>
+
+        <>
+          <section className="hidden md:flex gap-10 items-center">
+            <div className=" flex justify-around gap-10 mx-1">
+              <Navlinks />
+            </div>
+            <div className="flex">
+              <UserDropdown />
+            </div>
+          </section>
+        </>
+
         <div
           className="md:hidden flex items-center cursor-pointer m-3"
           onClick={() => {

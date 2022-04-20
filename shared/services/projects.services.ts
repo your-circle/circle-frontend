@@ -1,15 +1,10 @@
 import Axios from "axios";
-import axios from "../config/axios.config";
+import { API, APIWithToken } from "../config/axios.config";
 
 export const getUserProjects = async (id: any, payload: any) => {
-  const token = window.localStorage.getItem("jwtToken") || "";
+
   try {
-    const res = await axios.post(`/v1/project/my-projects/${id}`, payload, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    console.log("res", res);
+    const res = await APIWithToken.post(`/v1/project/my-projects/${id}`, payload);
 
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
@@ -24,7 +19,7 @@ export const getUserProjects = async (id: any, payload: any) => {
 
 export const getAllProjects = async (payload: any) => {
   try {
-    const res = await axios.post(`v1/project/all`, payload);
+    const res = await APIWithToken.post(`v1/project/all`, payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
@@ -38,7 +33,7 @@ export const getAllProjects = async (payload: any) => {
 
 export const getProject = async (id: any) => {
   try {
-    const res = await axios.get(`v1/project/${id}`);
+    const res = await APIWithToken.get(`v1/project/${id}`);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }
@@ -49,16 +44,11 @@ export const getProject = async (id: any) => {
 };
 
 export const joinProject = async (id: string) => {
-  const token = localStorage.getItem("jwtToken") || "";
+
   try {
-    const res = await axios.post(
+    const res = await APIWithToken.post(
       `v1/project/join-request/${id}`,
       {},
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
     );
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
@@ -70,16 +60,11 @@ export const joinProject = async (id: string) => {
 };
 
 export const addProjectMember = async (id: string, userId: string) => {
-  const token = localStorage.getItem("jwtToken") || "";
+
   try {
-    const res = await axios.post(
+    const res = await APIWithToken.post(
       `v1/project/add-member/${id}`,
-      { user_id: userId },
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
+      { user_id: userId }
     );
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
@@ -99,11 +84,7 @@ interface newProjectPayload {
 export const newProject = async (payload: newProjectPayload) => {
   const token = localStorage.getItem("jwtToken") || "";
   try {
-    const res = await axios.post("/v1/project/add-project", payload, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await APIWithToken.post("/v1/project/add-project", payload);
     return res.data;
   } catch (err: any) {
     throw Error(err?.response?.data?.message || "something went wrong");
@@ -111,13 +92,8 @@ export const newProject = async (payload: newProjectPayload) => {
 };
 
 export const editProject = async (id: string, payload: any) => {
-  const token = localStorage.getItem("jwtToken") || "";
   try {
-    const res = await axios.put("v1/project/update/" + id, payload, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await APIWithToken.put("v1/project/update/" + id, payload);
     if (res.status != 200) {
       throw Error(res?.data?.message || "something went wrong");
     }

@@ -75,38 +75,38 @@ const Peer: NextPage = () => {
       />
 
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-        {loading ? (
-          <Loading />
-        ) : (
-          <InfiniteScroll
-            dataLength={peers.length}
-            next={fetchPeers}
-            hasMore={hasMorePeers}
-            loader={
-              <div className="mx-auto w-fit">
-                <Loading />
-              </div>
-            }
-            endMessage={
-              peers.length !== 0 && (
-                <h4 className="text-center mb-4">You Have Seen All</h4>
-              )
-            }
-          >
-            <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
-              {peers.length === 0 && !loading ? (
-                <>
-                  <span></span>
-                  <EmptyList message="No users available" />
-                </>
-              ) : (
-                peers?.map((peer: PeerDetailsType, index: any) => {
-                  return <PeerCard data={peer} key={index} />;
-                })
-              )}
+        {/* {loading &&
+          <Loading />} */}
+
+        <InfiniteScroll
+          dataLength={peers.length}
+          next={fetchPeers}
+          hasMore={hasMorePeers}
+          loader={
+            <div className="mx-auto w-fit">
+              <Loading />
             </div>
-          </InfiniteScroll>
-        )}
+          }
+          endMessage={
+            peers.length !== 0 && (
+              <h4 className="text-center mb-4">You Have Seen All</h4>
+            )
+          }
+        >
+          <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
+            {peers.length === 0 && !loading ? (
+              <>
+                <span></span>
+                <EmptyList message="No users available" />
+              </>
+            ) : (
+              peers?.map((peer: PeerDetailsType, index: any) => {
+                return <PeerCard data={peer} key={index} />;
+              })
+            )}
+          </div>
+        </InfiniteScroll>
+
       </div>
     </>
   );

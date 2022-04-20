@@ -110,10 +110,10 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             </div>
           </div>
           <div
-            className={`${
-              sidebarStatus ? " visible" : "hidden"
-            } justify-center items-start pt-12 h-10/12 w-fit px-10 py-4 border-gray-border bg-main-bg border  flex 
+            className={`${sidebarStatus ? " visible" : "hidden"
+              } justify-center items-start pt-12 h-10/12  px-10 py-4 border-gray-border bg-main-bg border  flex 
             z-50
+            w-1/4
             inset-center
             fixed
             max-h-[90vh]

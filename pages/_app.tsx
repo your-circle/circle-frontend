@@ -3,10 +3,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import Navbar from "../components/navbar";
+import { useEffect, useState } from 'react'
 import { UserContextProvider } from "../providers/userProvider";
 import Sidebar from "../components/sidebar";
-
+import useAuth from "../hooks/useAuth";
 function MyApp({ Component, pageProps }: AppProps) {
+
+  // useAuth()
   return (
     <UserContextProvider>
       {/* bg-main-bg */}

@@ -33,6 +33,7 @@ const UserDropdown: React.FC = () => {
 
   const Logout = () => {
     updateUser({});
+    localStorage.clear()
     changeLogInStatus(false);
     router.push("/login");
     toast.info("user logged out!");
@@ -40,9 +41,8 @@ const UserDropdown: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between w-32 cursor-pointer bg-inherit relative ${
-        isMobileView ? "flex-col space-y-4" : ""
-      } `}
+      className={`flex items-center justify-between w-32 cursor-pointer bg-inherit relative ${isMobileView ? "flex-col space-y-4" : ""
+        } `}
     >
       {isLoggedIn ? (
         <>
@@ -72,9 +72,8 @@ const UserDropdown: React.FC = () => {
           </div>
           <div
             role="menu"
-            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 ${
-              !showDropdown ? "hidden" : ""
-            }`}
+            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 ${!showDropdown ? "hidden" : ""
+              }`}
           >
             {/* <Link href={`/user/${user._id}`}>
               <a
@@ -118,22 +117,28 @@ const UserDropdown: React.FC = () => {
             </a>
           </div>
           {isMobileView ? (
-            <span
-              className={isMobileView ? "opacity-80 hover:opacity-100 m-0" : ""}
-            >
-              Logout
-            </span>
+            <>
+            </>
           ) : (
-            <FiLogOut size={20} onClick={Logout}></FiLogOut>
+            <Link href={`/notification`}>
+              <IoMdNotificationsOutline size={20}></IoMdNotificationsOutline>
+            </Link>
           )}
         </>
       ) : (
         <div className="flex items-center">
-          <Button href="/login">
-            <h1 className="text-opacity-80 hover:text-opacity-100 cursor-pointer duration-200 w-16 p-1 text-center">
+
+          <Link href="/login">
+            <a className="opacity-80 hover:opacity-100 cursor-pointer duration-200">
+              {/* Login */}
+              Get Started
+            </a>
+          </Link>
+          {/* <Button href="/login">
+            <h1 className="opacity-80 hover:opacity-100 cursor-pointer duration-200">
               Login
             </h1>
-          </Button>
+          </Button> */}
         </div>
       )}
     </div>

@@ -8,11 +8,12 @@ const useAuth = () => {
   const router = useRouter();
   const { updateUser, changeLogInStatus } = useContext(userContext);
   useEffect(() => {
+
     const verifyAuth = async () => {
       try {
         const authToken = localStorage.getItem("jwtToken") || "";
         if (!authToken) {
-          router.push("/login");
+          ChangeRoute()
           return;
         }
         const isAuthenticated = await verifyToken(authToken);
@@ -20,7 +21,7 @@ const useAuth = () => {
           return;
         } else {
           Logout();
-          router.push("/login");
+          router.push("/");
         }
       } catch (err: any) {
         console.log("err", err.message);
@@ -30,7 +31,7 @@ const useAuth = () => {
         } else {
           toast.error(err?.message || "something went wrong");
         }
-        router.push("/login");
+        router.push("/");
       }
     };
     verifyAuth();
@@ -41,6 +42,13 @@ const useAuth = () => {
     updateUser({});
     changeLogInStatus(false);
     localStorage.removeItem("jwtToken");
+  };
+  const ChangeRoute = () => {
+
+    console.log(window.location.href.split('/'))
+    if (!(window.location.href.includes('login') || window.location.href.includes('signup') || window.location.href.split('/').length == 3 || window.location.href.split('/')[3] == '')) {
+      window.location.href = '/'
+    }
   };
 
   return;

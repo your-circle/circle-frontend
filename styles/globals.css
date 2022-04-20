@@ -27,7 +27,8 @@ a,
   display: inline-flex;
 }
 a:after,
-.a:after {
+.a:after,
+a:visited {
   background: none repeat scroll 0 0 transparent;
   bottom: 0;
   content: "";
@@ -103,7 +104,8 @@ input:checked + div svg {
     @apply bg-gradient-to-br from-[#7362D1] to-[#618EB0];
   }
   .button-box {
-    @apply m-0.5 mx-0.5 px-2 cursor-pointer border-cyan-500 rounded-sm  border hover:bg-cyan-500 hover:text-white;
+    /* @apply m-0.5 mx-0.5 px-2 cursor-pointer border-cyan-500 rounded-sm  border hover:bg-cyan-500 hover:text-white; */
+    @apply m-0.5 mx-0.5 px-2 py-[1px] cursor-pointer border-blue-500 rounded-sm  border hover:bg-blue-500 hover:text-white;
   }
 }
 

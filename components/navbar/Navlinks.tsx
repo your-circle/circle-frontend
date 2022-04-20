@@ -1,7 +1,16 @@
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import { userContext } from "../../providers/userProvider";
 
 const Navlinks: React.FC = () => {
+
+  const { isLoggedIn } =
+    useContext(userContext);
+
+  if (!isLoggedIn) {
+    return <></>
+  }
+
   return (
     <>
       <Link href="/projects">

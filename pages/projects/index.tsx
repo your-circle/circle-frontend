@@ -74,38 +74,37 @@ const Projects: NextPage = () => {
         onTitleChange={onTitleChange}
       />
       <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
-        {loading ? (
-          <Loading />
-        ) : (
-          <InfiniteScroll
-            dataLength={projects.length}
-            next={fetchProjects}
-            hasMore={hasMoreProject}
-            loader={
-              <div className="mx-auto w-fit">
-                <Loading />
-              </div>
-            }
-            endMessage={
-              projects.length !== 0 && (
-                <h4 className="text-center mb-4">You Have Seen All</h4>
-              )
-            }
-          >
-            <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
-              {projects.length === 0 && !loading ? (
-                <>
-                  <span></span>
-                  <EmptyList message="No Projects Available" />
-                </>
-              ) : (
-                projects.map((project: ProjectDetailsType, index: number) => {
-                  return <ProjectCard data={project} key={index} />;
-                })
-              )}
+        {/* {loading &&
+          <Loading />} */}
+        <InfiniteScroll
+          dataLength={projects.length}
+          next={fetchProjects}
+          hasMore={hasMoreProject}
+          loader={
+            <div className="mx-auto w-fit">
+              <Loading />
             </div>
-          </InfiniteScroll>
-        )}
+          }
+          endMessage={
+            projects.length !== 0 && (
+              <h4 className="text-center mb-4">You Have Seen All</h4>
+            )
+          }
+        >
+          <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 xl:grid-cols-3 mb-6">
+            {projects.length === 0 && !loading ? (
+              <>
+                <span></span>
+                <EmptyList message="No Projects Available" />
+              </>
+            ) : (
+              projects.map((project: ProjectDetailsType, index: number) => {
+                return <ProjectCard data={project} key={index} />;
+              })
+            )}
+          </div>
+        </InfiniteScroll>
+
       </div>
     </>
   );

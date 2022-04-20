@@ -1,14 +1,10 @@
-import axios from "../config/axios.config";
+import { API, APIWithToken } from "../config/axios.config";
 
 export const getNotification = async (payload: any) => {
   const token = localStorage.getItem("jwtToken") || "";
 
   try {
-    const res = await axios.post("/v1/notification/all", payload, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await APIWithToken.post("/v1/notification/all", payload);
     if (res.status !== 200) {
       throw Error(res?.data?.message || "Can't get the Notification");
     }
