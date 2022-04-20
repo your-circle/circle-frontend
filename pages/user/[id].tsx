@@ -97,9 +97,12 @@ const Peer: NextPage = () => {
 
           <div className="flex flex-col gap-2 items-start">
             <h2>User Name</h2>
-            <div className="w-[90%] text-start my-3">{user.username}</div>
+
+
+            <div className="w-[90%] text-start my-3">{user.username || "UserName Not Given"}</div>
             <h2>About</h2>
-            <div className="w-[90%] text-start my-3">{user.about}</div>
+            <div className="w-[90%] text-start my-3">{user.about || "About Not Given"}</div>
+
             <div className="flex flex-col gap-2">
               <h2>Contact peer</h2>
               {user.email && (
@@ -163,6 +166,7 @@ const Peer: NextPage = () => {
               )}
             </div>
 
+
             <div className="flex items-center my-2">
               <h2 className="mr-2 w-[80px] opacity-80 capitalize">Skills:</h2>
               <div>
@@ -194,21 +198,23 @@ const Peer: NextPage = () => {
               </div>
             </div>
 
-            {user._id == id && (
-              <div className="flex w-full justify-center my-3">
-                <Button href="/profile/edit">
-                  <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
-                    Edit
-                  </h1>
-                </Button>
-              </div>
-            )}
-          </div>
+            {
+              user._id == id && (
+                <div className="flex w-full justify-center my-3">
+                  <Button href="/profile/edit">
+                    <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
+                      Edit
+                    </h1>
+                  </Button>
+                </div>
+              )
+            }
+          </div >
 
           {/* user projects */}
-          <h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple">
+          < h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple" >
             Projects
-          </h2>
+          </h2 >
           <InfiniteScroll
             dataLength={projects.length}
             next={fetchProjects}
@@ -237,7 +243,9 @@ const Peer: NextPage = () => {
               )}
             </div>
           </InfiniteScroll>
-        </div >
+
+        </div>
+
       )}
     </>
   );
