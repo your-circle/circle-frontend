@@ -5,7 +5,7 @@ import type { AppProps } from "next/app";
 import Navbar from "../components/navbar";
 import { useEffect, useState } from 'react'
 import { UserContextProvider } from "../providers/userProvider";
-import Sidebar from "../components/sidebar";
+import Searchbar from "../components/searchbar";
 import useAuth from "../hooks/useAuth";
 function MyApp({ Component, pageProps }: AppProps) {
 
