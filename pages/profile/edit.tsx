@@ -139,10 +139,25 @@ const Profile: NextPage = () => {
         <div className="flex gap-20 items-center py-2   mx-[45px] ">
           <h1 className="mx-auto text-lg ">{user.name} Profile</h1>
         </div>
+        {!isEditing && (
+          <div
+            className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple mb-6 w-fit px-4 m-auto"
+            onClick={() => setIsEditing(true)}
+          >
+            <Image
+              src="/images/edit-purple.svg"
+              alt="edit"
+              height={25}
+              width={25}
+            />
+            <h2 className="p-3 px-2"> Edit Profile</h2>
+          </div>
+        )}
         <form
           onSubmit={(e) => e.preventDefault()}
-          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${!isEditing ? "pointer-events-none" : ""
-            }`}
+          className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
+            !isEditing ? "pointer-events-none" : ""
+          }`}
         >
           <h2>Basic Informations</h2>
           <div className="flex items-center gap-4 mb-2 justify-between">
@@ -328,21 +343,6 @@ const Profile: NextPage = () => {
             </div>
           )}
         </form>
-
-        {!isEditing && (
-          <div
-            className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple mb-6 w-11/12 m-auto"
-            onClick={() => setIsEditing(true)}
-          >
-            <Image
-              src="/images/edit-purple.svg"
-              alt="edit"
-              height={25}
-              width={25}
-            />
-            <h2 className="p-3 px-2"> Edit Profile</h2>
-          </div>
-        )}
       </div>
       {/* </Card > */}
     </div>
@@ -365,8 +365,9 @@ const Skill = ({
   return (
     <Card scale={false} hoverBorder={true}>
       <div
-        className={`flex items-center cursor-pointer px-1 text-s  ${selected ? "text-[#8080FF]" : "text-slate-200"
-          }`}
+        className={`flex items-center cursor-pointer px-1 text-s  ${
+          selected ? "text-[#8080FF]" : "text-slate-200"
+        }`}
         onClick={() => handleToggle(skill)}
       >
         <span>{skill}</span>
