@@ -87,10 +87,10 @@ input:checked + div svg {
   background: #555;
 }
 
-/* .Toastify__toast-container--top-right {
-  --toastify-color-dark: #7362d150;
+.Toastify__toast-container--top-right {
+  --toastify-color-dark: #343347;
   opacity: 100;
-} */
+}
 
 .inset-center {
   position: absolute;
