@@ -24,7 +24,7 @@ type Props = {
   onTitleChange?: any;
 };
 
-const Sidebar: React.FC<Props> = (props: Props) => {
+const Searchbar: React.FC<Props> = (props: Props) => {
   const {
     filters,
     setFilters,
@@ -529,4 +529,4 @@ const DivCheckbox: React.FC<{}> = () => {
   );
 };
 
-export default Sidebar;
+export default Searchbar;
