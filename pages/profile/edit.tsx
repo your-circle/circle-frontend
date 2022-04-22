@@ -366,7 +366,7 @@ const Skill = ({
     <Card scale={false} hoverBorder={true}>
       <div
         className={`flex items-center cursor-pointer px-1 text-s  ${
-          selected ? "text-[#8080FF]" : "text-slate-200"
+          selected ? "text-main-purple" : "text-slate-200"
         }`}
         onClick={() => handleToggle(skill)}
       >
