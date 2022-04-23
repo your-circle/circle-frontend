@@ -109,7 +109,7 @@ const Searchbar: React.FC<Props> = (props: Props) => {
                   onClick={() => setSidebarStatus(!sidebarStatus)}
                 >
                   <BiFilterAlt></BiFilterAlt>
-                  <span>Filters</span>
+                  <span className="">Filters</span>
                 </button>
               </div>
             </div>
@@ -119,15 +119,16 @@ const Searchbar: React.FC<Props> = (props: Props) => {
               sidebarStatus ? " visible" : "hidden"
             } justify-center items-start pt-12 h-10/12  px-10 py-4 border-gray-border bg-main-bg border  flex 
             z-50
-            w-1/4
+            w-[300px]
             inset-center
             fixed
-            max-h-[90vh]
-            overflow-auto
+            h-[600px]
+            overflow-x-hidden
+            overflow-y-scroll
             `}
           >
             <button
-              className="absolute top-2 right-2 cursor-pointer"
+              className="absolute top-2 right-2 cursor-pointer "
               onClick={() => setSidebarStatus(!sidebarStatus)}
             >
               <AiOutlineClose size={25}></AiOutlineClose>
@@ -137,7 +138,7 @@ const Searchbar: React.FC<Props> = (props: Props) => {
               <div className="flex w-full flex-col items-center">
                 <div className="filters pb-16 w-full px-[50px] bg-main-bg">
                   <div className="flex items-center justify-around px-6 pt-5 cursor-pointer">
-                    <h2>Filters</h2>
+                    <h2 className="text-xl mb-2">Filters</h2>
                   </div>
                   {/* projects: tech, need */}
                   {/* peers: skills, open_to */}
