@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import { getUser } from "../../shared/services/user.services";
@@ -15,6 +15,7 @@ import Button from "../../shared/components/Button";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../../shared/components/Loading";
 import { skillEnum } from "../../shared/config/constants";
+import { userContext } from "../../providers/userProvider";
 
 const Peer: NextPage = () => {
   const emptyUser: PeerDetailsType = {
@@ -43,6 +44,7 @@ const Peer: NextPage = () => {
   const [hasMoreProject, setHasMoreProject] = useState<boolean>(true);
   const [loading, setLoading] = useState(true);
   const [range, setRange] = useState({ from: 1, to: 9 });
+  const { user: loggedInUser } = useContext(userContext);
 
   const fetchUser = async () => {
     try {
@@ -94,24 +96,27 @@ const Peer: NextPage = () => {
             {"'s Profile"}
           </h1>
 
-
           <div className="flex flex-col gap-2 items-start">
             <h2>User Name</h2>
 
-
-            <div className="w-[90%] text-start my-3">{user.username || "UserName Not Given"}</div>
+            <div className="w-[90%] text-start my-3">
+              {user.username || "UserName Not Given"}
+            </div>
             <h2>About</h2>
-            <div className="w-[90%] text-start my-3">{user.about || "About Not Given"}</div>
+            <div className="w-[90%] text-start my-3">
+              {user.about || "About Not Given"}
+            </div>
 
             <div className="flex flex-col gap-2">
               <h2>Contact peer</h2>
               {user.email && (
                 <div className="flex items-center">
-                  <h2 className="mr-2 w-[80px] opacity-80 capitalize">Email:</h2>
+                  <h2 className="mr-2 w-[80px] opacity-80 capitalize">
+                    Email:
+                  </h2>
                   <span>{user.email}</span>
                 </div>
               )}
-
 
               {user.github && (
                 <div className="flex items-center">
@@ -166,7 +171,6 @@ const Peer: NextPage = () => {
               )}
             </div>
 
-
             <div className="flex items-center my-2">
               <h2 className="mr-2 w-[80px] opacity-80 capitalize">Skills:</h2>
               <div>
@@ -198,23 +202,21 @@ const Peer: NextPage = () => {
               </div>
             </div>
 
-            {
-              user._id == id && (
-                <div className="flex w-full justify-center my-3">
-                  <Button href="/profile/edit">
-                    <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
-                      Edit
-                    </h1>
-                  </Button>
-                </div>
-              )
-            }
-          </div >
+            {loggedInUser._id === id && (
+              <div className="flex w-full justify-center my-3">
+                <Button href="/profile/edit">
+                  <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
+                    Edit
+                  </h1>
+                </Button>
+              </div>
+            )}
+          </div>
 
           {/* user projects */}
-          < h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple" >
+          <h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple">
             Projects
-          </h2 >
+          </h2>
           <InfiniteScroll
             dataLength={projects.length}
             next={fetchProjects}
@@ -243,9 +245,7 @@ const Peer: NextPage = () => {
               )}
             </div>
           </InfiniteScroll>
-
         </div>
-
       )}
     </>
   );

@@ -131,8 +131,8 @@ const NewProject: NextPage = () => {
                     ))}
                   {/* placeholder(its like input field to fill the data) */}
                   {input.tech.length === 0 && (
-                    <span className="text-slate-300 py-3 select-none mx-auto w-full text-center">
-                      Add Project Type
+                    <span className="text-slate-300 py-3 select-none mx-auto w-full text-center text-gray-500">
+                      Add project type
                     </span>
                   )}
                 </div>
@@ -167,7 +167,7 @@ const NewProject: NextPage = () => {
                   {/* placeholder(its like input field to fill the data) */}
 
                   {input.need.length === 0 && (
-                    <span className="text-slate-300 py-3 select-none mx-auto  w-full text-center ">
+                    <span className="text-slate-300 py-3 select-none mx-auto  w-full text-center text-gray-500">
                       Project is looking for
                     </span>
                   )}

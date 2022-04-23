@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { signup } from "../shared/services/auth.services";
 import Input from "../shared/components/Input";
 import { userContext } from "../providers/userProvider";
 import { toast } from "react-toastify";
-import { validateEmail } from "../shared/helpers";
+import { validateEmail, validatePassword } from "../shared/helpers";
 import { toastConfig } from "../shared/config/constants";
 import Card from "../shared/components/Card";
 import { useRouter } from "next/router";
@@ -36,11 +36,14 @@ const Login: NextPage = () => {
     }
     if (!validateEmail(input.email)) {
       toast("Enter valid email", toastConfig);
-
       return;
     }
-    if (input.password.length < 3 || input.password.length > 25) {
-      toast("Password must be between 3 and 25 characters", toastConfig);
+
+    if (!validatePassword(input.password)) {
+      toast(
+        "Password must be between at least 8 characters, at least one letter and one number",
+        toastConfig
+      );
       return;
     }
 
@@ -50,7 +53,7 @@ const Login: NextPage = () => {
       updateUser(res.data);
       changeLogInStatus(true);
       localStorage.setItem("jwtToken", res.data.token);
-      router.push("/projects");
+      router.push("/profile/edit");
     };
     toast.promise(
       signupApiCall,
@@ -81,7 +84,8 @@ const Login: NextPage = () => {
           >
             <span className="text-lg">Create a Circle account</span>
             <div className="flex flex-col justify-between h-[10rem] gap-4">
-              <Input auth
+              <Input
+                auth
                 icon="/images/user-icon.svg"
                 name="name"
                 type="text"
@@ -98,7 +102,8 @@ const Login: NextPage = () => {
                 value={input.email}
                 onChange={onInputChange}
               />
-              <Input auth
+              <Input
+                auth
                 icon="/images/password-icon.svg"
                 name="password"
                 type="password"
