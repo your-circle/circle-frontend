@@ -37,7 +37,7 @@ const Profile: NextPage = () => {
     twitter: "",
   };
   const [input, setInput] = useState<inputType>(defaultInput);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(true);
 
   useEffect(() => {
     fetchUser();
@@ -139,7 +139,7 @@ const Profile: NextPage = () => {
         <div className="flex gap-20 items-center py-2   mx-[45px] ">
           <h1 className="mx-auto text-lg ">{user.name} Profile</h1>
         </div>
-        {!isEditing && (
+        {/* {!isEditing && (
           <div
             className="cursor-pointer flex items-center justify-center border rounded-md border-main-purple mb-6 w-fit px-4 m-auto"
             onClick={() => setIsEditing(true)}
@@ -152,7 +152,7 @@ const Profile: NextPage = () => {
             />
             <h2 className="p-3 px-2"> Edit Profile</h2>
           </div>
-        )}
+        )} */}
         <form
           onSubmit={(e) => e.preventDefault()}
           className={`flex flex-col px-10 mx-2 pb-10 gap-3 ${
