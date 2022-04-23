@@ -240,7 +240,7 @@ const Profile: NextPage = () => {
                   />
                 ))}
               {input.skills.length === 0 && (
-                <span className="text-slate-200 py2 select-none mx-auto">
+                <span className="text-slate-200 py2 select-none mx-auto text-gray-500">
                   Add your skills here
                 </span>
               )}
@@ -270,8 +270,8 @@ const Profile: NextPage = () => {
                   />
                 ))}
               {input.open_to.length === 0 && (
-                <span className="text-slate-200 py2 select-none mx-auto">
-                  Add your open_to here
+                <span className="text-slate-200 py2 select-none mx-auto text-gray-500">
+                  Add your open to here
                 </span>
               )}
             </div>

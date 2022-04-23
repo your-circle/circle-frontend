@@ -309,8 +309,8 @@ const Project: NextPage<Props> = (props: Props) => {
                     )
                   )}
                 {input.request_list.length === 0 && (
-                  <span className="text-slate-200 py2 select-none">
-                    join requests will be displayed here!
+                  <span className="text-slate-200 py2 select-none text-gray-500">
+                    Join requests will be displayed here!
                   </span>
                 )}
               </div>
@@ -347,7 +347,7 @@ const Project: NextPage<Props> = (props: Props) => {
                     )
                   )}
                 {input.team.length === 0 && (
-                  <span className="text-slate-200 py2 select-none">
+                  <span className="text-slate-200 py2 select-none text-gray-500">
                     All team members will be displayed here!
                   </span>
                 )}
