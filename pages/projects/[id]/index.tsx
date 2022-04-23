@@ -170,8 +170,9 @@ const Project: NextPage<Props> = (props: Props) => {
               </h1>
             </div>
             <form
-              className={`flex flex-col px-10 mx-2  gap-3 ${!isEditing ? "pointer-events-none" : ""
-                }`}
+              className={`flex flex-col px-10 mx-2  gap-3 ${
+                !isEditing ? "pointer-events-none" : ""
+              }`}
             >
               <div className="flex items-center gap-4 mb-2">
                 <span className="w-[100px]">Title</span>
@@ -366,20 +367,20 @@ const Project: NextPage<Props> = (props: Props) => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex flex-col gap-2 items-center">
-        <span className=" text-2xl">{data.title}</span>
-        <span>
-          by{" "}
+        <span className=" text-3xl text-main-purple">{data.title}</span>
+        <span className="">
+          by
           <Link href={`/user/${data._id}`} passHref>
-            <span className="opacity-80 underline hover:opacity-100 text-white cursor-pointer">
+            <span className="opacity-80 px-1 underline hover:opacity-100 text-white cursor-pointer">
               {data.creator_name}
             </span>
           </Link>
         </span>
         <div className="flex flex-col gap-3 items-start">
-          <div className="flex gap-4 flex-col ">
-            <h2 className="text-lg">About Project</h2>
-            <div className="w-[90%]">{data.description}</div>
+          <div className=" text-center w-full text-xl mt-5 mb-3 text-slate-300">
+            {data.description}
           </div>
+
           <div className="flex items-center">
             <h2 className="mr-2 w-[120px] opacity-80">Tech Stack:</h2>
             <div>
@@ -410,16 +411,17 @@ const Project: NextPage<Props> = (props: Props) => {
               })}
             </div>
           </div>
+          <br />
           <div className="flex items-center">
             <h2 className="mr-2 w-[120px] opacity-80">Current Team:</h2>
             <div>
               {data?.team?.length === 0 && (
-                <span className=" button-box">none</span>
+                <span className=" button-box">None</span>
               )}
               {data?.team?.map((user: any, index: number) => {
                 return (
                   <Link key={index} href={`/user/${user._id}`}>
-                    <a className="m-0.5 font-base mx-0.5 p-2 border-cyan-500 rounded-sm  border hover:bg-orange-300 hover:text-white ">
+                    <a className="capitalize m-0.5 mx-0.5 px-2 py-[1px] rounded-sm border border-main-purple text-main-purple">
                       {user.name}
                     </a>
                   </Link>
@@ -430,20 +432,25 @@ const Project: NextPage<Props> = (props: Props) => {
           <div className="flex items-center">
             <h2 className="mr-2 w-[120px] opacity-80">Status:</h2>
             <span
-              className={data.is_team_full ? "text-red-500" : "text-green-500"}
+              className={`m-0.5 mx-0.5 px-2 py-[1px] rounded-sm border ${
+                data.is_team_full
+                  ? "text-red-500 border-red-500"
+                  : "text-green-500  border-green-500 "
+              }`}
             >
               {data.is_team_full ? "Closed" : "Open"}
             </span>
           </div>
         </div>
         {isMember ? (
-          <div className="text-lg text-disabled-purple">
-            You are a member of this project team!
+          <div className="text-lg text-blue-300">
+            You are a member of this project's team!
           </div>
         ) : (
           <button
-            className={`bg-blue-500 ${requested ? "bg-disabled-purple" : ""
-              } rounded-sm text-white px-4 py-2 mt-4`}
+            className={`bg-blue-500 ${
+              requested ? "bg-disabled-purple" : ""
+            } rounded-sm text-white px-4 py-2 mt-4`}
             onClick={applyToProject}
             disabled={requested}
           >
@@ -456,6 +463,3 @@ const Project: NextPage<Props> = (props: Props) => {
 };
 
 export default Project;
-function fetchUser() {
-  throw new Error("Function not implemented.");
-}

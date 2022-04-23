@@ -110,7 +110,7 @@ input:checked + div svg {
   }
   .button-box {
     /* @apply m-0.5 mx-0.5 px-2 cursor-pointer border-cyan-500 rounded-sm  border hover:bg-cyan-500 hover:text-white; */
-    @apply m-0.5 mx-0.5 px-2 py-[1px] cursor-pointer  rounded-sm   bg-blue-500 text-white;
+    @apply m-0.5 mx-0.5 px-2 py-[1px] rounded-sm bg-blue-500 text-white cursor-default;
   }
 }
 
