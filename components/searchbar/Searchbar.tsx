@@ -24,7 +24,7 @@ type Props = {
   onTitleChange?: any;
 };
 
-const Sidebar: React.FC<Props> = (props: Props) => {
+const Searchbar: React.FC<Props> = (props: Props) => {
   const {
     filters,
     setFilters,
@@ -86,16 +86,16 @@ const Sidebar: React.FC<Props> = (props: Props) => {
                   key="text"
                   placeholder={`Search ${props.type.toLowerCase()}`}
                   onChange={(e) => {
-                    setTitle(e.target.value)
+                    setTitle(e.target.value);
                     if (e.target.value.length == 0 && title.length > 0) {
-                      onTitleChange("")
+                      onTitleChange("");
                     }
                   }}
                   value={title}
-                  className="text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border placeholder-slate-200 rounded-sm flex-1 bg-transparent"
+                  className="text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border border-r-0 placeholder-slate-200 rounded-0 rounded-l-sm flex-1 bg-transparent"
                 />
                 <button
-                  className="px-4 bg-blue-500 rounded-sm flex gap-2 items-center"
+                  className="px-4 bg-blue-500 flex gap-2 items-center  rounded-0 rounded-r-sm"
                   onClick={() => onTitleChange(title)}
                 >
                   <RiFindReplaceLine></RiFindReplaceLine>
@@ -115,8 +115,9 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             </div>
           </div>
           <div
-            className={`${sidebarStatus ? " visible" : "hidden"
-              } justify-center items-start pt-12 h-10/12  px-10 py-4 border-gray-border bg-main-bg border  flex 
+            className={`${
+              sidebarStatus ? " visible" : "hidden"
+            } justify-center items-start pt-12 h-10/12  px-10 py-4 border-gray-border bg-main-bg border  flex 
             z-50
             w-1/4
             inset-center
@@ -131,7 +132,6 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             >
               <AiOutlineClose size={25}></AiOutlineClose>
             </button>
-
 
             <div className="flex flex-col">
               <div className="flex w-full flex-col items-center">
@@ -503,9 +503,6 @@ const Sidebar: React.FC<Props> = (props: Props) => {
           </div>
         </>
       </div>
-
-
-
     </>
   );
 };
@@ -529,4 +526,4 @@ const DivCheckbox: React.FC<{}> = () => {
   );
 };
 
-export default Sidebar;
+export default Searchbar;

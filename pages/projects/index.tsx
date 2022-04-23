@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import ProjectCard from "../../components/projectCard";
-import Sidebar from "../../components/sidebar";
+import Searchbar from "../../components/searchbar";
 import EmptyList from "../../shared/components/EmptyList";
 import Loading from "../../shared/components/Loading";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
@@ -64,7 +64,7 @@ const Projects: NextPage = () => {
     <>
       {/* <Sidebar type="PROJECTS" filters={filters} setFilters={setFilters} onTitleChange={onTitleChange} /> */}
 
-      <Sidebar
+      <Searchbar
         type="PROJECTS"
         filters={filters}
         setFilters={setFilters}

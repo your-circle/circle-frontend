@@ -5,7 +5,7 @@ import { getAllUsers } from "../shared/services/user.services";
 import { toast } from "react-toastify";
 import EmptyList from "../shared/components/EmptyList";
 import { PeerDetailsType } from "../shared/schemas/peerDetails.schema";
-import Sidebar from "../components/sidebar";
+import Searchbar from "../components/searchbar";
 import Loading from "../shared/components/Loading";
 import { BsSearch } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -64,7 +64,7 @@ const Peer: NextPage = () => {
 
   return (
     <>
-      <Sidebar
+      <Searchbar
         type="PEERS"
         filters={filters}
         setFilters={setFilters}
