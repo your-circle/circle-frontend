@@ -97,18 +97,12 @@ const Peer: NextPage = () => {
           </h1>
 
           <div className="flex flex-col gap-2 items-start">
-            <h2>User Name</h2>
-
-            <div className="w-[90%] text-start my-3">
-              {user.username || "UserName Not Given"}
-            </div>
-            <h2>About</h2>
-            <div className="w-[90%] text-start my-3">
+            <div className="w-[90%] text-start my-3">{user.username || ""}</div>
+            <div className="w-[90%] text-center text-slate-300 text-lg my-3">
               {user.about || "About Not Given"}
             </div>
 
             <div className="flex flex-col gap-2">
-              <h2>Contact peer</h2>
               {user.email && (
                 <div className="flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize">
