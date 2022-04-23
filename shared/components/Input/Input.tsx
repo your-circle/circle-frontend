@@ -63,7 +63,7 @@ const Input = (props: Props) => {
           value={props.value}
           autoComplete="chrome-off"
           onChange={(e) => props.onChange(props.name, e.target.value)}
-          className={`text-white h-full px-4 py-3 relative focus:border-gray-800 placeholder-gray-500 border-gray-border border rounded-sm 
+          className={`capitalize text-white h-full px-4 py-3 relative focus:border-gray-800 placeholder-gray-500 border-gray-border border rounded-sm 
                       ${props.icon ? "pl-9" : "pl-4"}  
                      ${
                        props.transparent ? "bg-transparent" : "bg-secondary-bg"

@@ -17,8 +17,8 @@ const Choice = ({
   return (
     <Card scale={false} hoverBorder={true}>
       <div
-        className={`flex items-center justify-center w-full h-full cursor-pointer text-slate-300 px-1 text-sm ${
-          selected ? "text-[#8080FF]" : ""
+        className={`flex items-center justify-center w-full h-full cursor-pointe px-1 text-sm ${
+          selected ? "text-main-purple" : "text-slate-300"
         }`}
         onClick={() => handleToggle(choice)}
       >

@@ -75,7 +75,6 @@ const Profile: NextPage = () => {
 
   const discardChanges = () => {
     resetInput();
-    setIsEditing(false);
   };
 
   const saveChanges = async () => {
@@ -85,7 +84,6 @@ const Profile: NextPage = () => {
     try {
       await editUser(input);
       fetchUser();
-      setIsEditing(false);
     } catch (err: any) {
       toast.error(err.message || "something went wrong, try again!");
     }
@@ -137,7 +135,9 @@ const Profile: NextPage = () => {
       {/* <Card> */}
       <div className="text-white w-[360px] sm:w-fit mx-auto">
         <div className="flex gap-20 items-center py-2   mx-[45px] ">
-          <h1 className="mx-auto text-lg ">{user.name} Profile</h1>
+          <h1 className="mx-auto text-2xl my-3 capitalize">
+            Editing {user.name}'s Profile
+          </h1>
         </div>
         {/* {!isEditing && (
           <div
@@ -159,7 +159,6 @@ const Profile: NextPage = () => {
             !isEditing ? "pointer-events-none" : ""
           }`}
         >
-          <h2>Basic Informations</h2>
           <div className="flex items-center gap-4 mb-2 justify-between">
             <span className="w-[100px]">Username</span>
             <Input
@@ -323,25 +322,20 @@ const Profile: NextPage = () => {
               fullWidth={true}
             />
           </div>
-
-          {isEditing && (
-            <div className="flex justify-center items-center w-full gap-[10px]">
-              <button
-                className="rounded-md bg-blue-500 py-2 disabled:bg-slate-500 w-1/2"
-                onClick={discardChanges}
-                disabled={!isEditing}
-              >
-                Discard Changes
-              </button>
-              <button
-                className="rounded-md bg-blue-500  py-2 disabled:bg-slate-500 w-1/2"
-                onClick={saveChanges}
-                disabled={!isEditing}
-              >
-                Save
-              </button>
-            </div>
-          )}
+          <div className="flex justify-center items-center w-full gap-[10px]">
+            <button
+              className="rounded-md bg-blue-500 py-2 disabled:bg-slate-500 w-1/2"
+              onClick={discardChanges}
+            >
+              Discard Changes
+            </button>
+            <button
+              className="rounded-md bg-blue-500  py-2 disabled:bg-slate-500 w-1/2"
+              onClick={saveChanges}
+            >
+              Save
+            </button>
+          </div>
         </form>
       </div>
       {/* </Card > */}

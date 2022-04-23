@@ -87,7 +87,7 @@ const NewProject: NextPage = () => {
           onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col items-center gap-4 justify-center w-[300px] sm:w-1/2"
         >
-          <span className="text-lg m-4 text-main-gradient">
+          <span className="text-2xl m-4 text-main-gradient">
             Add a new Project
           </span>
           <div className="flex flex-col gap-3 items-start">
