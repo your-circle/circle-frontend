@@ -95,7 +95,7 @@ const Searchbar: React.FC<Props> = (props: Props) => {
                     }
                   }}
                   value={title}
-                  className="text-white h-full px-4 py-3 relative focus:border-gray-800 border-gray-border border border-r-0 placeholder-slate-200 rounded-0 rounded-l-sm flex-1 bg-transparent"
+                  className="text-white h-full px-4 py-3 relative placeholder:text-slate-400 focus:border-gray-800 border-gray-border border border-r-0 placeholder-slate-200 rounded-0 rounded-l-sm flex-1 bg-transparent"
                 />
                 <button
                   className="px-4 bg-blue-500 flex gap-2 items-center  rounded-0 rounded-r-sm"
