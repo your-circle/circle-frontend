@@ -67,7 +67,7 @@ const Searchbar: React.FC<Props> = (props: Props) => {
     setFilters(localFilters);
     setSidebarStatus(false);
   };
-
+  const preventDefaultSubmit = (e: any) => {};
   useEffect(() => {
     // console.log(setRange);
     setRange({ from: 1, to: 9 });
@@ -79,7 +79,10 @@ const Searchbar: React.FC<Props> = (props: Props) => {
         <>
           <div className={`flex m-1`}>
             <div className="flex flex-col sm:flex-row gap-3 w-full my-3">
-              <div className="flex flex-1">
+              <form
+                className="flex flex-1"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <input
                   name="title"
                   type="text"
@@ -97,11 +100,12 @@ const Searchbar: React.FC<Props> = (props: Props) => {
                 <button
                   className="px-4 bg-blue-500 flex gap-2 items-center  rounded-0 rounded-r-sm"
                   onClick={() => onTitleChange(title)}
+                  type="submit"
                 >
                   <RiFindReplaceLine></RiFindReplaceLine>
                   Search
                 </button>
-              </div>
+              </form>
 
               <div className="flex justify-center">
                 <button
