@@ -6,7 +6,7 @@ import Input from "../../shared/components/Input";
 import { getUser, editUser } from "../../shared/services/user.services";
 import { userContext } from "../../providers/userProvider";
 import { toast } from "react-toastify";
-import { skillEnum } from "../../shared/config/constants";
+import { skillEnum, toastConfig } from "../../shared/config/constants";
 import { openToArray } from "../../shared/schemas/peerDetails.schema";
 import Card from "../../shared/components/Card";
 
@@ -75,6 +75,7 @@ const Profile: NextPage = () => {
 
   const discardChanges = () => {
     resetInput();
+    toast.info("Changes Discarded", toastConfig);
   };
 
   const saveChanges = async () => {
@@ -84,6 +85,7 @@ const Profile: NextPage = () => {
     try {
       await editUser(input);
       fetchUser();
+      toast.info("Changes Saved", toastConfig);
     } catch (err: any) {
       toast.error(err.message || "something went wrong, try again!");
     }

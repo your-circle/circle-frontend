@@ -91,7 +91,7 @@ const Peer: NextPage = () => {
         </div>
       ) : (
         <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
-          <h1 className="text-center text-2xl  my-2 border-b-2 border-cyan-500  capitalize">
+          <h1 className="text-center text-2xl  my-2 border-b-2 border-main-purple  capitalize">
             {user.name}
             {"'s Profile"}
           </h1>
@@ -121,7 +121,7 @@ const Peer: NextPage = () => {
               {user.github && (
                 <div className="flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize">
-                    github:
+                    Github:
                   </h2>
                   <Link href={`https://www.github.com/${user.github}`} passHref>
                     <a target="_blank" className="flex items-center">
@@ -136,7 +136,7 @@ const Peer: NextPage = () => {
               {user.linkedin && (
                 <div className="flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize hover:scale-110">
-                    linkedin:{" "}
+                    Linkedin:{" "}
                   </h2>
                   <Link
                     href={`https://www.linkedin.com/${user.linkedin}`}
@@ -154,7 +154,7 @@ const Peer: NextPage = () => {
               {user.twitter && (
                 <div className="flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize">
-                    twitter:{" "}
+                    Twitter:{" "}
                   </h2>
                   <Link
                     href={`https://www.twitter.com/${user.twitter}`}

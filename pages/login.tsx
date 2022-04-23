@@ -57,7 +57,7 @@ const Login: NextPage = () => {
       );
     } catch (err: any) {
       toast.error("Oops! Something Went Wrong", toastConfig);
-      console.error(err?.message || "something went wrong, try again!");
+      console.error(err?.message || "Something went wrong, try again!");
     }
   };
 

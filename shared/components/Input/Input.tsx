@@ -54,16 +54,12 @@ const Input = (props: Props) => {
       )}
       {props.type !== "textarea" && (
         <input
-          placeholder={
-            props.auth
-              ? props.name.charAt(0).toUpperCase() + props.name.slice(1)
-              : props.name
-          }
+          placeholder={props.name.charAt(0).toUpperCase() + props.name.slice(1)}
           type={props.type}
           value={props.value}
           autoComplete="chrome-off"
           onChange={(e) => props.onChange(props.name, e.target.value)}
-          className={`capitalize text-white h-full px-4 py-3 relative focus:border-gray-800 placeholder-gray-500 border-gray-border border rounded-sm 
+          className={`placeholder-capitalize text-white h-full px-4 py-3 relative focus:border-gray-800 placeholder-gray-500 border-gray-border border rounded-sm 
                       ${props.icon ? "pl-9" : "pl-4"}  
                      ${
                        props.transparent ? "bg-transparent" : "bg-secondary-bg"

@@ -100,7 +100,7 @@ const NewProject: NextPage = () => {
                 value={input.title}
                 onChange={onInputChange}
                 transparent={true}
-                fullWidth={true}
+                fullWidth={true} 
               />
             </div>
             <H2 title="Description of Project"></H2>

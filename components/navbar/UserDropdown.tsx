@@ -12,7 +12,8 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { setInterval } from "timers";
-import { getNotificationStatus } from '../../shared/services/notification.services'
+import { getNotificationStatus } from "../../shared/services/notification.services";
+import { toastConfig } from "../../shared/config/constants";
 
 const UserDropdown: React.FC = () => {
   const isMobileView = useMediaQuery("(max-width:768px)");
@@ -37,46 +38,47 @@ const UserDropdown: React.FC = () => {
   }, [showDropdown]);
 
   useEffect(() => {
-
     // console.log(user)
 
     if (!isLoggedIn) {
       return;
     }
-    getNotificationStatus().then((res) => {
-      setIsNewNotification(res.data)
-    }
-    ).catch(() => {
-      setIsNewNotification(false)
-    })
+    getNotificationStatus()
+      .then((res) => {
+        setIsNewNotification(res.data);
+      })
+      .catch(() => {
+        setIsNewNotification(false);
+      });
 
     const notification_loop = setInterval(async () => {
-      getNotificationStatus().then((res) => {
-        setIsNewNotification(res.data)
-      }
-      ).catch(() => {
-        setIsNewNotification(false)
-      })
-    }, 10000)
+      getNotificationStatus()
+        .then((res) => {
+          setIsNewNotification(res.data);
+        })
+        .catch(() => {
+          setIsNewNotification(false);
+        });
+    }, 10000);
 
     return () => {
-
-      clearInterval(notification_loop)
+      clearInterval(notification_loop);
     };
   }, []);
 
   const Logout = () => {
     updateUser({});
-    localStorage.clear()
+    localStorage.clear();
     changeLogInStatus(false);
     router.push("/login");
-    toast.info("user logged out!");
+    toast.info("Logged out!", toastConfig);
   };
 
   return (
     <div
-      className={`flex items-center justify-between w-32 cursor-pointer bg-inherit relative ${isMobileView ? "flex-col space-y-4" : ""
-        } `}
+      className={`flex items-center justify-between w-32 cursor-pointer bg-inherit relative ${
+        isMobileView ? "flex-col space-y-4" : ""
+      } `}
     >
       {isLoggedIn ? (
         <>
@@ -106,8 +108,9 @@ const UserDropdown: React.FC = () => {
           </div>
           <div
             role="menu"
-            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 ${!showDropdown ? "hidden" : ""
-              }`}
+            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 ${
+              !showDropdown ? "hidden" : ""
+            }`}
           >
             {/* <Link href={`/user/${user._id}`}>
               <a
@@ -151,18 +154,25 @@ const UserDropdown: React.FC = () => {
             </a>
           </div>
           {isMobileView ? (
-            <>
-            </>
+            <></>
           ) : (
             <>
-              <Link href={`/notification`} >
-                <div onClick={() => setIsNewNotification(false)} className={`${isNewNotification && " text-main-purple animate-bounce"}`} >
-
-                  {isNewNotification ?
-                    <MdOutlineNotificationsActive size={22}></MdOutlineNotificationsActive>
-                    :
-                    <IoMdNotificationsOutline size={22}></IoMdNotificationsOutline>
-                  }
+              <Link href={`/notification`}>
+                <div
+                  onClick={() => setIsNewNotification(false)}
+                  className={`${
+                    isNewNotification && " text-main-purple animate-bounce"
+                  }`}
+                >
+                  {isNewNotification ? (
+                    <MdOutlineNotificationsActive
+                      size={22}
+                    ></MdOutlineNotificationsActive>
+                  ) : (
+                    <IoMdNotificationsOutline
+                      size={22}
+                    ></IoMdNotificationsOutline>
+                  )}
                 </div>
               </Link>
             </>
@@ -170,7 +180,6 @@ const UserDropdown: React.FC = () => {
         </>
       ) : (
         <div className="flex items-center">
-
           <Link href="/login">
             <a className="opacity-80 hover:opacity-100 cursor-pointer duration-200">
               {/* Login */}
