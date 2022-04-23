@@ -138,7 +138,7 @@ const Profile: NextPage = () => {
       <div className="text-white w-[360px] sm:w-fit mx-auto">
         <div className="flex gap-20 items-center py-2   mx-[45px] ">
           <h1 className="mx-auto text-2xl my-3 capitalize">
-            Editing {user.name}'s Profile
+            Editing {user.name}&apos;s Profile
           </h1>
         </div>
         {/* {!isEditing && (

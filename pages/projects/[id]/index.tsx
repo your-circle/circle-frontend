@@ -444,7 +444,7 @@ const Project: NextPage<Props> = (props: Props) => {
         </div>
         {isMember ? (
           <div className="text-lg text-blue-300">
-            You are a member of this project's team!
+            You are a member of this project&apos;s team!
           </div>
         ) : (
           <button
