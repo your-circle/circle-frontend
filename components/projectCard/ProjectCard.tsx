@@ -15,7 +15,9 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
             <Link href={`/user/${data.creator_id}`} passHref>
               <div className=" flex items-center w-full gap-1 text-base">
                 <AiOutlineUser></AiOutlineUser>
-                <span className="a p-0 m-0">{data.creator_name}</span>
+                <span className="a p-0 m-0 text-xs text-slate-200">
+                  {data.creator_name}
+                </span>
               </div>
             </Link>
             {/* comment for future use */}
@@ -34,42 +36,37 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
           </div>
           <div className="flex flex-col items-center justify-center w-full">
             {/* text-main-gradient */}
-            <h2 className=" w-full text-center text-lg">
+            <h2 className=" w-full text-center text-xl text-main-purple">
               {data.title}
             </h2>
             <div className="h-[60px]  mt-2 overflow-hidden">
-              <h3 className="table-cell text-slate-300 w-full text-center capitalize text-md align-middle">
-                {data.description.length > 110 ? data.description.slice(0, 110) + "..." : data.description}
+              <h3 className="table-cell text-slate-200 w-full text-md text-center capitalize align-middle">
+                {data.description.length > 110
+                  ? data.description.slice(0, 110) + "..."
+                  : data.description}
               </h3>
             </div>
           </div>
-          <div className="flex items-center justify-center w-full rounded-sm  overflow-hidden font-base">
+          <div className="flex  items-center justify-center w-full overflow-hidden rounded-sm text-xs">
+            {data?.tech?.map((item, index) => {
+              return (
+                <span key={index} className=" button-box">
+                  {item}
+                </span>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center justify-center w-full rounded-sm  overflow-hidden font-base text-xs">
             {data?.need?.length !== 0 && <h4 className="px-1">Looking for</h4>}
             {data?.need?.map((item, index) => {
               return (
-                <span
-                  key={index}
-                  className="button-box"
-                >
+                <span key={index} className="button-box">
                   {item}
                 </span>
               );
             })}
           </div>
-
-          <div className="flex  items-center justify-center w-full overflow-hidden rounded-sm">
-            {data?.tech?.map((item, index) => {
-              return (
-                <span
-                  key={index}
-                  className=" button-box"
-                >
-                  {item}
-                </span>
-              );
-            })}
-          </div>
-
         </div>
       </Link>
     </Card>
