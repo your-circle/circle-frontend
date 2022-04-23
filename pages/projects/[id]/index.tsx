@@ -432,7 +432,7 @@ const Project: NextPage<Props> = (props: Props) => {
             <span
               className={data.is_team_full ? "text-red-500" : "text-green-500"}
             >
-              {data.is_team_full ? "closed" : "open"}
+              {data.is_team_full ? "Closed" : "Open"}
             </span>
           </div>
         </div>
