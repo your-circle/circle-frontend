@@ -25,7 +25,7 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
               {
                 data.username
                 &&
-                <span className="a self-end p-0 m-0">{data.username}</span>
+                <span className="a self-end p-0 m-0 ml-1 text-gray-400 text-lg">{`@${data.username}`}</span>
               }
             </div>
             <h3 className="mx-auto w-full pl-1   overflow-hidden">
