@@ -141,6 +141,15 @@ input:checked + div svg {
     background: #131314;
   }
 }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #343347;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+}
 
 a {
   color: inherit;
