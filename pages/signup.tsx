@@ -36,7 +36,6 @@ const Login: NextPage = () => {
     }
     if (!validateEmail(input.email)) {
       toast("Enter valid email", toastConfig);
-
       return;
     }
 
@@ -54,7 +53,7 @@ const Login: NextPage = () => {
       updateUser(res.data);
       changeLogInStatus(true);
       localStorage.setItem("jwtToken", res.data.token);
-      router.push("/projects");
+      router.push("/profile/edit");
     };
     toast.promise(
       signupApiCall,
