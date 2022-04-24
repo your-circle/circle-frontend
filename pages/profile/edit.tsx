@@ -359,19 +359,20 @@ const Skill = ({
   const selected = skills.includes(skill);
   if (isSelected && !selected) return null;
   return (
-    <Card scale={false} hoverBorder={true}>
-      <div
-        className={`flex items-center cursor-pointer px-1 text-s  ${
-          selected ? "text-main-purple" : "text-slate-200"
-        }`}
-        onClick={() => handleToggle(skill)}
-      >
-        <span>{skill}</span>
-        <span className="ml-1 pl-1  border-gray-500">
-          {selected ? "x" : "+"}
-        </span>
-      </div>
-    </Card>
+    <div onClick={() => handleToggle(skill)} className="w-fit h-fit">
+      <Card scale={false} hoverBorder={true}>
+        <div
+          className={`flex items-center cursor-pointer px-0.5 text-sm  ${
+            selected ? "text-main-purple" : "text-slate-200"
+          }`}
+        >
+          <span>{skill}</span>
+          <span className="ml-1 pl-1  border-gray-500">
+            {selected ? "x" : "+"}
+          </span>
+        </div>
+      </Card>
+    </div>
   );
 };
 
