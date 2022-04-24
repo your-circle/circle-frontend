@@ -88,7 +88,6 @@ const Peer: NextPage = () => {
     }
   }, [router.isReady]);
 
-  user.linkedin = "aa";
   return (
     <>
       {loading ? (
@@ -96,8 +95,8 @@ const Peer: NextPage = () => {
           <Loading />
         </div>
       ) : (
-        <div className="-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
-          <div className="relative flex flex-col items-center border-2 border-red px-4 py-4 min-w-[500px] max-w-[85%]">
+        <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
+          <div className="rounded-lg border-gray-border bg-card-bg relative flex flex-col items-center border border-red px-4 py-4 min-w-[500px] max-w-[85%]">
             {loggedInUser._id === id && (
               <div
                 onClick={() => router.push("/profile/edit")}
@@ -113,12 +112,12 @@ const Peer: NextPage = () => {
               width={80}
               className="rounded-[50%]"
             />
-            <div className="text-center text-2xl  my-2  capitalize">
+            <div className="text-center text-2xl my-2 capitalize">
               {user.name}
             </div>
             {user.username && <div>@{user.username}</div>}
-            <div>{user.about || "user description unavailable!"}</div>
-            <div className="flex gap-4 my-3">
+            <div>{user.about || ""}</div>
+            <div className="flex gap-4 mt-6 mb-4">
               {user.email && (
                 <Link href={`mailto:${user.email}`}>
                   <a
@@ -163,7 +162,7 @@ const Peer: NextPage = () => {
 
             <div className="flex flex-col items-start max-w-[90%]">
               <div className="flex my-2">
-                <h2 className="mr-2 w-[65px] opacity-80 capitalize">Skills:</h2>
+                <h2 className="mr-2 w-[70px] opacity-80 capitalize">Skills:</h2>
                 <div className="flex flex-wrap">
                   {user.skills?.length === 0 && (
                     <span className=" button-box ">not available</span>
@@ -178,7 +177,7 @@ const Peer: NextPage = () => {
                 </div>
               </div>
               <div className="flex items-center">
-                <h2 className="mr-2 w-[65px] opacity-80 capitalize">
+                <h2 className="mr-2 w-[70px] opacity-80 capitalize">
                   open to:
                 </h2>
                 <div>
@@ -196,27 +195,6 @@ const Peer: NextPage = () => {
               </div>
             </div>
           </div>
-          {/* <h1 className="text-center text-2xl  my-2 border-b-2 border-main-purple  capitalize">
-            {user.name}
-            {"'s Profile"}
-          </h1> */}
-
-          {/* <div className="flex flex-col gap-2 items-start">
-            <div className="w-[90%] text-start my-3">{user.username || ""}</div>
-            <div className="w-[90%] text-center text-slate-300 text-lg my-3">
-              {user.about || "About Not Given"}
-            </div>
-
-            {loggedInUser._id === id && (
-              <div className="flex w-full justify-center my-3">
-                <Button href="/profile/edit">
-                  <h1 className="text-opacity-80 margin-auto hover:text-opacity-100 cursor-pointer duration-200 w-16 px-1 text-center">
-                    Edit
-                  </h1>
-                </Button>
-              </div>
-            )}
-          </div> */}
 
           {/* user projects */}
           <h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple">
