@@ -104,7 +104,7 @@ const Peer: NextPage = () => {
 
             <div className="flex flex-col gap-2">
               {user.email && (
-                <div className="flex items-center">
+                <div className=" sm:flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize">
                     Email:
                   </h2>
@@ -113,7 +113,7 @@ const Peer: NextPage = () => {
               )}
 
               {user.github && (
-                <div className="flex items-center">
+                <div className="sm:flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize">
                     Github:
                   </h2>
@@ -128,7 +128,7 @@ const Peer: NextPage = () => {
                 </div>
               )}
               {user.linkedin && (
-                <div className="flex items-center">
+                <div className="sm:flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize hover:scale-110">
                     Linkedin:{" "}
                   </h2>
@@ -146,7 +146,7 @@ const Peer: NextPage = () => {
                 </div>
               )}
               {user.twitter && (
-                <div className="flex items-center">
+                <div className="sm:flex items-center">
                   <h2 className="mr-2 w-[80px] opacity-80 capitalize">
                     Twitter:{" "}
                   </h2>
@@ -165,7 +165,7 @@ const Peer: NextPage = () => {
               )}
             </div>
 
-            <div className="flex items-center my-2">
+            <div className="sm:flex items-center my-2">
               <h2 className="mr-2 w-[80px] opacity-80 capitalize">Skills:</h2>
               <div>
                 {user.skills?.length === 0 && (
@@ -180,7 +180,7 @@ const Peer: NextPage = () => {
                 })}
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="sm:flex items-center">
               <h2 className="mr-2 w-[80px] opacity-80 capitalize">open to:</h2>
               <div>
                 {user.open_to?.length === 0 && (
