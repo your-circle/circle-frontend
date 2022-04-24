@@ -63,7 +63,7 @@ const Peer: NextPage = () => {
   }, [filters]);
 
   return (
-    <>
+    <div className="bg-main-bg">
       <Searchbar
         type="PEERS"
         filters={filters}
@@ -106,9 +106,8 @@ const Peer: NextPage = () => {
             )}
           </div>
         </InfiniteScroll>
-
       </div>
-    </>
+    </div>
   );
 };
 

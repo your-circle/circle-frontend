@@ -365,7 +365,7 @@ const Project: NextPage<Props> = (props: Props) => {
   }
 
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[90%] mx-auto bg-main-bg">
       <div className="flex flex-col gap-2 items-center">
         <span className=" text-3xl text-main-purple">{data.title}</span>
         <span className="">

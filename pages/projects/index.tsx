@@ -61,7 +61,7 @@ const Projects: NextPage = () => {
   }, [filters]);
 
   return (
-    <>
+    <div className="bg-main-bg">
       {/* <Sidebar type="PROJECTS" filters={filters} setFilters={setFilters} onTitleChange={onTitleChange} /> */}
 
       <Searchbar
@@ -104,9 +104,8 @@ const Projects: NextPage = () => {
             )}
           </div>
         </InfiniteScroll>
-
       </div>
-    </>
+    </div>
   );
 };
 

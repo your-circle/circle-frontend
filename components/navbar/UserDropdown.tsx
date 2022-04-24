@@ -76,7 +76,7 @@ const UserDropdown: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between w-32 cursor-pointer bg-inherit relative ${
+      className={`flex items-center justify-between cursor-pointer bg-inherit relative bg-main-bg ${
         isMobileView ? "flex-col space-y-4" : ""
       } `}
     >
@@ -98,7 +98,7 @@ const UserDropdown: React.FC = () => {
                   : "/images/expand-down-icon.svg"
               }
               alt="expand"
-              className="opacity-80 hover:opacity-100"
+              className="opacity-80 hover:opacity-100 "
               width={25}
               height={25}
               onClick={() => {
@@ -108,7 +108,7 @@ const UserDropdown: React.FC = () => {
           </div>
           <div
             role="menu"
-            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 ${
+            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 bg-main-bg ${
               !showDropdown ? "hidden" : ""
             }`}
           >
