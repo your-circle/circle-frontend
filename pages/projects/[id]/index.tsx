@@ -161,11 +161,11 @@ const Project: NextPage<Props> = (props: Props) => {
 
   const EditprojectForm = () => {
     return (
-      <div className="flex flex-col items-center xl:flex-row xl:items-start gap-8 justify-center">
+      <div className="flex  items-center flex-col gap-8 justify-center">
         <Card>
           <div className="text-white min-h-full w-[360px] sm:w-fit">
             <div className="flex gap-20 items-center py-2 mx-[45px] ">
-              <h1 className="mx-auto text-2xl text-main-gradient mb-4">
+              <h1 className="mx-auto text-2xl text-main-purple mb-4">
                 {data.title}
               </h1>
             </div>
@@ -174,7 +174,7 @@ const Project: NextPage<Props> = (props: Props) => {
                 !isEditing ? "pointer-events-none" : ""
               }`}
             >
-              <div className="flex items-center gap-4 mb-2">
+              <div className="sm:flex items-center gap-4 mb-2">
                 <span className="w-[100px]">Title</span>
                 <Input
                   name="title"
@@ -186,7 +186,7 @@ const Project: NextPage<Props> = (props: Props) => {
                   fullWidth={true}
                 />
               </div>
-              <div className="flex items-center gap-4 mb-2">
+              <div className="sm:flex items-center gap-4 mb-2">
                 <span className="w-[100px]">Description</span>
                 <Input
                   transparent={true}
@@ -267,10 +267,10 @@ const Project: NextPage<Props> = (props: Props) => {
             )}
           </div>
         </Card>
-        <div className="flex flex-col w-1/4">
+        <div className="flex flex-col w-full items-center">
           <Card>
-            <div className="w-full">
-              <div className="text-xl w-[350px] my-2 text-main-gradient">
+            <div className="w-[340px]">
+              <div className="text-xl w-[340px] my-2 text-main-gradient">
                 Requests List:
               </div>
               <div className="flex flex-col gap-2 my-2 border-gray-border border w-full min-w-fit px-3 py-2">
@@ -318,8 +318,8 @@ const Project: NextPage<Props> = (props: Props) => {
             </div>
           </Card>
           <Card>
-            <div className="w-full">
-              <div className="text-xl w-[350px] my-2 text-main-gradient">
+            <div className="w-[340px]">
+              <div className="text-xl w-[340px] my-2 text-main-gradient">
                 Team Members:
               </div>
               <div className="flex flex-col gap-2 my-2 border-gray-border border w-full min-w-fit px-3 py-2">
