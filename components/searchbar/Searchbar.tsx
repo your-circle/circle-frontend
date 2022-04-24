@@ -75,7 +75,7 @@ const Searchbar: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      <div className="w-9/12 z-20 m-auto scrollbar overflow-y-scroll bg-main-bg">
+      <div className="w-9/12 z-20 m-auto bg-main-bg">
         <>
           <div className={`flex m-1`}>
             <div className="flex flex-col sm:flex-row gap-3 w-full my-3">
