@@ -16,6 +16,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../../shared/components/Loading";
 import { skillEnum } from "../../shared/config/constants";
 import { userContext } from "../../providers/userProvider";
+import Image from "next/image";
+import { BsGithub, BsLinkedin, BsPen, BsPencil } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
+import { FiTwitter } from "react-icons/fi";
+import { RiLinkedinBoxLine } from "react-icons/ri";
 
 const Peer: NextPage = () => {
   const emptyUser: PeerDetailsType = {
@@ -83,6 +88,7 @@ const Peer: NextPage = () => {
     }
   }, [router.isReady]);
 
+  user.linkedin = "aa";
   return (
     <>
       {loading ? (
@@ -90,110 +96,115 @@ const Peer: NextPage = () => {
           <Loading />
         </div>
       ) : (
-        <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
-          <h1 className="text-center text-2xl  my-2 border-b-2 border-main-purple  capitalize">
+        <div className="-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
+          <div className="relative flex flex-col items-center border-2 border-red px-4 py-4 min-w-[500px] max-w-[85%]">
+            {loggedInUser._id === id && (
+              <div
+                onClick={() => router.push("/profile/edit")}
+                className="absolute top-4 right-4 cursor-pointer"
+              >
+                <BsPencil />
+              </div>
+            )}
+            <Image
+              src={`https://ui-avatars.com/api/?name=${user.name}`}
+              alt="logo"
+              height={80}
+              width={80}
+              className="rounded-[50%]"
+            />
+            <div className="text-center text-2xl  my-2  capitalize">
+              {user.name}
+            </div>
+            {user.username && <div>@{user.username}</div>}
+            <div>{user.about || "user description unavailable!"}</div>
+            <div className="flex gap-4 my-3">
+              {user.email && (
+                <Link href={`mailto:${user.email}`}>
+                  <a
+                    target="_blank"
+                    className="text-blue-400 scale-150 cursor-pointer"
+                  >
+                    <MdEmail />
+                  </a>
+                </Link>
+              )}
+              {user.github && (
+                <Link href={`https://github.com/${user.github}`}>
+                  <a
+                    target="_blank"
+                    className="text-blue-400 scale-150 cursor-pointer"
+                  >
+                    <BsGithub />
+                  </a>
+                </Link>
+              )}
+              {user.linkedin && (
+                <Link href={`https://www.linkedin.com/in/${user.linkedin}`}>
+                  <a
+                    target="_blank"
+                    className="text-blue-400 scale-150 cursor-pointer"
+                  >
+                    <BsLinkedin />
+                  </a>
+                </Link>
+              )}
+              {user.twitter && (
+                <Link href={`https://twitter.com/${user.linkedin}`}>
+                  <a
+                    target="_blank"
+                    className="text-blue-400 scale-150 cursor-pointer"
+                  >
+                    <FiTwitter />
+                  </a>
+                </Link>
+              )}
+            </div>
+
+            <div className="flex flex-col items-start max-w-[90%]">
+              <div className="flex my-2">
+                <h2 className="mr-2 w-[65px] opacity-80 capitalize">Skills:</h2>
+                <div className="flex flex-wrap">
+                  {user.skills?.length === 0 && (
+                    <span className=" button-box ">not available</span>
+                  )}
+                  {user.skills?.map((item, index) => {
+                    return (
+                      <span key={index} className=" button-box ">
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="flex items-center">
+                <h2 className="mr-2 w-[65px] opacity-80 capitalize">
+                  open to:
+                </h2>
+                <div>
+                  {user.open_to?.length === 0 && (
+                    <span className=" button-box ">none</span>
+                  )}
+                  {user.open_to?.map((item, index) => {
+                    return (
+                      <span key={index} className=" button-box ">
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <h1 className="text-center text-2xl  my-2 border-b-2 border-main-purple  capitalize">
             {user.name}
             {"'s Profile"}
-          </h1>
+          </h1> */}
 
-          <div className="flex flex-col gap-2 items-start">
+          {/* <div className="flex flex-col gap-2 items-start">
             <div className="w-[90%] text-start my-3">{user.username || ""}</div>
             <div className="w-[90%] text-center text-slate-300 text-lg my-3">
               {user.about || "About Not Given"}
-            </div>
-
-            <div className="flex flex-col gap-2">
-              {user.email && (
-                <div className="flex items-center">
-                  <h2 className="mr-2 w-[80px] opacity-80 capitalize">
-                    Email:
-                  </h2>
-                  <span>{user.email}</span>
-                </div>
-              )}
-
-              {user.github && (
-                <div className="flex items-center">
-                  <h2 className="mr-2 w-[80px] opacity-80 capitalize">
-                    Github:
-                  </h2>
-                  <Link href={`https://www.github.com/${user.github}`} passHref>
-                    <a target="_blank" className="flex items-center">
-                      {user.github}
-                      <div className="ml-2 mt-1">
-                        <AiOutlineLink></AiOutlineLink>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              )}
-              {user.linkedin && (
-                <div className="flex items-center">
-                  <h2 className="mr-2 w-[80px] opacity-80 capitalize hover:scale-110">
-                    Linkedin:{" "}
-                  </h2>
-                  <Link
-                    href={`https://www.linkedin.com/${user.linkedin}`}
-                    passHref
-                  >
-                    <a target="_blank" className="flex items-center">
-                      {user.linkedin}
-                      <div className="ml-2 mt-1">
-                        <AiOutlineLink></AiOutlineLink>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              )}
-              {user.twitter && (
-                <div className="flex items-center">
-                  <h2 className="mr-2 w-[80px] opacity-80 capitalize">
-                    Twitter:{" "}
-                  </h2>
-                  <Link
-                    href={`https://www.twitter.com/${user.twitter}`}
-                    passHref
-                  >
-                    <a target="_blank" className="flex items-center">
-                      {user.twitter}
-                      <div className="ml-2 mt-1">
-                        <AiOutlineLink></AiOutlineLink>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <div className="flex items-center my-2">
-              <h2 className="mr-2 w-[80px] opacity-80 capitalize">Skills:</h2>
-              <div>
-                {user.skills?.length === 0 && (
-                  <span className=" button-box ">not available</span>
-                )}
-                {user.skills?.map((item, index) => {
-                  return (
-                    <span key={index} className=" button-box ">
-                      {item}
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="flex items-center">
-              <h2 className="mr-2 w-[80px] opacity-80 capitalize">open to:</h2>
-              <div>
-                {user.open_to?.length === 0 && (
-                  <span className=" button-box ">none</span>
-                )}
-                {user.open_to?.map((item, index) => {
-                  return (
-                    <span key={index} className=" button-box ">
-                      {item}
-                    </span>
-                  );
-                })}
-              </div>
             </div>
 
             {loggedInUser._id === id && (
@@ -205,7 +216,7 @@ const Peer: NextPage = () => {
                 </Button>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* user projects */}
           <h2 className="text-xl mt-4 text-main-purple border-b-2 border-main-purple">
