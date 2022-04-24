@@ -5,6 +5,7 @@ import {
   editProject,
   getProject,
   joinProject,
+  deleteProject,
 } from "../../../shared/services/projects.services";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -157,6 +158,18 @@ const Project: NextPage<Props> = (props: Props) => {
 
   const removeMember = (index: number) => {
     // remove user from team
+  };
+
+  const deleteCurrentProject = async () => {
+    try {
+      const res = await deleteProject(props.data._id);
+      if (res.status === 200) {
+        router.push("/projects");
+      }
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err);
+    }
   };
 
   const EditprojectForm = () => {
@@ -355,6 +368,12 @@ const Project: NextPage<Props> = (props: Props) => {
               </div>
             </div>
           </Card>
+          <button
+            style={{ border: "white 2px solid" }}
+            onClick={() => deleteCurrentProject()}
+          >
+            Delete Project
+          </button>
         </div>
       </div>
     );
