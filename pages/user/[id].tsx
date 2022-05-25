@@ -21,8 +21,10 @@ import { BsGithub, BsLinkedin, BsPen, BsPencil } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FiTwitter } from "react-icons/fi";
 import { RiLinkedinBoxLine } from "react-icons/ri";
+import { themeContext } from "../../providers/themeProvider";
 
 const Peer: NextPage = () => {
+  const { theme } = useContext(themeContext);
   const emptyUser: PeerDetailsType = {
     _id: "",
     name: "",
@@ -95,8 +97,18 @@ const Peer: NextPage = () => {
           <Loading />
         </div>
       ) : (
-        <div className="bg-main-bg text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center">
-          <div className="rounded-lg border-gray-border bg-card-bg relative flex flex-col items-center border border-red px-4 py-4 min-w-[500px] max-w-[85%]">
+        <div
+          className={`${
+            theme === "light" ? "bg-light-theme-bg" : "bg-main-bg"
+          } text-white min-h-min-h-[calc(100vh-60px)] min-w-full flex flex-col gap-3 items-center`}
+        >
+          <div
+            className={`rounded-lg border-gray-border ${
+              theme === "light"
+                ? "bg-light-theme-bg text-black"
+                : "bg-card-bg text-white"
+            } relative flex flex-col items-center border border-red px-4 py-4 min-w-[500px] max-w-[85%]`}
+          >
             {loggedInUser._id === id && (
               <div
                 onClick={() => router.push("/profile/edit")}

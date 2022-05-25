@@ -6,8 +6,10 @@ import { userContext } from "../providers/userProvider";
 import Loading from "../shared/components/Loading/Loading";
 import Lottie from "lottie-react";
 import teamworkAnimation from "../public/lottie-files/teamwork.json";
+import { themeContext } from "../providers/themeProvider";
 
 const Home: NextPage = () => {
+  const { theme } = useContext(themeContext);
   const router = useRouter();
   const { isLoggedIn } = useContext(userContext);
 
@@ -16,16 +18,29 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="flex items-start flex-col md:items-center md:flex-row md:justify-between h-[calc(100vh-74px)] overflow-y-clip ">
+    <div
+      className={`flex items-start flex-col md:items-center md:flex-row md:justify-between h-[calc(100vh-65px)] overflow-y-clip ${
+        theme === "light" ? "bg-light-theme-bg text-[#202020]" : "bg-main-bg"
+      }`}
+    >
       <div className="flex flex-col ml-4 w-fit md:w-1/2">
         <div className="flex flex-col items-start home-text basis-3/6 px-6 py-2 text-center text-transparent bg-clip-text">
           <div className="flex gap-[10px] md:gap-0 md:flex-col md:items-start">
             <span className="text-4xl md:text-4xl font-semibold lg:text-6xl text-white"></span>
             <span className="text-4xl md:text-4xl font-bold lg:text-6xl text-blue-500">
-              <span className="text-white">Build</span> Awesome Team
+              <span
+                className={theme === "light" ? "text-[#202020]" : "text-white"}
+              >
+                Build
+              </span>{" "}
+              Awesome Team
             </span>
           </div>
-          <span className="text-3xl md:text-3xl lg:text-5xl text-white">
+          <span
+            className={`text-3xl md:text-3xl lg:text-5xl ${
+              theme === "light" ? "text-[#202020]" : "text-white"
+            }`}
+          >
             For Your Next Project
           </span>
         </div>

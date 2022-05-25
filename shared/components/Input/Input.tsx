@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
+import { themeContext } from "../../../providers/themeProvider";
 
 type Props = {
   icon?: string;
@@ -15,12 +16,13 @@ type Props = {
 };
 
 const Input = (props: Props) => {
+  const { theme } = useContext(themeContext);
   return (
     <div
       className={`relative h-max flex items-center ${
         (props.type == "text" || props.type === "textarea") &&
         "flex-1 justify-end"
-      }`}
+      } ${theme === "light" ? "text-black" : "text-white"}`}
     >
       {props.icon && (
         <div className="absolute left-1 z-10 flex items-center justify-center px-2">
@@ -30,7 +32,11 @@ const Input = (props: Props) => {
       {props.pre && (
         <span
           className={`h-full pl-3 pr-2 py-2  ${
-            props.transparent ? "" : "bg-gray-700"
+            props.transparent
+              ? ""
+              : theme === "light"
+              ? "bg-white"
+              : "bg-gray-700"
           }`}
         >
           {props.pre}
@@ -47,7 +53,7 @@ const Input = (props: Props) => {
               : "bg-secondary-bg"
           } h-full relative px-4 py-2 focus:border-main-purple rounded-sm min-w-[280px] resize-none text-white placeholder-gray-500
             ${props.fullWidth ? "w-full" : "min-w-[280px]"}
-            `}
+            ${theme === "light" ? "text-black" : "text-white"}`}
           rows={4}
           cols={40}
         />
@@ -59,12 +65,16 @@ const Input = (props: Props) => {
           value={props.value}
           autoComplete="chrome-off"
           onChange={(e) => props.onChange(props.name, e.target.value)}
-          className={`placeholder-capitalize text-white h-full px-4 py-3 relative focus:border-gray-800 placeholder-gray-500 border-gray-border border rounded-sm 
+          className={`placeholder-capitalize h-full px-4 py-3 relative focus:border-gray-800 placeholder-gray-500 border-gray-border border rounded-sm 
                       ${props.icon ? "pl-9" : "pl-4"}  
                      ${
-                       props.transparent ? "bg-transparent" : "bg-secondary-bg"
+                       props.transparent
+                         ? "bg-transparent"
+                         : theme === "light"
+                         ? "bg-white"
+                         : "bg-gray-700"
                      } 
-                     ${props.fullWidth ? "w-full" : "min-w-[280px]"}  
+                     ${props.fullWidth ? "w-full" : "min-w-[280px]"}
                       `}
         />
       )}

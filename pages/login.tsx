@@ -8,9 +8,11 @@ import { toast } from "react-toastify";
 import { toastConfig } from "../shared/config/constants";
 import Card from "../shared/components/Card";
 import { useRouter } from "next/router";
+import { themeContext } from "../providers/themeProvider";
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const { theme } = useContext(themeContext);
   type inputType = {
     email: string;
     password: string;
@@ -74,8 +76,18 @@ const Login: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col mt-6 min-w-full items-center justify-center">
-      <div className="bg-main-bg text-white h-fit">
+    <div
+      className={`${
+        theme === "light" ? "bg-light-theme-bg text-[#202020]" : "bg-main-bg"
+      } flex flex-col min-w-full h-[calc(100vh-65px)] items-center justify-center overflow-auto`}
+    >
+      <div
+        className={`${
+          theme === "light"
+            ? "bg-light-theme-bg text-[#202020]"
+            : "bg-main-bg text-white"
+        } h-fit`}
+      >
         <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -86,7 +98,11 @@ const Login: NextPage = () => {
             <div className="flex flex-col justify-between h-[6rem] gap-4 my-3">
               <Input
                 auth
-                icon="/images/email-icon.svg"
+                icon={
+                  theme === "light"
+                    ? "/images/email-icon-light.svg"
+                    : "/images/email-icon.svg"
+                }
                 name="email"
                 type="text"
                 key="email"
@@ -95,7 +111,11 @@ const Login: NextPage = () => {
               />
               <Input
                 auth
-                icon="/images/password-icon.svg"
+                icon={
+                  theme === "light"
+                    ? "/images/password-icon-light.svg"
+                    : "/images/password-icon.svg"
+                }
                 name="password"
                 type="password"
                 key="password"

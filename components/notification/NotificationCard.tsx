@@ -1,20 +1,24 @@
-import Link from "next/link";
-import Card from "../../shared/components/Card";
+import { useContext } from "react";
+import { themeContext } from "../../providers/themeProvider";
 import { NotificationCardType } from "../../shared/schemas/notificationDetails.schema";
-import { SiCountingworkspro } from "react-icons/si";
+
 const NotificationCard: React.FC<NotificationCardType> = (props) => {
   const { project, title } = props;
+  const { theme } = useContext(themeContext);
 
   return (
-    <div className="w-3/4  bg-main-gray border border-gray p-4 border-gray-border">
+    <div
+      className={`w-3/4 ${
+        theme === "light" ? "bg-slate-100 text-[#202020]" : "bg-main-bg"
+      } border border-gray p-4 border-gray-border`}
+    >
       {/* <Card> */}
       <div
-
         className=" cursor-pointer"
         onClick={() => {
           window.location.href = `projects/${project}`;
-        }}>
-
+        }}
+      >
         <div>
           <div className="flex justify-between">
             <span className="opacity-80">{props.type}</span>
@@ -23,7 +27,6 @@ const NotificationCard: React.FC<NotificationCardType> = (props) => {
           </div>
           <div>{title}</div>
         </div>
-
       </div>
       {/* </Card> */}
     </div>

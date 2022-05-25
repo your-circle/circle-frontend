@@ -2,11 +2,14 @@ import Card from "../../shared/components/Card";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import Link from "next/link";
 import { AiOutlineUser } from "react-icons/ai";
+import { useContext } from "react";
+import { themeContext } from "../../providers/themeProvider";
 
 type ProjectCardProp = {
   data: ProjectDetailsType;
 };
 const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
+  const { theme } = useContext(themeContext);
   return (
     <Card scale>
       <Link href={`/projects/${data._id}`} passHref>
@@ -15,7 +18,11 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
             <Link href={`/user/${data.creator_id}`} passHref>
               <div className=" flex items-center w-full gap-1 text-base">
                 <AiOutlineUser></AiOutlineUser>
-                <span className="a p-0 m-0 text-xs text-slate-200">
+                <span
+                  className={`a p-0 m-0 text-xs ${
+                    theme === "light" ? "text-[#202020]" : "text-slate-300"
+                  }`}
+                >
                   {data.creator_name}
                 </span>
               </div>
@@ -40,7 +47,11 @@ const ProjectCard: React.FC<ProjectCardProp> = ({ data }) => {
               {data.title}
             </h2>
             <div className="h-[60px]  mt-2 overflow-hidden">
-              <h3 className="table-cell text-slate-200 w-full text-md text-center capitalize align-middle">
+              <h3
+                className={`table-cell ${
+                  theme === "light" ? "text-[#202020]" : "text-slate-300"
+                } w-full text-md text-center capitalize align-middle`}
+              >
                 {data.description.length > 110
                   ? data.description.slice(0, 110) + "..."
                   : data.description}

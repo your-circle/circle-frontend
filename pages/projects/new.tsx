@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
@@ -8,9 +8,11 @@ import { newProject } from "../../shared/services/projects.services";
 import Input from "../../shared/components/Input";
 import Card from "../../shared/components/Card";
 import Choice from "../../shared/components/Choice/Choice";
+import { themeContext } from "../../providers/themeProvider";
 
 const NewProject: NextPage = () => {
   useAuth();
+  const { theme } = useContext(themeContext);
   const router = useRouter();
 
   type inputType = {
@@ -80,14 +82,28 @@ const NewProject: NextPage = () => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center text-sm sm:text-md mb-6">
-      <div className="text-white min-h-screen min-w-full flex flex-col items-center justify-center ">
+    <div
+      className={`flex w-full items-center justify-center text-sm sm:text-md pb-6 ${
+        theme === "light"
+          ? "bg-light-theme-bg text-[#202020]"
+          : "bg-main-bg text-white"
+      }`}
+    >
+      <div
+        className={`${
+          theme === "light" ? "text-black" : "text-white"
+        } min-h-screen min-w-full flex flex-col items-center justify-center`}
+      >
         {/* <Card> */}
         <form
           onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col items-center gap-4 justify-center w-[300px] sm:w-1/2"
         >
-          <span className="text-2xl m-4 text-main-gradient">
+          <span
+            className={`text-2xl m-4 text-main-gradient ${
+              theme === "light" ? "text-black" : "text-white"
+            }`}
+          >
             Add a new Project
           </span>
           <div className="flex flex-col gap-3 items-start">
@@ -100,7 +116,7 @@ const NewProject: NextPage = () => {
                 value={input.title}
                 onChange={onInputChange}
                 transparent={true}
-                fullWidth={true} 
+                fullWidth={true}
               />
             </div>
             <H2 title="Description of Project"></H2>
