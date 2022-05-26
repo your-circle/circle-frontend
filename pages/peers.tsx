@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import PeerCard from "../components/peerCard";
 import { getAllUsers } from "../shared/services/user.services";
@@ -9,8 +9,10 @@ import Searchbar from "../components/searchbar";
 import Loading from "../shared/components/Loading";
 import { BsSearch } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { themeContext } from "../providers/themeProvider";
 
 const Peer: NextPage = () => {
+  const { theme } = useContext(themeContext);
   const [filters, setFilters] = useState({
     name: "",
     skills: [],
@@ -63,7 +65,7 @@ const Peer: NextPage = () => {
   }, [filters]);
 
   return (
-    <div className="bg-main-bg">
+    <div className={theme === "light" ? "bg-light-theme-bg" : "bg-main-bg"}>
       <Searchbar
         type="PEERS"
         filters={filters}
@@ -74,7 +76,11 @@ const Peer: NextPage = () => {
         onTitleChange={onTitleChange}
       />
 
-      <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
+      <div
+        className={`${
+          theme === "light" ? "bg-light-theme-bg" : "bg-main-bg"
+        } text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center`}
+      >
         {/* {loading &&
           <Loading />} */}
 

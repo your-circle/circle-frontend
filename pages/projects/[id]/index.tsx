@@ -15,6 +15,7 @@ import Input from "../../../shared/components/Input";
 import Card from "../../../shared/components/Card";
 import Choice from "../../../shared/components/Choice/Choice";
 import { useRouter } from "next/router";
+import { themeContext } from "../../../providers/themeProvider";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // api call
@@ -35,6 +36,7 @@ type Props = { data: ProjectDetailsType };
 
 const Project: NextPage<Props> = (props: Props) => {
   const router: any = useRouter();
+  const { theme } = useContext(themeContext);
   const { user } = useContext(userContext);
   const [data, setData] = useState<any>(props.data);
   const [requested, setRequested] = useState<boolean>(false);
@@ -161,7 +163,11 @@ const Project: NextPage<Props> = (props: Props) => {
 
   const EditprojectForm = () => {
     return (
-      <div className="flex  items-center flex-col gap-8 justify-center">
+      <div
+        className={`flex items-center flex-col gap-8 justify-center ${
+          theme === "light" ? "bg-light-theme-bg" : "bg-main-bg"
+        } w-full h-full`}
+      >
         <Card>
           <div className="text-white min-h-full w-[360px] sm:w-fit">
             <div className="flex gap-20 items-center py-2 mx-[45px] ">
@@ -365,19 +371,31 @@ const Project: NextPage<Props> = (props: Props) => {
   }
 
   return (
-    <div className="w-[90%] mx-auto bg-main-bg">
+    <div
+      className={`px-[5%] mx-auto h-[calc(100vh-65px)] overflow-auto ${
+        theme === "light"
+          ? "bg-light-theme-bg text-[#202020]"
+          : "bg-main-bg text-white"
+      }`}
+    >
       <div className="flex flex-col gap-2 items-center">
         <span className=" text-3xl text-main-purple">{data.title}</span>
-        <span className="">
+        <span className={theme === "light" ? "text-black" : "text-white"}>
           by
           <Link href={`/user/${data._id}`} passHref>
-            <span className="opacity-80 px-1 underline hover:opacity-100 text-white cursor-pointer">
+            <span
+              className={`opacity-80 px-1 underline hover:opacity-100 cursor-pointer`}
+            >
               {data.creator_name}
             </span>
           </Link>
         </span>
         <div className="flex flex-col gap-3 items-start">
-          <div className=" text-center w-full text-xl mt-5 mb-3 text-slate-300">
+          <div
+            className={`text-center w-full text-xl mt-5 mb-3 ${
+              theme === "light" ? "text-black" : "text-slate-300"
+            }`}
+          >
             {data.description}
           </div>
 

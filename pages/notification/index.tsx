@@ -3,12 +3,14 @@ import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { getNotification } from "../../shared/services/notification.services";
 import NotificationCard from "../../components/notification/NotificationCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EmptyList from "../../shared/components/EmptyList";
 import Loading from "../../shared/components/Loading";
 import { NotificationCardType } from "../../shared/schemas/notificationDetails.schema";
+import { themeContext } from "../../providers/themeProvider";
 
 const Notification: NextPage = () => {
+  const { theme } = useContext(themeContext);
   useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [notifications, setNotifications] = useState<NotificationCardType[]>(
@@ -27,9 +29,7 @@ const Notification: NextPage = () => {
     // return () => {
     // clearInterval(data)
     // };
-
   }, [range]);
-
 
   const fetchNotifications = async () => {
     try {
@@ -44,8 +44,16 @@ const Notification: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-center w-full text-xl text-main-gradient my-2 ">
+    <div
+      className={`flex flex-col items-center ${
+        theme === "light" ? "bg-light-theme-bg" : "bg-main-bg"
+      } min-h-[calc(100vh-65px)]`}
+    >
+      <h1
+        className={`text-center w-full text-xl text-main-gradient my-2 ${
+          theme === "light" ? "text-black" : "text-white"
+        }`}
+      >
         Notifications
       </h1>
       {isLoading ? (

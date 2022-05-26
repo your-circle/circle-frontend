@@ -3,11 +3,14 @@ import { PeerDetailsType } from "../../shared/schemas/peerDetails.schema";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineUser } from "react-icons/ai";
+import { useContext } from "react";
+import { themeContext } from "../../providers/themeProvider";
 
 type PeerCardProp = {
   data: PeerDetailsType;
 };
 const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
+  const { theme } = useContext(themeContext);
   if (!data.about) {
     return <></>;
   }
@@ -24,11 +27,19 @@ const PeerCard: React.FC<PeerCardProp> = ({ data }) => {
               <div>
                 {" "}
                 {data.username && (
-                  <span className="text-slate-300 text-xs">{`@${data.username}`}</span>
+                  <span
+                    className={`${
+                      theme === "light" ? "text-[#202020]" : "text-slate-300"
+                    } text-xs`}
+                  >{`@${data.username}`}</span>
                 )}
               </div>
             </div>
-            <h3 className="mx-auto w-full pl-1 text-slate-200 text-center  overflow-hidden">
+            <h3
+              className={`mx-auto w-full pl-1 ${
+                theme === "light" ? "text-[#202020]" : "text-slate-200"
+              } text-center  overflow-hidden`}
+            >
               {data.about || "No description available"}
             </h3>
             <div className="flex w-full items-center pl-1">

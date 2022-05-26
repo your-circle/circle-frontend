@@ -14,8 +14,10 @@ import { FiLogOut } from "react-icons/fi";
 import { setInterval } from "timers";
 import { getNotificationStatus } from "../../shared/services/notification.services";
 import { toastConfig } from "../../shared/config/constants";
+import { themeContext } from "../../providers/themeProvider";
 
 const UserDropdown: React.FC = () => {
+  const { theme } = useContext(themeContext);
   const isMobileView = useMediaQuery("(max-width:768px)");
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState<Boolean>(false);
@@ -76,9 +78,9 @@ const UserDropdown: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between cursor-pointer bg-inherit relative bg-main-bg ${
-        isMobileView ? "flex-col space-y-4" : ""
-      } `}
+      className={`flex items-center justify-between cursor-pointer bg-inherit relative ${
+        theme === "light" ? "bg-light-theme-bg text-[#202020]" : "bg-main-bg"
+      } ${isMobileView ? "flex-col space-y-4" : ""} `}
     >
       {isLoggedIn ? (
         <>
@@ -108,9 +110,11 @@ const UserDropdown: React.FC = () => {
           </div>
           <div
             role="menu"
-            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 bg-main-bg ${
-              !showDropdown ? "hidden" : ""
-            }`}
+            className={`absolute top-[25px] bg-c right-0 mt-2 w-[170px] rounded-md z-10 ${
+              theme === "light"
+                ? "bg-light-theme-bg border-gray-200 border-2"
+                : "bg-main-bg"
+            } ${!showDropdown ? "hidden" : ""} `}
           >
             {/* <Link href={`/user/${user._id}`}>
               <a

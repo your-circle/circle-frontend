@@ -9,9 +9,11 @@ import { validateEmail, validatePassword } from "../shared/helpers";
 import { toastConfig } from "../shared/config/constants";
 import Card from "../shared/components/Card";
 import { useRouter } from "next/router";
+import { themeContext } from "../providers/themeProvider";
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const { theme } = useContext(themeContext);
   type inputType = {
     name: string;
     email: string;
@@ -74,8 +76,18 @@ const Login: NextPage = () => {
   };
 
   return (
-    <>
-      <div className="bg-main-bg text-white mt-6 min-w-full  flex flex-col items-center justify-center">
+    <div
+      className={`${
+        theme === "light" ? "bg-light-theme-bg text-[#202020]" : "bg-main-bg"
+      } flex flex-col min-w-full h-[calc(100vh-65px)] items-center justify-center overflow-auto`}
+    >
+      <div
+        className={`${
+          theme === "light"
+            ? "bg-light-theme-bg text-[#202020]"
+            : "bg-main-bg text-white"
+        } h-fit`}
+      >
         <Card scale={false}>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -86,7 +98,11 @@ const Login: NextPage = () => {
             <div className="flex flex-col justify-between h-[10rem] gap-4">
               <Input
                 auth
-                icon="/images/user-icon.svg"
+                icon={
+                  theme === "light"
+                    ? "/images/user-icon-light.svg"
+                    : "/images/user-icon.svg"
+                }
                 name="name"
                 type="text"
                 key="name"
@@ -104,7 +120,11 @@ const Login: NextPage = () => {
               />
               <Input
                 auth
-                icon="/images/password-icon.svg"
+                icon={
+                  theme === "light"
+                    ? "/images/password-icon-light.svg"
+                    : "/images/password-icon.svg"
+                }
                 name="password"
                 type="password"
                 key="password"
@@ -127,7 +147,7 @@ const Login: NextPage = () => {
           </form>
         </Card>
       </div>
-    </>
+    </div>
   );
 };
 

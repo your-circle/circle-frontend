@@ -1,16 +1,18 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProjectCard from "../../components/projectCard";
 import Searchbar from "../../components/searchbar";
 import EmptyList from "../../shared/components/EmptyList";
 import Loading from "../../shared/components/Loading";
 import { ProjectDetailsType } from "../../shared/schemas/projectDetails.schema";
 import { getAllProjects } from "../../shared/services/projects.services";
-import { BsSearch } from "react-icons/bs";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
+import { themeContext } from "../../providers/themeProvider";
 
 const Projects: NextPage = () => {
+  const { theme, updateTheme } = useContext(themeContext);
+
   const [filters, setFilters] = useState({
     title: "",
     tech: [],
@@ -61,7 +63,7 @@ const Projects: NextPage = () => {
   }, [filters]);
 
   return (
-    <div className="bg-main-bg">
+    <div className={theme === "dark" ? "bg-main-bg" : "bg-light-theme-bg"}>
       {/* <Sidebar type="PROJECTS" filters={filters} setFilters={setFilters} onTitleChange={onTitleChange} /> */}
 
       <Searchbar
@@ -73,7 +75,11 @@ const Projects: NextPage = () => {
         setHasMoreProject={setHasMoreProject}
         onTitleChange={onTitleChange}
       />
-      <div className="bg-main-bg text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center">
+      <div
+        className={`${
+          theme === "light" ? "bg-light-theme-bg" : "bg-main-bg"
+        } text-white min-h-[calc(100vh-60px)] min-w-full flex flex-col items-center`}
+      >
         {/* {loading &&
           <Loading />} */}
         <InfiniteScroll
